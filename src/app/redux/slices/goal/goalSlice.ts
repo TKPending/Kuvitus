@@ -1,4 +1,4 @@
-import { GoalType } from "@/types/GoalType";
+import { GoalType } from "@/app/types/GoalType";
 import { createSlice } from "@reduxjs/toolkit";
 
 const UNCOMPLETE = 0;

@@ -5,7 +5,7 @@ import {
     Reducer,
   } from "@reduxjs/toolkit";
   
-import { GoalType } from "@/types/GoalType";
+import { GoalType } from "@/app/types/GoalType";
 import goalReducer from "./slices/goal/goalSlice";
   interface Action {
     type: string;
