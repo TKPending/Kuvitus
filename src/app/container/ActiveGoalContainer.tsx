@@ -32,7 +32,7 @@ const ActiveGoalContainer = ({ goal, position }: Props) => {
   };
 
   return (
-    <div className="absolute flex items-end justify-center flex-col gap-2"
+    <div className="absolute flex items-end justify-center flex-col gap-2 transition-transform duration-100 ease-linear"
         style={{ 
           left: `${position.x}px`,
           right: `${position.y}px`,
