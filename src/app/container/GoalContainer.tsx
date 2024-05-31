@@ -21,7 +21,7 @@ const GoalContainer = ({ onClick }: Props) => {
       </div>
       {goal.goalDepth === "basic" && <BasicGoalComponent />}
       {goal.goalDepth === "medium" && <MediumGoalComponent dueDate={goal.goalDueDate} />}
-      {goal.goalDepth === "advanced" && <AdvancedGoalComponent dueDate={goal.goalDueDate} />}
+      {goal.goalDepth === "advanced" && <AdvancedGoalComponent dueDate={goal.goalDueDate} subGoals={goal.goalSteps} />}
     </div>
   );
 };
