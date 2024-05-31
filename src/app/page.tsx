@@ -1,10 +1,9 @@
-import ActiveGoalContainer from "./container/ActiveGoalContainer";
-import GoalContainer from "./container/GoalContainer";
+import AddGoalButtonComponent from "./components/AddGoalButtonComponent";
 
 export default function Home() {
   return (
-    <main className="h-screen w-screen flex items-center justify-center">
-      <ActiveGoalContainer />
+    <main className="relative h-screen w-screen">
+      <AddGoalButtonComponent />
     </main>
   );
 }

@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ReduxProvider>
-        <body>{children}</body>
+        <body className="max-w-screen">{children}</body>
       </ReduxProvider>
     </html>
   );
