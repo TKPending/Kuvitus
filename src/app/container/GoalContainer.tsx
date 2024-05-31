@@ -12,7 +12,7 @@ type Props = {
 
 const GoalContainer = ({ goal, onClick }: Props) => {
   return (
-    <div onClick={onClick} className={`relative h-auto bg-black rounded-lg bg-opacity-40 py-2 px-4 cursor-pointer shadow-lg`}>
+    <div onClick={onClick} className={`relative h-auto hover:bg-opacity-60 bg-black rounded-lg bg-opacity-40 py-2 px-4 cursor-pointer shadow-lg`}>
       <div className="w-full px-2 flex justify-end gap-2">
         {goal.goalTags.map((topic: string, index: number) => (
           <TagsComponent key={index} title={topic} />

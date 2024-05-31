@@ -8,6 +8,7 @@ const initialState: GoalType = {
   goalTitle: "",
   goalDescription: "",
   goalStatus: UNCOMPLETE,
+  goalDepth: "basic",
   goalTags: [],
   goalDueDate: "",
   goalSteps: [],

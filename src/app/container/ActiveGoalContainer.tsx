@@ -1,24 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 import GoalContainer from "./GoalContainer";
 import GoalButtonComponent from "@/app/components/GoalButtonComponent";
-import { GoalType } from "@/app/types/GoalType";
+import { LocalGoalType } from "@/app/types/LocalGoalType";
+import { removeLocalGoal, setLocalGoalFocused, setLocalGoalUnfocused } from "@/app/redux/slices/localGoals/localGoalsSlice";
 
 type Props = {
-  goal: GoalType;
-  position: { x: number, y: number, t: number, b: number };
+  goal: LocalGoalType;
 };
 
-const ActiveGoalContainer = ({ goal, position }: Props) => {
-  const [buttonsVisible, setButtonsVisible] = useState<boolean>(false);
+const ActiveGoalContainer = ({ goal }: Props) => {
+  const dispatch = useDispatch();
+  const goalUID: string = goal.goal.goalUID;
+  const position: { x: number, y: number, t: number, b: number } = goal.position;
+  const isFocused: boolean = goal.isFocused;
 
   const handleButtonVisibility = () => {
-    setButtonsVisible(!buttonsVisible);
+    if (isFocused) {
+      dispatch(setLocalGoalUnfocused(goalUID));
+    } else {
+      dispatch(setLocalGoalFocused(goalUID));
+    };
   };
 
   const handleDelete = () => {
     console.log("Delete Task");
+    dispatch(removeLocalGoal(goalUID));
     // Activate modal
   };
 
@@ -40,7 +48,7 @@ const ActiveGoalContainer = ({ goal, position }: Props) => {
           bottom: `${position.b}px`,
         }}
     >
-      {buttonsVisible && (
+      {isFocused && (
         <div className="flex gap-2">
           <GoalButtonComponent title="Title" onClick={handleDelete} />
           <GoalButtonComponent title="View" onClick={handleDelete} />
@@ -48,7 +56,7 @@ const ActiveGoalContainer = ({ goal, position }: Props) => {
         </div>
       )}
 
-      <GoalContainer goal={goal} onClick={handleButtonVisibility} />
+      <GoalContainer goal={goal.goal} onClick={handleButtonVisibility} />
     </div>
   );
 };
