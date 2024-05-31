@@ -5,7 +5,7 @@ type Props = {
 
 const MediumGoalComponent = ({ title, dueDate }: Props) => {
   return (
-    <div className="h-full w-full flex gap-4 py-2">
+    <div className="h-full w-full flex gap-4 py-2 text-center">
       <p className="font-semibold">{!title ? "Medium Goal Has Been Created" : title}</p>
       <p className="text-base">by {dueDate}</p>
     </div>

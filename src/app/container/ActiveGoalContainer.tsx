@@ -3,8 +3,14 @@
 import { useState } from "react";
 import GoalContainer from "./GoalContainer";
 import GoalButtonComponent from "@/app/components/GoalButtonComponent";
+import { GoalType } from "@/app/types/GoalType";
 
-const ActiveGoalContainer = () => {
+type Props = {
+  goal: GoalType;
+  position: { x: number, y: number, t: number, b: number };
+};
+
+const ActiveGoalContainer = ({ goal, position }: Props) => {
   const [buttonsVisible, setButtonsVisible] = useState<boolean>(false);
 
   const handleButtonVisibility = () => {
@@ -26,7 +32,14 @@ const ActiveGoalContainer = () => {
   };
 
   return (
-    <div className="flex items-end justify-center flex-col gap-2">
+    <div className="absolute flex items-end justify-center flex-col gap-2"
+        style={{ 
+          left: `${position.x}px`,
+          right: `${position.y}px`,
+          top: `${position.t}px`,
+          bottom: `${position.b}px`,
+        }}
+    >
       {buttonsVisible && (
         <div className="flex gap-2">
           <GoalButtonComponent title="Title" onClick={handleDelete} />
@@ -35,7 +48,7 @@ const ActiveGoalContainer = () => {
         </div>
       )}
 
-      <GoalContainer onClick={handleButtonVisibility} />
+      <GoalContainer goal={goal} onClick={handleButtonVisibility} />
     </div>
   );
 };

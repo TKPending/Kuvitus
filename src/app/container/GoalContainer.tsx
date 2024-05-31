@@ -6,12 +6,11 @@ import { BASIC, MEDIUM, ADVANCED } from "@/temp/tempGoalData";
 import { GoalType } from "../types/GoalType";
 
 type Props = {
+  goal: GoalType;
   onClick: () => void;
 };
 
-const GoalContainer = ({ onClick }: Props) => {
-  const goal: GoalType = ADVANCED;
-
+const GoalContainer = ({ goal, onClick }: Props) => {
   return (
     <div onClick={onClick} className={`relative h-auto bg-black rounded-lg bg-opacity-40 py-2 px-4 cursor-pointer shadow-lg`}>
       <div className="w-full px-2 flex justify-end gap-2">

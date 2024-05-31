@@ -1,9 +1,5 @@
-import AddGoalButtonComponent from "./components/AddGoalButtonComponent";
+import InteractiveProvider from "@/app/interactive/InteractiveProvider";
 
 export default function Home() {
-  return (
-    <main className="relative h-screen w-screen">
-      <AddGoalButtonComponent />
-    </main>
-  );
+  return <InteractiveProvider />
 }
