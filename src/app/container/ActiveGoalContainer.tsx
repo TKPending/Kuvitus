@@ -16,7 +16,7 @@ const ActiveGoalContainer = ({ goal }: Props) => {
   const position: { x: number, y: number, t: number, b: number } = goal.position;
   const isFocused: boolean = goal.isFocused;
 
-  const handleButtonVisibility = () => {
+  const handleDetailedGoalVisibility = () => {
     if (isFocused) {
       dispatch(setLocalGoalUnfocused(goalUID));
     } else {
@@ -56,7 +56,7 @@ const ActiveGoalContainer = ({ goal }: Props) => {
         </div>
       )}
 
-      <GoalContainer goal={goal.goal} onClick={handleButtonVisibility} />
+      <GoalContainer goal={goal.goal} onClick={handleDetailedGoalVisibility} />
     </div>
   );
 };
