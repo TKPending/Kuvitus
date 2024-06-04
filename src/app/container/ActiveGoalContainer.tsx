@@ -1,6 +1,7 @@
 "use client";
 
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
 import GoalContainer from "./GoalContainer";
 import GoalButtonComponent from "@/app/components/GoalButtonComponent";
 import { LocalGoalType } from "@/app/types/LocalGoalType";
@@ -12,6 +13,8 @@ type Props = {
 
 const ActiveGoalContainer = ({ goal }: Props) => {
   const dispatch = useDispatch();
+  const router = useRouter();
+
   const goalUID: string = goal.goal.goalUID;
   const position: { x: number, y: number, t: number, b: number } = goal.position;
   const isFocused: boolean = goal.isFocused;
@@ -24,7 +27,7 @@ const ActiveGoalContainer = ({ goal }: Props) => {
     };
   };
 
-  const handleDelete = () => {
+  const handleDeleteGoal = () => {
     console.log("Delete Task");
     dispatch(removeLocalGoal(goalUID));
     // Activate modal
@@ -37,6 +40,7 @@ const ActiveGoalContainer = ({ goal }: Props) => {
   const handleEditGoal = () => {
     console.log("Edit Goal");
     // Redirect user
+    router.push(`/goal/${goalUID}`);
   };
 
   return (
@@ -50,9 +54,9 @@ const ActiveGoalContainer = ({ goal }: Props) => {
     >
       {isFocused && (
         <div className="flex gap-2">
-          <GoalButtonComponent title="Title" onClick={handleDelete} />
-          <GoalButtonComponent title="View" onClick={handleDelete} />
-          <GoalButtonComponent title="Delete" onClick={handleDelete} />
+          <GoalButtonComponent title="Title" onClick={handleDeleteGoal} />
+          <GoalButtonComponent title="View" onClick={handleEditGoal} />
+          <GoalButtonComponent title="Delete" onClick={handleDeleteGoal} />
         </div>
       )}
 
