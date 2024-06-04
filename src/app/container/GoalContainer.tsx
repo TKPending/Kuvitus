@@ -1,66 +1,65 @@
-import React, { useState } from "react";
+"use client";
+
 import { useDispatch } from "react-redux";
-import BasicGoalComponent from "@/app/components/custom/goal/BasicGoalComponent";
-import MediumGoalComponent from "@/app/components/custom/goal/MediumGoalComponent";
-import AdvancedGoalComponent from "@/app/components/custom/goal/AdvancedGoalComponent";
-import TagsComponent from "@/app/components/TagsComponent";
-import { GoalType } from "@/app/types/GoalType";
-import { setDragLocalPosition, setLocalGoalDrag } from "@/app/redux/slices/localGoals/localGoalsSlice";
-import { getGoalDimensions } from "@/app/util/getGoalDimensions";
+import React, { useState } from "react";
+import GoalLayout from "@/app/layouts/GoalLayout";
+import { setLocalGoalFocused, setLocalGoalUnfocused } from "@/app/redux/slices/localGoals/localGoalsSlice";
+import { PositionType } from "@/app/types/PositionType";
+import { GoalType } from "../types/GoalType";
 
 type Props = {
+  goalUID: string;
+  position: PositionType;
+  isFocused: boolean;
   goal: GoalType;
 };
 
-const GoalContainer = ({ goal }: Props) => {
+const GoalContainer = ({ goalUID, position, isFocused, goal }: Props) => {
   const dispatch = useDispatch();
-  const goalUID: string = goal.goalUID;
-  const goalDepth: "basic" | "medium" | "advanced" = goal.goalDepth;
-  const dimensions: {height: number, width: number} = getGoalDimensions(goalDepth);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+  
+  const [dragging, setDragging] = useState<boolean>(false);
+  const [startPos, setStartPos] = useState<{x: number, y: number}>({ x: 0, y: 0 });
+  const [isButtonClicked, setIsButtonClicked] = useState<boolean>(false);
 
-  const handleDragStart = (e: React.MouseEvent<HTMLDivElement>) => {
-    setIsDragging(true);
-    setStartPos({ x: e.clientX, y: e.clientY });
-    dispatch(setLocalGoalDrag(goalUID));
-  };
-
-  const handleDragMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (isDragging) {
-      const newX = e.clientX - startPos.x;
-      const newY = e.clientY - startPos.y;
-      dispatch(setDragLocalPosition({
-        UID: goalUID,
-        newPositions: { x: newX, y: newY, t: window.innerHeight, b: window.innerHeight }
-      }));
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isButtonClicked) {
       setStartPos({ x: e.clientX, y: e.clientY });
     }
   };
 
-  const handleDragEnd = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.type !== "mouseleave") {
-      setIsDragging(false);
-      dispatch(setLocalGoalDrag(goalUID)); // Stop dragging
-    };
+  const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!dragging && !isButtonClicked) {
+      handleDetailedGoalVisibility();
+    }
+    setDragging(false);
+    setIsButtonClicked(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.buttons === 1 && !isButtonClicked) {
+      const dx = Math.abs(e.clientX - startPos.x);
+      const dy = Math.abs(e.clientY - startPos.y);
+      if (dx > 5 || dy > 5) { // Considered as drag if moved more than 5px
+        setDragging(true);
+      }
+    }
+  };
+
+  const handleDetailedGoalVisibility = () => {
+    if (isFocused) {
+      dispatch(setLocalGoalUnfocused(goalUID));
+    } else {
+      dispatch(setLocalGoalFocused(goalUID));
+    }
   };
 
   return (
     <div
-      onMouseDown={handleDragStart}
-      onMouseMove={handleDragMove}
-      onMouseUp={handleDragEnd}
-      onMouseLeave={handleDragEnd}
-      className={`relative h-${dimensions.height} w-${dimensions.width}  hover:bg-opacity-60 bg-black rounded-lg bg-opacity-40 py-2 px-4 cursor-pointer shadow-lg ${isDragging ? 'dragging' : ''}`}
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      onMouseMove={handleMouseMove}
     >
-      <div className="w-full px-2 flex justify-end gap-2">
-        {goal.goalTags.map((topic, index) => (
-          <TagsComponent key={index} title={topic} />
-        ))}
-      </div>
-      {goal.goalDepth === "basic" && <BasicGoalComponent />}
-      {goal.goalDepth === "medium" && <MediumGoalComponent dueDate={goal.goalDueDate} />}
-      {goal.goalDepth === "advanced" && <AdvancedGoalComponent dueDate={goal.goalDueDate} subGoals={goal.goalSteps} />}
+      <GoalLayout goal={goal} />
     </div>
   );
 };
