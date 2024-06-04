@@ -1,6 +1,8 @@
+import React from "react";
+
 type Props = {
   title: string;
-  onClick: () => void;
+  onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
 const GoalButtonComponent = ({ title, onClick }: Props) => {

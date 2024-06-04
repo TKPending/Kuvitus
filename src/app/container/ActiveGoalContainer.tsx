@@ -6,8 +6,7 @@ import GoalContainer from "./GoalContainer";
 import GoalButtonComponent from "@/app/components/GoalButtonComponent";
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import { removeLocalGoal, setLocalGoalFocused, setLocalGoalUnfocused } from "@/app/redux/slices/localGoals/localGoalsSlice";
-import { PositionType } from "@/app/types/PositionType";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 type Props = {
   goal: LocalGoalType;
@@ -23,20 +22,24 @@ const ActiveGoalContainer = ({ goal }: Props) => {
   
   const [dragging, setDragging] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
+  const [isButtonClicked, setIsButtonClicked] = useState(false);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    setStartPos({ x: e.clientX, y: e.clientY });
+    if (!isButtonClicked) {
+      setStartPos({ x: e.clientX, y: e.clientY });
+    }
   };
 
   const handleMouseUp = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!dragging) {
+    if (!dragging && !isButtonClicked) {
       handleDetailedGoalVisibility();
     }
     setDragging(false);
+    setIsButtonClicked(false);
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.buttons === 1) {
+    if (e.buttons === 1 && !isButtonClicked) {
       const dx = Math.abs(e.clientX - startPos.x);
       const dy = Math.abs(e.clientY - startPos.y);
       if (dx > 5 || dy > 5) { // Considered as drag if moved more than 5px
@@ -53,12 +56,25 @@ const ActiveGoalContainer = ({ goal }: Props) => {
     }
   };
 
-  const handleDeleteGoal = () => {
+  const handleDeleteGoal = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsButtonClicked(true);
     dispatch(removeLocalGoal(goalUID));
   };
 
-  const handleEditGoal = () => {
+  const handleEditGoal = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsButtonClicked(true);
     router.push(`/goal/${goalUID}`);
+  };
+
+  const handleTitleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setIsButtonClicked(true);
+    // Handle title click if necessary
   };
 
   return (
@@ -74,7 +90,7 @@ const ActiveGoalContainer = ({ goal }: Props) => {
     >
       {isFocused && (
         <div className="flex gap-2">
-          <GoalButtonComponent title="Title" onClick={handleDeleteGoal} />
+          <GoalButtonComponent title="Title" onClick={handleTitleClick} />
           <GoalButtonComponent title="View" onClick={handleEditGoal} />
           <GoalButtonComponent title="Delete" onClick={handleDeleteGoal} />
         </div>
