@@ -1,5 +1,5 @@
 import ProgressionComponent from "@/app/components/custom/progression/ProgressionComponent";
-import { SubType } from "@/app/redux/types/SubType";
+import { SubType } from "@/app/types/SubType";
 
 type Props = {
     title?: string;

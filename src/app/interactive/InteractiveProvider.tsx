@@ -24,10 +24,10 @@ const InteractiveProvider = () => {
             goal: tempgoals[iterator],
             position: getRandomPosition(),
             velocity: { 
-                vx: Math.random() * 2 - 1, 
-                vy: Math.random() * 2 - 1, 
-                vt: Math.random() * 2 - 1 , 
-                vb: Math.random() * 2 - 1 
+                vx: (Math.random() * 4 - 2), // Increase speed range
+                vy: (Math.random() * 4 - 2), 
+                vt: (Math.random() * 4 - 2), 
+                vb: (Math.random() * 4 - 2) 
             },
             isFocused: false,
             isDragged: false,

@@ -6,6 +6,7 @@ import AdvancedGoalComponent from "@/app/components/custom/goal/AdvancedGoalComp
 import TagsComponent from "@/app/components/TagsComponent";
 import { GoalType } from "@/app/types/GoalType";
 import { setDragLocalPosition, setLocalGoalDrag } from "@/app/redux/slices/localGoals/localGoalsSlice";
+import { getGoalDimensions } from "@/app/util/getGoalDimensions";
 
 type Props = {
   goal: GoalType;
@@ -13,7 +14,9 @@ type Props = {
 
 const GoalContainer = ({ goal }: Props) => {
   const dispatch = useDispatch();
-  const goalUID = goal.goalUID;
+  const goalUID: string = goal.goalUID;
+  const goalDepth: "basic" | "medium" | "advanced" = goal.goalDepth;
+  const dimensions: {height: number, width: number} = getGoalDimensions(goalDepth);
   const [isDragging, setIsDragging] = useState(false);
   const [startPos, setStartPos] = useState({ x: 0, y: 0 });
 
@@ -35,9 +38,11 @@ const GoalContainer = ({ goal }: Props) => {
     }
   };
 
-  const handleDragEnd = () => {
-    setIsDragging(false);
-    dispatch(setLocalGoalDrag(goalUID)); // Stop dragging
+  const handleDragEnd = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.type !== "mouseleave") {
+      setIsDragging(false);
+      dispatch(setLocalGoalDrag(goalUID)); // Stop dragging
+    };
   };
 
   return (
@@ -46,7 +51,7 @@ const GoalContainer = ({ goal }: Props) => {
       onMouseMove={handleDragMove}
       onMouseUp={handleDragEnd}
       onMouseLeave={handleDragEnd}
-      className={`relative h-auto hover:bg-opacity-60 bg-black rounded-lg bg-opacity-40 py-2 px-4 cursor-pointer shadow-lg ${isDragging ? 'dragging' : ''}`}
+      className={`relative h-${dimensions.height} w-${dimensions.width}  hover:bg-opacity-60 bg-black rounded-lg bg-opacity-40 py-2 px-4 cursor-pointer shadow-lg ${isDragging ? 'dragging' : ''}`}
     >
       <div className="w-full px-2 flex justify-end gap-2">
         {goal.goalTags.map((topic, index) => (

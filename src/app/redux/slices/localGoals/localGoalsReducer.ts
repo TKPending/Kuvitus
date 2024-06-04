@@ -45,32 +45,26 @@ export const updateLocalGoalsPositionReducer = (state: LocalGoalState) => {
     let { x, y, t, b } = goal.position;
     let { vx, vy, vt, vb } = goal.velocity;
 
-    const distanceX = Math.abs(x - state.blockedProximity.x);
-    const distanceY = Math.abs(y - state.blockedProximity.y);
-    const distanceT = Math.abs(t - state.blockedProximity.t);
-    const distanceB = Math.abs(b - state.blockedProximity.b);
-
     const proximityThreshold = 50;
-    if (distanceX < proximityThreshold || distanceY < proximityThreshold || distanceT < proximityThreshold || distanceB < proximityThreshold) {
-      if (x < state.blockedProximity.x) vx *= -1;
-      if (x > state.blockedProximity.x) vx *= 1;
-      if (y < state.blockedProximity.y) vy *= -1;
-      if (y > state.blockedProximity.y) vy *= 1;
-      if (t < state.blockedProximity.t) vt *= -1;
-      if (t > state.blockedProximity.t) vt *= 1;
-      if (b < state.blockedProximity.b) vb *= -1;
-      if (b > state.blockedProximity.b) vb *= 1;
-    }
+    const dx = x - state.blockedProximity.x;
+    const dy = y - state.blockedProximity.y;
+    const dt = t - state.blockedProximity.t;
+    const db = b - state.blockedProximity.b;
+
+    if (Math.abs(dx) < proximityThreshold) vx = Math.sign(dx) * Math.abs(vx);
+    if (Math.abs(dy) < proximityThreshold) vy = Math.sign(dy) * Math.abs(vy);
+    if (Math.abs(dt) < proximityThreshold) vt = Math.sign(dt) * Math.abs(vt);
+    if (Math.abs(db) < proximityThreshold) vb = Math.sign(db) * Math.abs(vb);
 
     x += vx;
     y += vy;
     t += vt;
     b += vb;
 
-    if (x < 0 || x > window.innerWidth - 10) vx *= -1;
-    if (y < 0 || y > window.innerHeight - 10) vy *= -1;
-    if (t < 0 || t > window.innerHeight - 10) vt *= -1;
-    if (b < 0 || b > window.innerHeight - 10) vb *= -1;
+    if (x < 0 || x > window.innerWidth - 64) vx *= -1; // Adjust for goal size
+    if (y < 0 || y > window.innerHeight - 64) vy *= -1;
+    if (t < 0 || t > window.innerHeight - 64) vt *= -1;
+    if (b < 0 || b > window.innerHeight - 64) vb *= -1;
 
     goal.position = { x, y, t, b };
     goal.velocity = { vx, vy, vt, vb };
