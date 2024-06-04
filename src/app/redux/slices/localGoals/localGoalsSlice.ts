@@ -1,16 +1,17 @@
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import { createSlice } from "@reduxjs/toolkit";
-import { addLocalGoalReducer, localGoalFocusedReducer, localGoalUnfocusedReducer, removeLocalGoalReducer, updateLocalGoalsPositionReducer } from "./localGoalsReducer";
+import { addLocalGoalReducer, goalDraggedPositionReducer, goalDraggedReducer, localGoalFocusedReducer, localGoalUnfocusedReducer, removeLocalGoalReducer, updateLocalGoalsPositionReducer } from "./localGoalsReducer";
+import { PositionType } from "@/app/types/PositionType";
 
 
 export interface LocalGoalState {
     goals: LocalGoalType[];
-    blockedProximity: { x: number, y: number, t: number, b: number };
+    blockedProximity: PositionType;
   }
   
   const initialState: LocalGoalState = {
     goals: [],
-    blockedProximity: { x: 0, y: 0, t: 0, b: 0 },
+    blockedProximity: { x: 0, y: 0 , t: 0, b: 0 },
   };
 
 const localGoalSlice = createSlice({
@@ -22,6 +23,8 @@ const localGoalSlice = createSlice({
     setLocalGoalFocused: localGoalFocusedReducer,
     setLocalGoalUnfocused: localGoalUnfocusedReducer,
     updateLocalPositions: updateLocalGoalsPositionReducer,
+    setLocalGoalDrag: goalDraggedReducer,
+    setDragLocalPosition: goalDraggedPositionReducer,
   },
 });
 
@@ -31,6 +34,8 @@ export const {
     setLocalGoalFocused,
     setLocalGoalUnfocused,
     updateLocalPositions,
+    setLocalGoalDrag,
+    setDragLocalPosition,
 } = localGoalSlice.actions;
 
 export default localGoalSlice.reducer;

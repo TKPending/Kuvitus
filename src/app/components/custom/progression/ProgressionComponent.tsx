@@ -1,6 +1,6 @@
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { SubType } from "@/app/types/SubType";
+import { SubType } from "@/app/redux/types/SubType";
 
 type Props = {
   subGoals: SubType[];

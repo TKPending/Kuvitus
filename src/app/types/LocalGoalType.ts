@@ -1,8 +1,10 @@
 import { GoalType } from "./GoalType";
+import { PositionType } from "./PositionType";
 
 export interface LocalGoalType {
     goal: GoalType,
-    position: { x: number, y: number, t: number, b: number },
+    position: PositionType,
     velocity: { vx: number, vy: number, vt: number, vb: number },
     isFocused: boolean,
+    isDragged: boolean,
 };

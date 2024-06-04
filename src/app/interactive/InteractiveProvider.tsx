@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,9 +13,9 @@ import { addLocalGoal, updateLocalPositions } from "@/app/redux/slices/localGoal
 
 const InteractiveProvider = () => {
     const dispatch = useDispatch();
-    const localGoals: LocalGoalType[] = useSelector((state: RootState) => state.localGoals.goals);
+    const localGoals = useSelector((state: RootState) => state.localGoals.goals);
 
-    const [ iterator, setIterator ] = useState<number>(0);
+    const [iterator, setIterator] = useState(0);
     const requestRef = useRef<number>();
     const tempgoals: GoalType[] = [BASIC, MEDIUM, ADVANCED];
 
@@ -30,6 +30,7 @@ const InteractiveProvider = () => {
                 vb: Math.random() * 2 - 1 
             },
             isFocused: false,
+            isDragged: false,
         }
         dispatch(addLocalGoal(localNewGoal));
         setIterator((prevIterator) => (prevIterator + 1) % tempgoals.length);
@@ -50,10 +51,9 @@ const InteractiveProvider = () => {
             {localGoals.map((goal: LocalGoalType, index: number) => (
                 <ActiveGoalContainer key={index} goal={goal} />
             ))}
-
             <AddGoalButtonComponent onClick={handleAddGoal} />
         </div>
-    )
+    );
 };
 
 export default InteractiveProvider;
