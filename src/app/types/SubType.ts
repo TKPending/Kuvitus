@@ -3,6 +3,7 @@ export interface SubType {
   subTitle: string;
   subDetails: string;
   subStatus: number | 0 |  1 | 2; //(Uncomplete, Complete, Pending);
-  subTags: String[];
+  subTags: string[];
   subDueDate: string;
+  isPressed: boolean;
 };

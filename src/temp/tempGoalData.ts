@@ -37,7 +37,8 @@ export const ADVANCED: GoalType = {
             subDetails: "Consult with a nutritionist and create a balanced meal plan.",
             subStatus: 0,
             subTags: ["Nutrition", "Healthy Eating"],
-            subDueDate: "2024-06-01"
+            subDueDate: "2024-06-01",
+            isPressed: false,
         },
         {
             subUID: "2",
@@ -45,7 +46,8 @@ export const ADVANCED: GoalType = {
             subDetails: "Join a gym or start a home workout routine.",
             subStatus: 1,
             subTags: ["Fitness", "Exercise"],
-            subDueDate: "2024-06-02"
+            subDueDate: "2024-06-02",
+            isPressed: false,
         },
         {
             subUID: "3",
@@ -53,7 +55,8 @@ export const ADVANCED: GoalType = {
             subDetails: "Use a fitness app to track calorie intake and exercise sessions.",
             subStatus: 0,
             subTags: ["Fitness", "Progress Tracking"],
-            subDueDate: "2024-06-03"
+            subDueDate: "2024-06-03",
+            isPressed: false,
         },
         {
             subUID: "4",
@@ -61,7 +64,8 @@ export const ADVANCED: GoalType = {
             subDetails: "Drink at least 8 glasses of water every day.",
             subStatus: 2,
             subTags: ["Health", "Hydration"],
-            subDueDate: "2024-06-04"
+            subDueDate: "2024-06-04",
+            isPressed: false,
         },
         {
             subUID: "5",
@@ -69,7 +73,8 @@ export const ADVANCED: GoalType = {
             subDetails: "Ensure 7-8 hours of quality sleep per night.",
             subStatus: 0,
             subTags: ["Health", "Sleep"],
-            subDueDate: "2024-06-05"
+            subDueDate: "2024-06-05",
+            isPressed: false,
         }
     ]
 };

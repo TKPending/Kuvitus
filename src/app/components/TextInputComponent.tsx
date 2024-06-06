@@ -42,7 +42,7 @@ const TextInputComponent = ({
       onChange={onChange}
       onBlur={onSave}
       placeholder={placeholder}
-      className={`${textSize()} ${customStyle} h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
+      className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
     />
   ) : (
     <textarea
@@ -50,7 +50,7 @@ const TextInputComponent = ({
       onChange={onChange}
       onBlur={onSave}
       placeholder={placeholder}
-      className={`${textSize()} ${customStyle} h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
+      className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
     />
   );
 };

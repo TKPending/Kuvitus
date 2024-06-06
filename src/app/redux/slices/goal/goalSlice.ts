@@ -1,6 +1,16 @@
 import { GoalType } from "@/app/types/GoalType";
 import { createSlice } from "@reduxjs/toolkit";
-import { addToGoalTagsReducer, includeGoalDateReducer, processGoalDepthReducer, removeFromGoalTagsReducer, updateGoalDescriptionReducer, updateGoalStatusReducer, updateGoalTitleReducer } from "./goalReducer";
+import {
+  addToGoalTagsReducer,
+  includeGoalDateReducer,
+  loadGoalReducer,
+  processGoalDepthReducer,
+  removeFromGoalTagsReducer,
+  updateGoalDescriptionReducer,
+  updateGoalStatusReducer,
+  updateGoalTitleReducer,
+  subGoalFocusedReducer,
+} from "./goalReducer";
 
 const UNCOMPLETE = 0;
 
@@ -19,6 +29,7 @@ const goalSlice = createSlice({
   name: "goal",
   initialState,
   reducers: {
+    setGoal: loadGoalReducer,
     setGoalTitle: updateGoalTitleReducer,
     setGoalDescription: updateGoalDescriptionReducer,
     setGoalStatus: updateGoalStatusReducer,
@@ -26,10 +37,12 @@ const goalSlice = createSlice({
     setGoalTags: addToGoalTagsReducer,
     removeGoalTag: removeFromGoalTagsReducer,
     setGoalDate: includeGoalDateReducer,
+    setSubGoalFocus: subGoalFocusedReducer,
   },
 });
 
 export const {
+  setGoal,
   setGoalTitle,
   setGoalDescription,
   setGoalStatus,
@@ -37,6 +50,7 @@ export const {
   setGoalTags,
   removeGoalTag,
   setGoalDate,
+  setSubGoalFocus,
 } = goalSlice.actions;
 
 export default goalSlice.reducer;
