@@ -1,7 +1,11 @@
 import { useDispatch } from "react-redux";
 import TagsComponent from "../components/TagsComponent";
-import { setSubGoalFocus } from "../redux/slices/goal/goalSlice";
+import {
+  setSubGoalDetails,
+  setSubGoalFocus,
+} from "../redux/slices/goal/goalSlice";
 import TextInputComponent from "../components/TextInputComponent";
+import React from "react";
 
 type Props = {
   UID: string;
@@ -24,7 +28,18 @@ const SubGoalDropdownContainer = ({
     dispatch(setSubGoalFocus(UID));
   };
 
-  const handleOnChange = () => {};
+  const handleOnChange = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    const updatedValue: string = e.target.value;
+
+    dispatch(
+      setSubGoalDetails({
+        subUID: UID,
+        newDesc: updatedValue,
+      })
+    );
+  };
 
   const handleOnSave = async () => {};
 

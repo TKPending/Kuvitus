@@ -6,6 +6,9 @@ type Props = {
   size?: "standard" | "small" | "big" | "large" | string;
   input?: boolean;
   placeholder?: string;
+  onClick?: (
+    e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
   onSave: () => void;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -18,6 +21,8 @@ const TextInputComponent = ({
   size,
   input = true,
   placeholder,
+  onClick = (e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+    e.stopPropagation(),
   onSave,
   onChange,
 }: Props) => {
@@ -40,6 +45,7 @@ const TextInputComponent = ({
     <input
       value={text}
       onChange={onChange}
+      onClick={onClick}
       onBlur={onSave}
       placeholder={placeholder}
       className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
@@ -47,6 +53,7 @@ const TextInputComponent = ({
   ) : (
     <textarea
       value={text}
+      onClick={onClick}
       onChange={onChange}
       onBlur={onSave}
       placeholder={placeholder}

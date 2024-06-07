@@ -39,15 +39,29 @@ export const addSubGoalReducer = (
 };
 
 export const updateSubGoalTitleReducer = (
-    state: GoalType,
-    action: PayloadAction<{subUID: string, newTitle: string}>
-  ) => {
-    const AP = action.payload;
+  state: GoalType,
+  action: PayloadAction<{ subUID: string; newTitle: string }>
+) => {
+  const AP = action.payload;
 
-    state.goalSteps = state.goalSteps.map((goal) => {
-      if (goal.subUID === AP.subUID) {
-        return { ...goal, subTitle:  AP.newTitle};
-      }
-      return goal;
-    });
-  };
+  state.goalSteps = state.goalSteps.map((goal) => {
+    if (goal.subUID === AP.subUID) {
+      return { ...goal, subTitle: AP.newTitle };
+    }
+    return goal;
+  });
+};
+
+export const updateSubGoalDescriptionReducer = (
+  state: GoalType,
+  action: PayloadAction<{ subUID: string; newDesc: string }>
+) => {
+  const AP = action.payload;
+
+  state.goalSteps = state.goalSteps.map((goal) => {
+    if (goal.subUID === AP.subUID) {
+      return { ...goal, subDetails: AP.newDesc };
+    }
+    return goal;
+  });
+};
