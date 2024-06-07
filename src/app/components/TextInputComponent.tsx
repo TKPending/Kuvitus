@@ -6,6 +6,7 @@ type Props = {
   size?: "standard" | "small" | "big" | "large" | string;
   input?: boolean;
   placeholder?: string;
+  isDisabled?: boolean;
   onClick?: (
     e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -21,6 +22,7 @@ const TextInputComponent = ({
   size,
   input = true,
   placeholder,
+  isDisabled=false,
   onClick = (e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     e.stopPropagation(),
   onSave,
@@ -48,6 +50,7 @@ const TextInputComponent = ({
       onClick={onClick}
       onBlur={onSave}
       placeholder={placeholder}
+      disabled={isDisabled}
       className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
     />
   ) : (
@@ -57,6 +60,7 @@ const TextInputComponent = ({
       onChange={onChange}
       onBlur={onSave}
       placeholder={placeholder}
+      disabled={isDisabled}
       className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
     />
   );

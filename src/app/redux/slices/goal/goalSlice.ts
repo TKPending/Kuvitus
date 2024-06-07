@@ -15,7 +15,8 @@ import {
   removeSubGoalReducer,
   addSubGoalReducer,
   updateSubGoalTitleReducer,
-  updateSubGoalDescriptionReducer
+  updateSubGoalDescriptionReducer,
+  removeTagFromSubGoalReducer
 }  from "./subGoalReducer"
 
 const UNCOMPLETE = 0;
@@ -49,6 +50,7 @@ const goalSlice = createSlice({
     addSubGoal: addSubGoalReducer,
     setSubGoalTitle: updateSubGoalTitleReducer,
     setSubGoalDetails: updateSubGoalDescriptionReducer,
+    removeSubGoalTag: removeTagFromSubGoalReducer,
   },
 });
 
@@ -61,11 +63,13 @@ export const {
   setGoalTags,
   removeGoalTag,
   setGoalDate,
+  
   setSubGoalFocus,
   removeSubGoal,
   addSubGoal,
   setSubGoalTitle,
   setSubGoalDetails,
+  removeSubGoalTag,
 } = goalSlice.actions;
 
 export default goalSlice.reducer;

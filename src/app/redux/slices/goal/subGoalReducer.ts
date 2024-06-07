@@ -65,3 +65,22 @@ export const updateSubGoalDescriptionReducer = (
     return goal;
   });
 };
+
+export const removeTagFromSubGoalReducer = (
+    state: GoalType,
+    action: PayloadAction<{ subUID: string | undefined, tagToRemove: string }>
+  ) => {
+    const AP = action.payload
+    if (!AP.subUID) {
+        return;
+    }
+
+    state.goalSteps = state.goalSteps.map((goal) => {
+        if (goal.subUID === AP.subUID) {
+          const updatedTags: string[] = goal.subTags.filter(tags => tags !== AP.tagToRemove );
+
+          return { ...goal, subTags: updatedTags };
+        }
+        return goal;
+      });
+  };

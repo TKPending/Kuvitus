@@ -61,7 +61,7 @@ const SubGoalDropdownContainer = ({
 
       <div className="flex gap-4 w-full p-2 items-center justify-end">
         {tags.map((subject: string, index: number) => (
-          <TagsComponent key={index} title={subject} />
+          <TagsComponent key={index} title={subject} UID={UID} />
         ))}
       </div>
 
