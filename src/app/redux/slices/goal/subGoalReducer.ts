@@ -117,3 +117,17 @@ export const updateSubGoalStatusReducer = (
     return goal;
   });
 };
+
+export const updateSubGoalDueDateReducer = (
+  state: GoalType,
+  action: PayloadAction<{ subUID: string; newDate: string }>
+) => {
+  const AP = action.payload;
+
+  state.goalSteps = state.goalSteps.map((goal) => {
+    if (goal.subUID === AP.subUID) {
+      return { ...goal, subDueDate: AP.newDate };
+    }
+    return goal;
+  });
+};

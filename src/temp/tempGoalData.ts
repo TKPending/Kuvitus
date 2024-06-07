@@ -73,7 +73,7 @@ export const ADVANCED: GoalType = {
             subDetails: "Ensure 7-8 hours of quality sleep per night.",
             subStatus: 0,
             subTags: ["Health", "Sleep"],
-            subDueDate: "08/05/2024",
+            subDueDate: "08/06/2024",
             isPressed: false,
         }
     ]

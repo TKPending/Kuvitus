@@ -1,14 +1,15 @@
 import { useDispatch } from "react-redux";
 import GoalStatusContainer from "./GoalStatusContainer";
-import GoalDate from "@/app/components/custom/date/GoalDate";
-import { setSubGoalStatus } from "../redux/slices/goal/goalSlice";
+import GoalDateComponent from "@/app/components/custom/date/GoalDateComponent";
+import { setSubGoalDueDate, setSubGoalStatus } from "@/app/redux/slices/goal/goalSlice";
 
 type Props = {
   subUID: string;
   status: number;
+  dueDate: string;
 };
 
-const StatusDateContainer = ({ subUID, status }: Props) => {
+const StatusDateContainer = ({ subUID, status, dueDate }: Props) => {
   const dispatch = useDispatch();
 
   const handleStatusChange = (option: number) => {
@@ -18,10 +19,17 @@ const StatusDateContainer = ({ subUID, status }: Props) => {
       }));
   };
 
+  const handleDateChange = (newDate: string) => {
+    dispatch(setSubGoalDueDate({
+      subUID,
+      newDate
+    }));
+  };
+
   return (
     <div className="flex px-8 gap-6">
-      <GoalStatusContainer status={status} handleDispatch={(option) => handleStatusChange(option)} />
-      <GoalDate />
+      <GoalStatusContainer status={status} handleDispatch={handleStatusChange} />
+      <GoalDateComponent dueDate={dueDate} handleDispatch={handleDateChange} />
     </div>
   );
 };

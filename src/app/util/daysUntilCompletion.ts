@@ -1,6 +1,6 @@
-// Incorrect Days
 export const daysUntilCompletion = (targetDate: string): number => {
-  const target: Date = new Date(targetDate);
+  const [day, month, year] = targetDate.split('/').map(Number);
+  const target: Date = new Date(year, month - 1, day);
   const today: Date = new Date();
 
   const differenceMs: number = target.getTime() - today.getTime();
