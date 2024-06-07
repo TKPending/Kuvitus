@@ -1,26 +1,33 @@
 import { useDispatch } from "react-redux";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
+import GoalStatusContainer from "./GoalStatusContainer";
+import { setSubGoalStatus } from "../redux/slices/goal/goalSlice";
 
-const UNCOMPLETE: number = 0;
 const COMPLETED: number = 1;
+const PENDING: number = 2;
 
 type Props = {
+  subUID: string;
   dueDate: string;
   status: number;
 };
 
-const SubGoalDateContainer = ({ dueDate, status }: Props) => {
+const SubGoalDateContainer = ({ subUID, dueDate, status }: Props) => {
+    const dispatch = useDispatch();
   const remainingDays: number = daysUntilCompletion(dueDate);
-  const progress: {text: string, color: string} = 
-    status === UNCOMPLETE ? {text: "Uncomplete", color: "bg-red-400"} : status === COMPLETED ? {text: "Complete", color: "bg-green-400"} : {text: "Pending", color: "bg-neutral-800"};
+
+  const handleStatusChange = (option: number) => {
+    dispatch(setSubGoalStatus({
+        subUID,
+        newStatus: option,
+    }));
+  };
 
   return (
     <div className="w-full flex items-center justify-end px-8">
       <div className="flex flex-col gap-2 items-center justify-center">
-        <p className={`${dueDate ? "text-xs" : "text-base"} p-2 ${progress.color} rounded`}>
-          {progress.text}
-        </p>
-        {status !== COMPLETED && dueDate && (
+        <GoalStatusContainer status={status} handleDispatch={(option) => handleStatusChange(option)} />
+        {status !== COMPLETED && status !== PENDING  && dueDate && (
           <p className="flex items-center gap-2">
             {dueDate}{" "}
             {remainingDays > 0 ? (

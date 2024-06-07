@@ -1,9 +1,9 @@
 import { useDispatch } from "react-redux";
-import TagsComponent from "../components/TagsComponent";
+import TagsComponent from "@/app/components/TagsComponent";
 import {
   setSubGoalDetails,
   setSubGoalFocus,
-} from "../redux/slices/goal/goalSlice";
+} from "@/app/redux/slices/goal/goalSlice";
 import TextInputComponent from "../components/TextInputComponent";
 import React from "react";
 import AddTagsComponent from "@/app/components/custom/subgoal/AddTagsComponent";
@@ -68,7 +68,7 @@ const SubGoalDropdownContainer = ({
         <AddTagsComponent subUID={UID} />
       </div>
 
-      <SubGoalDateContainer dueDate={dueDate} status={status} />
+      <SubGoalDateContainer subUID={UID} dueDate={dueDate} status={status} />
     </div>
   );
 };

@@ -26,7 +26,7 @@ export const ADVANCED: GoalType = {
     goalUID: "3",
     goalTitle: "Lose 5KG",
     goalDescription: "I am getting fat and I want to lose weight",
-    goalStatus: 2,
+    goalStatus: 1,
     goalDepth: "advanced",
     goalTags: ["Fitness", "Discipline", "Fun"],
     goalDueDate: "01/06/24",

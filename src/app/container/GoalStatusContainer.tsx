@@ -1,29 +1,37 @@
-import { RootState } from "@/app/redux/store";
-import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
-import { setGoalStatus } from "@/app/redux/slices/goal/goalSlice";
+import React, { useState } from "react";
 
 type Props = {
-  subGoal?: boolean;
+  status: number;
   onSave?: () => void;
+  handleDispatch: (option: number) => void;
 };
 
-const GoalStatusContainer = ({ subGoal=false, onSave }: Props) => {
-  const dispatch = useDispatch();
-  const status: number = useSelector((state: RootState) => state.goal.goalStatus);
+const GoalStatusContainer = ({ status, onSave, handleDispatch }: Props) => {
   const [progressClicked, setProgressClicked] = useState<boolean>(false);
   const options: string[] = ["Uncomplete", "Completed", "Pending"];
 
-  const handleOptionClick = (option: number) => {
-    dispatch(setGoalStatus(option))
-    setProgressClicked(false); 
+  const handleInitialClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
+    e.stopPropagation();
+    setProgressClicked(!progressClicked);
+  };
+
+  const handleOptionClick = (e: React.MouseEvent<HTMLParagraphElement>, option: number) => {
+    e.stopPropagation();
+    handleDispatch(option);
+    setProgressClicked(false);
   };
 
   return (
     <div className="relative">
       <p
-        className={`p-2 cursor-pointer rounded-lg text-white ${status === 0 ? "bg-red-600" : status === 1 ? "bg-green-600" : "bg-neutral-400"}`}
-        onClick={() => setProgressClicked(!progressClicked)} // Toggle dropdown visibility
+        className={`p-2 cursor-pointer rounded-lg text-white ${
+          status === 0
+            ? "bg-red-600"
+            : status === 1
+            ? "bg-green-600"
+            : "bg-neutral-400"
+        }`}
+        onClick={handleInitialClick} // Toggle dropdown visibility
       >
         {status === 0 ? "Uncomplete" : status === 1 ? "Completed" : "Pending"}
       </p>
@@ -32,8 +40,8 @@ const GoalStatusContainer = ({ subGoal=false, onSave }: Props) => {
           {options.map((option: string, index: number) => (
             <p
               key={index}
-              className="p-2 cursor-pointer hover:bg-gray-200"
-              onClick={() => handleOptionClick(index)}
+              className="p-2 text-black cursor-pointer hover:bg-gray-200"
+              onClick={(e: React.MouseEvent<HTMLParagraphElement>) => handleOptionClick(e, index)}
             >
               {option}
             </p>

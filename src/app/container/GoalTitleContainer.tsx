@@ -3,7 +3,7 @@ import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import ReturnHomeComponent from "@/app/components/ReturnHomeComponent";
 import TextInputComponent from "@/app/components/TextInputComponent";
-import { setGoalTitle } from "@/app/redux/slices/goal/goalSlice";
+import { setGoalStatus, setGoalTitle } from "@/app/redux/slices/goal/goalSlice";
 import GoalStatusContainer from "./GoalStatusContainer";
 
 const GoalTitleContainer = () => {
@@ -18,10 +18,14 @@ const GoalTitleContainer = () => {
 
   const handleOnSave = async () => {};
 
+  const handleStatusChange = (option: number) => {
+    dispatch(setGoalStatus(option));
+  }
+
   return (
     <div className="flex h-auto items-center gap-6">
       <ReturnHomeComponent />
-      <GoalStatusContainer />
+      <GoalStatusContainer status={status} handleDispatch={(option) => handleStatusChange(option)} />
       <TextInputComponent
         text={title}
         size="text-4xl"

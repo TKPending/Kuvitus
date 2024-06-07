@@ -88,18 +88,32 @@ export const removeTagFromSubGoalReducer = (
 };
 
 export const addSubGoalTagReducer = (
-    state: GoalType,
-    action: PayloadAction<{ subUID: string | undefined; tagToAdd: string }>
-  ) => {
-    const AP = action.payload;
-    if (!AP.subUID) {
-      return;
+  state: GoalType,
+  action: PayloadAction<{ subUID: string | undefined; tagToAdd: string }>
+) => {
+  const AP = action.payload;
+  if (!AP.subUID) {
+    return;
+  }
+
+  state.goalSteps = state.goalSteps.map((goal) => {
+    if (goal.subUID === AP.subUID) {
+      return { ...goal, subTags: [...goal.subTags, AP.tagToAdd] };
     }
-  
-    state.goalSteps = state.goalSteps.map((goal) => {
-      if (goal.subUID === AP.subUID) {
-        return { ...goal, subTags: [...goal.subTags, AP.tagToAdd] };
-      }
-      return goal;
-    });
-  };
+    return goal;
+  });
+};
+
+export const updateSubGoalStatusReducer = (
+  state: GoalType,
+  action: PayloadAction<{ subUID: string; newStatus: number }>
+) => {
+  const AP = action.payload;
+
+  state.goalSteps = state.goalSteps.map((goal) => {
+    if (goal.subUID === AP.subUID) {
+      return { ...goal, subStatus: AP.newStatus };
+    }
+    return goal;
+  });
+};
