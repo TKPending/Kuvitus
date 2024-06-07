@@ -1,9 +1,12 @@
 import { useDispatch } from "react-redux";
 import TagsComponent from "@/app/components/TagsComponent";
-import { setSubGoalFocus, setSubGoalTitle } from "@/app/redux/slices/goal/goalSlice";
+import {
+  setSubGoalFocus,
+  setSubGoalTitle,
+} from "@/app/redux/slices/goal/goalSlice";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
-
+import { daysUntilCompletion } from "../util/daysUntilCompletion";
 
 type Props = {
   UID: string;
@@ -21,22 +24,25 @@ const SubGoalFrontContainer = ({
   isPressed,
 }: Props) => {
   const dispatch = useDispatch();
+  const remainingDays: number = daysUntilCompletion(dueDate);
 
   const handleSubGoalFocus = () => {
     dispatch(setSubGoalFocus(UID));
   };
 
-  const handleTitleSave = async () => {
+  const handleTitleSave = async () => {};
 
-  };
-
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleTitleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const updatedValue: string = e.target.value;
 
-    dispatch(setSubGoalTitle({
-      subUID: UID,
-      newTitle: updatedValue,
-    }))
+    dispatch(
+      setSubGoalTitle({
+        subUID: UID,
+        newTitle: updatedValue,
+      })
+    );
   };
 
   return (
@@ -44,7 +50,11 @@ const SubGoalFrontContainer = ({
       onClick={handleSubGoalFocus}
       className="cursor-pointer bg-black text-white flex items-center justify-around p-4"
     >
-      <TextInputComponent text={title} onSave={handleTitleSave} onChange={handleTitleChange} />
+      <TextInputComponent
+        text={title}
+        onSave={handleTitleSave}
+        onChange={handleTitleChange}
+      />
 
       {!isPressed && (
         <div className="flex flex-col items-center justify-center gap-4 w-full">
@@ -54,7 +64,14 @@ const SubGoalFrontContainer = ({
             ))}
           </div>
 
-          <p>{dueDate}</p>
+          {dueDate && (
+            <div className="flex items-center gap-2 text-base">
+              <p>{dueDate}</p>
+              <p className="text-xs text-neutral-200">
+                {remainingDays > 0 ? `${remainingDays} days left` : "Overdue"}
+              </p>
+            </div>
+          )}
         </div>
       )}
     </div>

@@ -7,6 +7,7 @@ import {
 import TextInputComponent from "../components/TextInputComponent";
 import React from "react";
 import AddTagsComponent from "@/app/components/custom/subgoal/AddTagsComponent";
+import SubGoalDateContainer from "./SubGoalDateContainer";
 
 type Props = {
   UID: string;
@@ -47,7 +48,7 @@ const SubGoalDropdownContainer = ({
   return (
     <div
       onClick={handleSubGoalFocus}
-      className="flex flex-col gap-2 bg-black text-white p-4"
+      className="flex cursor-pointer flex-col gap-2 bg-black text-white p-4"
     >
       <div className="flex-col gap-4 flex">
         <p>Details</p>
@@ -67,9 +68,7 @@ const SubGoalDropdownContainer = ({
         <AddTagsComponent subUID={UID} />
       </div>
 
-      <p className="flex items-center justify-end p-2 px-8">
-        {status === 0 ? "Uncomplete" : status === 1 ? "Complete" : "Pending"}
-      </p>
+      <SubGoalDateContainer dueDate={dueDate} status={status} />
     </div>
   );
 };
