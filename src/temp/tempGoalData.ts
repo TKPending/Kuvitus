@@ -18,7 +18,7 @@ export const MEDIUM: GoalType = {
     goalStatus: 1,
     goalDepth: "medium",
     goalTags: ["Fitness", "Discipline"],
-    goalDueDate: "01/06/24",
+    goalDueDate: "01/06/2024",
     goalSteps: []
 };
 
@@ -29,7 +29,7 @@ export const ADVANCED: GoalType = {
     goalStatus: 1,
     goalDepth: "advanced",
     goalTags: ["Fitness", "Discipline", "Fun"],
-    goalDueDate: "01/06/24",
+    goalDueDate: "01/06/2024",
     goalSteps: [
         {
             subUID: "1",
