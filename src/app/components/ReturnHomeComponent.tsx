@@ -9,16 +9,15 @@ const ReturnHomeComponent = () => {
     const [ isHovered, setIsHover ] = useState<boolean>(false);
 
     const handleReturnHome = () => {
-        router.push("");
+        router.push("/");
     };
     
     return (
-        <div>
+        <div onClick={handleReturnHome}>
             <FontAwesomeIcon 
                 icon={isHovered ? solidLeft : regularLeft} 
                 onMouseEnter={() => setIsHover(true)}
                 onMouseLeave={() => setIsHover(false)}
-                onClick={handleReturnHome}
                 className="text-6xl transition-all duration-400 cursor-pointer" 
             />
         </div>

@@ -76,3 +76,10 @@ export const subGoalFocusedReducer = (
     return goal;
   });
 };
+
+export const removeSubGoalReducer = (
+  state: GoalType,
+  action: PayloadAction<string>
+) => {
+  state.goalSteps = state.goalSteps.filter(goal => goal.subUID !== action.payload);
+};
