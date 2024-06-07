@@ -1,4 +1,5 @@
 import { GoalType } from "@/app/types/GoalType";
+import { SubType } from "@/app/types/SubType";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export const loadGoalReducer = (
@@ -82,4 +83,19 @@ export const removeSubGoalReducer = (
   action: PayloadAction<string>
 ) => {
   state.goalSteps = state.goalSteps.filter(goal => goal.subUID !== action.payload);
+};
+
+export const addSubGoalReducer = (
+  state: GoalType,
+  action: PayloadAction<string>
+) => {
+  state.goalSteps.push({
+    subUID: action.payload,
+    subTitle: "",
+    subDetails: "",
+    subStatus: 0,
+    subTags: [],
+    subDueDate: "",
+    isPressed: false,
+  });
 };
