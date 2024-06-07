@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 import { removeSubGoalTag } from "../redux/slices/goal/goalSlice";
 

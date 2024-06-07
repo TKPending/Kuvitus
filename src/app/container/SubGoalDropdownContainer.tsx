@@ -6,6 +6,7 @@ import {
 } from "../redux/slices/goal/goalSlice";
 import TextInputComponent from "../components/TextInputComponent";
 import React from "react";
+import AddTagsComponent from "@/app/components/custom/subgoal/AddTagsComponent";
 
 type Props = {
   UID: string;
@@ -63,6 +64,7 @@ const SubGoalDropdownContainer = ({
         {tags.map((subject: string, index: number) => (
           <TagsComponent key={index} title={subject} UID={UID} />
         ))}
+        <AddTagsComponent subUID={UID} />
       </div>
 
       <p className="flex items-center justify-end p-2 px-8">
