@@ -6,7 +6,7 @@ import {
 } from "@/app/redux/slices/goal/goalSlice";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
-import { daysUntilCompletion } from "../util/daysUntilCompletion";
+import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 
 type Props = {
   UID: string;

@@ -33,7 +33,7 @@ export const updateGoalDescriptionReducer = (
 
 export const updateGoalStatusReducer = (
   state: GoalType,
-  action: PayloadAction<0 | 1 | 2>
+  action: PayloadAction<number>
 ) => {
   state.goalStatus = action.payload;
 };
