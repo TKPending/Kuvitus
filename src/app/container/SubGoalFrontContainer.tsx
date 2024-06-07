@@ -1,6 +1,8 @@
 import { useDispatch } from "react-redux";
 import TagsComponent from "@/app/components/TagsComponent";
-import { setSubGoalFocus } from "@/app/redux/slices/goal/goalSlice";
+import { setSubGoalFocus, setSubGoalTitle } from "@/app/redux/slices/goal/goalSlice";
+import TextInputComponent from "@/app/components/TextInputComponent";
+import React from "react";
 
 
 type Props = {
@@ -24,12 +26,25 @@ const SubGoalFrontContainer = ({
     dispatch(setSubGoalFocus(UID));
   };
 
+  const handleTitleSave = async () => {
+
+  };
+
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const updatedValue: string = e.target.value;
+
+    dispatch(setSubGoalTitle({
+      subUID: UID,
+      newTitle: updatedValue,
+    }))
+  };
+
   return (
     <div
       onClick={handleSubGoalFocus}
       className="cursor-pointer bg-black text-white flex items-center justify-around p-4"
     >
-      <p className="w-full">{title}</p>
+      <TextInputComponent text={title} onSave={handleTitleSave} onChange={handleTitleChange} />
 
       {!isPressed && (
         <div className="flex flex-col items-center justify-center gap-4 w-full">
