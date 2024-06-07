@@ -7,7 +7,7 @@ import {
 import TextInputComponent from "../components/TextInputComponent";
 import React from "react";
 import AddTagsComponent from "@/app/components/custom/subgoal/AddTagsComponent";
-import SubGoalDateContainer from "./SubGoalDateContainer";
+import SubGoalDateLayout from "../layouts/SubGoalDateLayout";
 
 type Props = {
   UID: string;
@@ -68,7 +68,8 @@ const SubGoalDropdownContainer = ({
         <AddTagsComponent subUID={UID} />
       </div>
 
-      <SubGoalDateContainer subUID={UID} dueDate={dueDate} status={status} />
+      <SubGoalDateLayout subUID={UID} dueDate={dueDate} status={status} />
+
     </div>
   );
 };
