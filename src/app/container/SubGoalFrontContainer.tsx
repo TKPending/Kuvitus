@@ -48,7 +48,7 @@ const SubGoalFrontContainer = ({
   return (
     <div
       onClick={handleSubGoalFocus}
-      className="cursor-pointer bg-black text-white flex items-center justify-around p-4"
+      className="min-h-16 cursor-pointer bg-black text-white flex items-center justify-around p-4"
     >
       <TextInputComponent
         text={title}

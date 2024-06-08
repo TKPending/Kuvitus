@@ -46,7 +46,7 @@ const TagsComponent = ({
       </p>
       {button && (
         <FontAwesomeIcon
-          icon={isHovered ? faCircleXmark : faXmark}
+          icon={faXmark}
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
           onClick={(e: any) => handleTagDeletion(e, title)}

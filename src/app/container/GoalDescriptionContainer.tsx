@@ -19,7 +19,7 @@ const GoalDescriptionContainer = () => {
   const handleOnSave = async () => {};
 
   return (
-    <div className="h-full border-2 border-black rounded-lg p-4">
+    <div className="h-full border-4 border-black rounded-lg p-4">
       <TextInputComponent
         text={description}
         size="big"

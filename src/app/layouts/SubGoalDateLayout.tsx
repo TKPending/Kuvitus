@@ -29,6 +29,8 @@ const SubGoalDateLayout = ({ subUID, dueDate, status }: Props) => {
               >
                 {remainingDays} left
               </span>
+            ) : remainingDays === 0 ? (
+              <p className="text-xs text-green-600">Due Today</p>
             ) : (
               <span className="text-xs text-red-200">Overdue</span>
             )}

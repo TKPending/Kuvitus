@@ -1,13 +1,13 @@
+import React from "react";
 import { useDispatch } from "react-redux";
 import TagsComponent from "@/app/components/TagsComponent";
 import {
   setSubGoalDetails,
   setSubGoalFocus,
 } from "@/app/redux/slices/goal/goalSlice";
-import TextInputComponent from "../components/TextInputComponent";
-import React from "react";
+import TextInputComponent from "@/app/components/TextInputComponent"
 import AddTagsComponent from "@/app/components/custom/subgoal/AddTagsComponent";
-import SubGoalDateLayout from "../layouts/SubGoalDateLayout";
+import SubGoalDateLayout from "@/app/layouts/SubGoalDateLayout"
 
 type Props = {
   UID: string;

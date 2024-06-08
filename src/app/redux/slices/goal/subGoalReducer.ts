@@ -29,9 +29,9 @@ export const addSubGoalReducer = (
 ) => {
   state.goalSteps.push({
     subUID: action.payload,
-    subTitle: "",
-    subDetails: "",
-    subStatus: 0,
+    subTitle: "Enter goal title",
+    subDetails: "Enter details about the subgoal you want to achieve",
+    subStatus: 2,
     subTags: [],
     subDueDate: "",
     isPressed: false,
