@@ -11,7 +11,6 @@ import AddSubGoalButtonComponent from "../components/AddSubGoalButtonComponent";
 const StepsLayout = () => {
   const dispatch = useDispatch();
   const steps: SubType[] = useSelector((state: RootState) => state.goal.goalSteps);
-//   const steps: SubType[] = [];
 
   useEffect(() => {
     const handle = () => {
