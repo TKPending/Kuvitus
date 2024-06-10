@@ -8,7 +8,8 @@ export const BASIC: GoalType = {
     goalDepth: "basic",
     goalTags: [],
     goalDueDate: "",
-    goalSteps: []
+    goalSteps: [],
+    drawingElements: [],
 };
 
 export const MEDIUM: GoalType = {
@@ -19,7 +20,8 @@ export const MEDIUM: GoalType = {
     goalDepth: "medium",
     goalTags: ["Fitness", "Discipline"],
     goalDueDate: "01/06/2024",
-    goalSteps: []
+    goalSteps: [],
+    drawingElements: [],
 };
 
 export const ADVANCED: GoalType = {
@@ -76,5 +78,6 @@ export const ADVANCED: GoalType = {
             subDueDate: "08/06/2024",
             isPressed: false,
         }
-    ]
+    ],
+    drawingElements: [],
 };

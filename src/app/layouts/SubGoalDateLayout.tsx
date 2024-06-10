@@ -21,16 +21,16 @@ const SubGoalDateLayout = ({ subUID, dueDate, status }: Props) => {
         {status !== COMPLETED && status !== PENDING && dueDate && (
           <p className="flex items-center justify-center gap-2 text-center">
             {dueDate}{" "}
-            {remainingDays > 0 ? (
+            {remainingDays < 0 ? (
               <span
                 className={`text-xs ${
                   remainingDays > 3 ? "text-neutral-200" : "text-red-800"
                 }`}
               >
-                {remainingDays} left
+                {Math.abs(remainingDays)} {remainingDays === -1 ? "day" : "days"} left
               </span>
             ) : remainingDays === 0 ? (
-              <p className="text-xs text-green-600">Due Today</p>
+              <span className="text-xs text-green-600">Due Today</span>
             ) : (
               <span className="text-xs text-red-200">Overdue</span>
             )}

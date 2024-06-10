@@ -9,7 +9,7 @@ import { daysUntilCompletion } from "../util/daysUntilCompletion";
 const GoalTitleDateContainer = () => {
   const dispatch = useDispatch();
   const goal: GoalType | null = useSelector((state: RootState) => state.goal);
-  const [daysRemaining, setDaysRemaining] = useState<number | null>(null);
+  const [daysRemaining, setDaysRemaining] = useState<number>(0);
 
   const handleDateChange = (newDate: string) => {
     dispatch(setGoalDate(newDate));
@@ -18,6 +18,7 @@ const GoalTitleDateContainer = () => {
   useEffect(() => {
     if (goal?.goalDueDate) {
       const remaining: number = daysUntilCompletion(goal.goalDueDate);
+      console.log(remaining);
       setDaysRemaining(remaining);
     }
   }, [goal]);
@@ -28,12 +29,12 @@ const GoalTitleDateContainer = () => {
   if (daysRemaining === 0) {
     daysRemainingText = "Due Today";
     daysRemainingColor = "text-green-600";
-  } else if (daysRemaining && daysRemaining < 0) {
+  } else if (daysRemaining > 0) {
     daysRemainingText = "Overdue";
     daysRemainingColor = "text-red-600";
   } else if (daysRemaining) {
-    daysRemainingText = `${daysRemaining} days left`;
-    daysRemainingColor = `${daysRemaining < 3 ? "text-red-600" : "text-black"}`
+    daysRemainingText = `${Math.abs(daysRemaining)} ${daysRemaining === -1 ? "day" : "days"} left`;
+    daysRemainingColor = `${daysRemaining > -3 ? "text-red-600" : "text-black"}`
   }
 
   return (
