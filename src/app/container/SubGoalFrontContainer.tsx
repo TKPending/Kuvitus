@@ -7,12 +7,14 @@ import {
 import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
+import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
 
 type Props = {
   UID: string;
   title: string;
   tags: string[];
   dueDate: string;
+  status: number;
   isPressed: boolean;
 };
 
@@ -21,10 +23,12 @@ const SubGoalFrontContainer = ({
   title,
   tags,
   dueDate,
+  status,
   isPressed,
 }: Props) => {
   const dispatch = useDispatch();
   const remainingDays: number = daysUntilCompletion(dueDate);
+  const remainingDaysStyle: { text: string, style: string} = getDaysLeftStyle(remainingDays);
 
   const handleSubGoalFocus = () => {
     dispatch(setSubGoalFocus(UID));
@@ -64,12 +68,18 @@ const SubGoalFrontContainer = ({
             ))}
           </div>
 
-          {dueDate && (
+          {dueDate && status !== 1 && (
             <div className="flex items-center gap-2 text-base">
               <p>{dueDate}</p>
-              <p className="text-xs text-neutral-200">
-                {remainingDays > 0 ? `${remainingDays} days left` : "Overdue"}
+              <p className={`text-xs ${remainingDaysStyle.style}`}>
+                {remainingDaysStyle.text}
               </p>
+            </div>
+          )}
+
+          {status === 1 && (
+            <div className="flex items-center text-base">
+              <p className="text-green-600">Completed</p>
             </div>
           )}
         </div>

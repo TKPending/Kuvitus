@@ -19,6 +19,7 @@ const SubGoalLayout = ({ subGoal }: Props) => {
         title={subGoal.subTitle}
         tags={subGoal.subTags}
         dueDate={subGoal.subDueDate}
+        status={subGoal.subStatus}
         isPressed={subGoal.isPressed}
       />
 

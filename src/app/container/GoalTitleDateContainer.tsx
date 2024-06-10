@@ -4,44 +4,25 @@ import { useEffect, useState } from "react";
 import GoalDateComponent from "@/app/components/custom/date/GoalDateComponent";
 import { setGoalDate } from "@/app/redux/slices/goal/goalSlice";
 import { GoalType } from "@/app/types/GoalType";
-import { daysUntilCompletion } from "../util/daysUntilCompletion";
+import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
+import { getDaysLeftStyle } from "../util/getDaysLeftStyle";
 
 const GoalTitleDateContainer = () => {
   const dispatch = useDispatch();
+  const darkMode: boolean = true;
   const goal: GoalType | null = useSelector((state: RootState) => state.goal);
-  const [daysRemaining, setDaysRemaining] = useState<number>(0);
+  const remainingDays: number = daysUntilCompletion(goal.goalDueDate);
+  const remainingDaysSyle: { text: string, style: string } = getDaysLeftStyle(remainingDays, darkMode);
 
   const handleDateChange = (newDate: string) => {
     dispatch(setGoalDate(newDate));
   };
 
-  useEffect(() => {
-    if (goal?.goalDueDate) {
-      const remaining: number = daysUntilCompletion(goal.goalDueDate);
-      console.log(remaining);
-      setDaysRemaining(remaining);
-    }
-  }, [goal]);
-
-  let daysRemainingText = "";
-  let daysRemainingColor = "";
-
-  if (daysRemaining === 0) {
-    daysRemainingText = "Due Today";
-    daysRemainingColor = "text-green-600";
-  } else if (daysRemaining > 0) {
-    daysRemainingText = "Overdue";
-    daysRemainingColor = "text-red-600";
-  } else if (daysRemaining) {
-    daysRemainingText = `${Math.abs(daysRemaining)} ${daysRemaining === -1 ? "day" : "days"} left`;
-    daysRemainingColor = `${daysRemaining > -3 ? "text-red-600" : "text-black"}`
-  }
-
   return (
     <div className="flex items-center justify-center gap-4">
       <div className="flex flex-col items-center">
         <p className="text-2xl font-semibold">{goal?.goalDueDate}</p>
-        <p className={`font-semibold text-xs ${daysRemainingColor}`}>{daysRemainingText}</p>
+        <p className={`font-semibold text-xs ${remainingDaysSyle.style}`}>{remainingDaysSyle.text}</p>
       </div>
 
       {goal?.goalDueDate && (

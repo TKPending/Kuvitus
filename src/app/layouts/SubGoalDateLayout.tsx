@@ -1,5 +1,6 @@
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 import StatusDateContainer from "@/app/container/StatusDateContainer";
+import { getDaysLeftStyle } from "../util/getDaysLeftStyle";
 
 const COMPLETED: number = 1;
 const PENDING: number = 2;
@@ -12,6 +13,7 @@ type Props = {
 
 const SubGoalDateLayout = ({ subUID, dueDate, status }: Props) => {
   const remainingDays: number = daysUntilCompletion(dueDate);
+  const remainingDaysStyle: { text: string, style: string } = getDaysLeftStyle(remainingDays);
 
   return (
     <div className="flex items-center justify-end px-8 w-full">
@@ -19,21 +21,9 @@ const SubGoalDateLayout = ({ subUID, dueDate, status }: Props) => {
         <StatusDateContainer subUID={subUID} status={status} dueDate={dueDate} />
 
         {status !== COMPLETED && status !== PENDING && dueDate && (
-          <p className="flex items-center justify-center gap-2 text-center">
+          <p className={`flex items-center justify-center gap-2 text-center`}>
             {dueDate}{" "}
-            {remainingDays < 0 ? (
-              <span
-                className={`text-xs ${
-                  remainingDays > 3 ? "text-neutral-200" : "text-red-800"
-                }`}
-              >
-                {Math.abs(remainingDays)} {remainingDays === -1 ? "day" : "days"} left
-              </span>
-            ) : remainingDays === 0 ? (
-              <span className="text-xs text-green-600">Due Today</span>
-            ) : (
-              <span className="text-xs text-red-200">Overdue</span>
-            )}
+            <span className={`${remainingDaysStyle.style}`}>{remainingDaysStyle.text}</span>
           </p>
         )}
 
