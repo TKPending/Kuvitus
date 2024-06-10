@@ -1,5 +1,5 @@
-import InteractiveProvider from "@/app/interactive/InteractiveProvider";
+import InteractiveCanvas from "@/app/interactive/InteractiveCanvas";
 
 export default function Home() {
-  return <InteractiveProvider />
+  return <InteractiveCanvas />
 }

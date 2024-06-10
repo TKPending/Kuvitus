@@ -1,11 +1,16 @@
 import rough from "roughjs";
 import React, { useLayoutEffect, useState } from "react";
+import { RootState } from "@/app/redux/store";
+import { useSelector, useDispatch } from "react-redux";
 import { getCanvasDimension } from "./util/getCanvasDimension";
 import { createElement } from "./util/createElement";
 import CanvasToolBarComponent from "./component/CanvasToolBarComponent";
+import { DrawingType } from "@/app/types/DrawingType";
+import { setDrawingElements, updateDrawingElements } from "../redux/slices/goal/goalSlice";
 
-const DrawingProvider = () => {
-  const [elements, setElements] = useState<any[]>([]);
+const DrawingCanvas = () => {
+  const dispatch = useDispatch();
+  const elements: DrawingType[] = useSelector((state: RootState) => state.goal.drawingElements);
   const [isDrawing, setIsDrawing] = useState<boolean>(false);
   const [elementType, setElementType] = useState<string>("pointer");
 
@@ -27,14 +32,8 @@ const DrawingProvider = () => {
 
     const { canvasX, canvasY } = getCanvasDimension(e);
 
-    const element = createElement(
-      canvasX,
-      canvasY,
-      canvasX,
-      canvasY,
-      elementType
-    );
-    setElements((prevState) => [...prevState, element]);
+    const element = createElement( canvasX, canvasY, canvasX, canvasY, elementType);
+    dispatch(setDrawingElements(element));
   };
 
   const handleMouseMove = (e: React.MouseEvent) => {
@@ -46,9 +45,7 @@ const DrawingProvider = () => {
     const { x1, y1 } = elements[currentDrawingIndex];
     const updatedElement = createElement(x1, y1, canvasX, canvasY, elementType);
 
-    const copyElements = [...elements];
-    copyElements[currentDrawingIndex] = updatedElement;
-    setElements(copyElements);
+    dispatch(updateDrawingElements(updatedElement));
   };
 
   const handleMouseUp = () => {
@@ -74,4 +71,4 @@ const DrawingProvider = () => {
   );
 };
 
-export default DrawingProvider;
+export default DrawingCanvas;

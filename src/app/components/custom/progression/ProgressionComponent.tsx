@@ -1,4 +1,4 @@
-import { CircularProgressbar } from 'react-circular-progressbar';
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { SubType } from "@/app/types/SubType";
 
@@ -25,7 +25,11 @@ const ProgressionComponent = ({ subGoals }: Props) => {
   return (
     <div className="flex items-center justify-center rounded-full h-16 w-16">
       <p className="font-semibold">
-        <CircularProgressbar value={percentage} text={`${percentage}%`} />
+        <CircularProgressbar value={percentage} text={`${percentage}%`} styles={buildStyles({
+          textColor: "#696969",
+          pathColor: "#696969",
+          trailColor: "#F8F8FF"
+        })} />
       </p>
     </div>
   );

@@ -11,7 +11,7 @@ import { BASIC, MEDIUM, ADVANCED } from "@/temp/tempGoalData";
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import { addLocalGoal, updateLocalPositions } from "@/app/redux/slices/localGoals/localGoalsSlice";
 
-const InteractiveProvider = () => {
+const InteractiveCanvas = () => {
     const dispatch = useDispatch();
     const localGoals = useSelector((state: RootState) => state.localGoals.goals);
 
@@ -56,4 +56,4 @@ const InteractiveProvider = () => {
     );
 };
 
-export default InteractiveProvider;
+export default InteractiveCanvas;

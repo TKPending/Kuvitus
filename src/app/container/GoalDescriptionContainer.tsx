@@ -12,7 +12,6 @@ const GoalDescriptionContainer = () => {
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue: string = e.target.value;
-    console.log(newValue);
     dispatch(setGoalDescription(newValue));
   };
 

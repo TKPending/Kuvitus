@@ -6,11 +6,9 @@ import {
 } from "@reduxjs/toolkit";
 
 import { GoalType } from "@/app/types/GoalType";
-import localGoalsReducer, {
-  LocalGoalState,
-} from "./slices/localGoals/localGoalsSlice";
+import { LocalGoalStateType } from "../types/LocalGoalStateType";
+import localGoalsReducer from "./slices/localGoals/localGoalsSlice";
 import goalReducer from "./slices/goal/goalSlice";
-
 
 interface Action {
   type: string;
@@ -19,7 +17,7 @@ interface Action {
 
 interface State {
   goal: GoalType;
-  localGoals: LocalGoalState;
+  localGoals: LocalGoalStateType;
 }
 
 const rootReducer: Reducer<State, Action> = combineReducers<State>({

@@ -1,5 +1,4 @@
 import { GoalType } from "@/app/types/GoalType";
-import { SubType } from "@/app/types/SubType";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export const loadGoalReducer = (
