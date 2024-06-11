@@ -17,7 +17,8 @@ const ProgressionComponent = ({ subGoals }: Props) => {
       }
     });
 
-    return (completedSubGoals / subGoalAmount) * 100;
+    const progression: number = (completedSubGoals / subGoalAmount) * 100;
+    return parseFloat(progression.toFixed(2));
   };
 
   const percentage: number = calculateProgression();

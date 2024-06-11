@@ -7,13 +7,13 @@ import {
 import { DrawingElementsType } from "@/app/types/DrawingElementType";
 
 type Props = {
-  elementType: string;
+  tool: string;
   onClick: (element: string) => void;
 };
 
-const CanvasToolBarComponent = ({ elementType, onClick }: Props) => {
+const CanvasToolBarComponent = ({ tool, onClick }: Props) => {
   const elementOptions: DrawingElementsType[] = [
-    { type: "pointer", icon: faArrowPointer },
+    { type: "selection", icon: faArrowPointer },
     { type: "line", icon: faPen },
     { type: "rectangle", icon: faSquare },
   ];
@@ -24,7 +24,7 @@ const CanvasToolBarComponent = ({ elementType, onClick }: Props) => {
         <div
           key={index}
           className={`${
-            element.type === elementType && "bg-neutral-600 text-white"
+            element.type === tool && "bg-neutral-600 text-white"
           }  hover:bg-black hover:text-white transition duration-200 cursor-pointer`}
         >
           <FontAwesomeIcon
