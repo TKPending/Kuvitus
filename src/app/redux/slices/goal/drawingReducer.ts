@@ -8,10 +8,3 @@ export const addDrawingElementReducer = (
 ) => {
   state.drawingElements.push(action.payload);
 };
-
-export const updateDrawingElementsReducer = (
-  state: GoalType,
-  action: PayloadAction<DrawingType[]>
-) => {
-  state.drawingElements = action.payload;
-};

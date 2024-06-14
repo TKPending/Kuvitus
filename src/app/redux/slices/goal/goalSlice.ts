@@ -21,7 +21,6 @@ import {
   updateSubGoalStatusReducer,
   updateSubGoalDueDateReducer
 }  from "./subGoalReducer"
-import { addDrawingElementReducer, updateDrawingElementsReducer } from "./drawingReducer";
 
 const UNCOMPLETE = 0;
 
@@ -59,9 +58,6 @@ const goalSlice = createSlice({
     removeSubGoalTag: removeTagFromSubGoalReducer,
     setSubGoalStatus: updateSubGoalStatusReducer,
     setSubGoalDueDate: updateSubGoalDueDateReducer,
-
-    setDrawingElements: addDrawingElementReducer,
-    updateDrawingElements: updateDrawingElementsReducer,
   },
 });
 
@@ -85,8 +81,6 @@ export const {
   setSubGoalStatus,
   setSubGoalDueDate,
 
-  setDrawingElements,
-  updateDrawingElements,
 } = goalSlice.actions;
 
 export default goalSlice.reducer;

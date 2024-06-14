@@ -1,21 +1,19 @@
 import rough from "roughjs";
 import React, { useLayoutEffect, useState } from "react";
-import { RootState } from "@/app/redux/store";
-import { useSelector, useDispatch } from "react-redux";
 import { DrawingType } from "@/app/types/DrawingType";
 import CanvasToolBarComponent from "./components/CanvasToolBarComponent";
 import { getCanvasDimension } from "./util/getDimensions";
 import { createElement } from "./util/createElement";
 import { updateElements } from "./util/updateElements";
-import { setDrawingElements, updateDrawingElements } from "@/app/redux/slices/goal/goalSlice";
 import { selectElement } from "./util/selectElement";
 
 const DrawingCanvas = () => {
-  const dispatch = useDispatch();
-  const elements: DrawingType[] = useSelector((state: RootState) => state.goal.drawingElements);
-  const [ drawingTool, setDrawingTool ] = useState<string>("");
-  const [ userAction, setUserAction ] = useState<string>("none");
-  const [ selectedElement, setSelectedElement] = useState<DrawingType | null>(null);
+  const [elements, setElements] = useState<DrawingType[]>([]);
+  const [drawingTool, setDrawingTool] = useState<string>("");
+  const [userAction, setUserAction] = useState<string>("none");
+  const [selectedElement, setSelectedElement] = useState<DrawingType | null>(
+    null
+  );
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -24,7 +22,9 @@ const DrawingCanvas = () => {
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 
-    elements.forEach(({ roughElement }) => roughCanvas.draw(roughElement));
+    elements.forEach(({ roughElement }) => {
+      roughCanvas.draw(roughElement);
+    });
   }, [elements]);
 
   const handleMouseDown = (event: React.MouseEvent) => {
@@ -34,14 +34,21 @@ const DrawingCanvas = () => {
       const chosenElement = selectElement(canvasX, canvasY, elements);
       if (chosenElement) {
         setUserAction("moving");
-        // setSelectedElement()
-      };
+        setSelectedElement(chosenElement);
+      }
     } else {
       const id: number = elements.length;
-      const newElement: DrawingType = createElement(id, canvasX, canvasY, canvasX, canvasY, drawingTool);
+      const newElement: DrawingType = createElement(
+        id,
+        canvasX,
+        canvasY,
+        canvasX,
+        canvasY,
+        drawingTool
+      );
 
       setUserAction("drawing");
-      dispatch(setDrawingElements(newElement));
+      setElements((prevState) => [...prevState, newElement]);
     }
   };
 
@@ -51,15 +58,40 @@ const DrawingCanvas = () => {
     if (userAction === "drawing") {
       const newestElementIndex: number = elements.length - 1;
       const { x1, y1 } = elements[newestElementIndex];
-      const updatedElement: DrawingType = createElement(newestElementIndex, x1, y1, canvasX, canvasY, drawingTool);
+      const updatedElement: DrawingType = createElement(
+        newestElementIndex,
+        x1,
+        y1,
+        canvasX,
+        canvasY,
+        drawingTool
+      );
 
-      const refreshedElements: DrawingType[] = updateElements(elements, updatedElement, newestElementIndex);
-      dispatch(updateDrawingElements(refreshedElements));
+      const refreshedElements: DrawingType[] = updateElements(
+        elements,
+        updatedElement,
+        newestElementIndex
+      );
+      setElements(refreshedElements);
     } else if (userAction === "moving" && selectedElement) {
       const { x1, y1, x2, y2 } = selectedElement;
+      const width = x2 - x1;
+      const height = y2 - y1;
 
+      const updatedElement: DrawingType = {
+        ...selectedElement,
+        x1: canvasX,
+        y1: canvasY,
+        x2: canvasX + width,
+        y2: canvasY + height,
+      };
 
-      // Update Elements
+      const refreshedElements: DrawingType[] = updateElements(
+        elements,
+        updatedElement,
+        selectedElement.id
+      );
+      setElements(refreshedElements);
     }
   };
 
@@ -74,7 +106,10 @@ const DrawingCanvas = () => {
 
   return (
     <div className="flex flex-col items-center justify-center relative h-full w-full border-4 rounded-lg border-black">
-      <CanvasToolBarComponent drawingTool={drawingTool} onClick={handleToolChange} />
+      <CanvasToolBarComponent
+        drawingTool={drawingTool}
+        onClick={handleToolChange}
+      />
       <canvas
         id="canvas"
         onMouseDown={handleMouseDown}
