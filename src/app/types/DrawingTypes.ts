@@ -8,3 +8,9 @@ export interface DrawingType {
   x2: number;
   y2: number;
 };
+
+
+export interface DrawingToolType {
+  type: string,
+  icon: any,
+};

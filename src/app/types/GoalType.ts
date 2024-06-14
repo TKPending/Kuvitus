@@ -1,4 +1,4 @@
-import { DrawingType } from "./DrawingType";
+import { DrawingType, DrawingToolType } from "./DrawingTypes";
 import { SubType } from "./SubType";
 
 export interface GoalType {
@@ -11,4 +11,5 @@ export interface GoalType {
     goalDueDate: string;
     goalSteps: SubType[];
     drawingElements: DrawingType[];
+    drawingToolType:  DrawingToolType;
 };

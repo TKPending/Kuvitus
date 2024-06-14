@@ -1,10 +1,10 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { GoalType } from "@/app/types/GoalType";
-import { DrawingType } from "@/app/types/DrawingType";
+import { DrawingType, DrawingToolType } from "@/app/types/DrawingTypes";
 
-export const addDrawingElementReducer = (
+export const updateDrawingToolReducer = (
   state: GoalType,
-  action: PayloadAction<DrawingType>
+  action: PayloadAction<DrawingToolType>
 ) => {
-  state.drawingElements.push(action.payload);
+  state.drawingToolType = action.payload;
 };
