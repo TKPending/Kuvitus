@@ -1,19 +1,17 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { GoalType } from "@/app/types/GoalType";
 import { DrawingType } from "@/app/types/DrawingType";
-import { serializeDrawingElement } from "@/app/util/serializeDrawingElement";
 
 export const addDrawingElementReducer = (
   state: GoalType,
   action: PayloadAction<DrawingType>
 ) => {
-  state.drawingElements.push(serializeDrawingElement(action.payload));
+  state.drawingElements.push(action.payload);
 };
 
-export const updateDrawingElementReducer = (
+export const updateDrawingElementsReducer = (
   state: GoalType,
-  action: PayloadAction<DrawingType>
+  action: PayloadAction<DrawingType[]>
 ) => {
-  const index = action.payload.id;
-  state.drawingElements[index] = serializeDrawingElement(action.payload);
+  state.drawingElements = action.payload;
 };

@@ -1,4 +1,6 @@
-export const getCanvasDimension = (e: React.MouseEvent): { canvasX: number; canvasY: number } => {
+export const getCanvasDimension = (
+  e: React.MouseEvent
+): { canvasX: number; canvasY: number } => {
   const canvas = document.getElementById("canvas") as HTMLCanvasElement;
   const rect = canvas.getBoundingClientRect();
 

@@ -11,14 +11,7 @@ export const createElement = (
   y2: number,
   elementType: string
 ) => {
-  if (elementType === "pointer") {
-    return;
-  }
-
-  const roughElement =
-    elementType === "line"
-      ? generator.line(x1, y1, x2, y2)
-      : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
+  const roughElement = elementType === "line" ? generator.line(x1, y1, x2, y2) : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
 
   return { id,  x1, y1, x2, y2, roughElement };
 };

@@ -4,15 +4,15 @@ import {
   faSquare,
   faArrowPointer,
 } from "@fortawesome/free-solid-svg-icons";
-import { DrawingElementsType } from "@/app/types/DrawingElementType";
+import { DrawingToolType } from "@/app/types/DrawingToolType";
 
 type Props = {
-  tool: string;
+  drawingTool: string;
   onClick: (element: string) => void;
 };
 
-const CanvasToolBarComponent = ({ tool, onClick }: Props) => {
-  const elementOptions: DrawingElementsType[] = [
+const CanvasToolBarComponent = ({ drawingTool, onClick }: Props) => {
+  const drawingToolOptions: DrawingToolType[] = [
     { type: "selection", icon: faArrowPointer },
     { type: "line", icon: faPen },
     { type: "rectangle", icon: faSquare },
@@ -20,16 +20,16 @@ const CanvasToolBarComponent = ({ tool, onClick }: Props) => {
 
   return (
     <div className="absolute border-black top-4 border-4 rounded-lg bg-white flex items-center justify-center overflow-hidden">
-      {elementOptions.map((element: DrawingElementsType, index: number) => (
+      {drawingToolOptions.map((tool: DrawingToolType, index: number) => (
         <div
           key={index}
           className={`${
-            element.type === tool && "bg-neutral-600 text-white"
+            tool.type === drawingTool && "bg-neutral-600 text-white"
           }  hover:bg-black hover:text-white transition duration-200 cursor-pointer`}
         >
           <FontAwesomeIcon
-            icon={element.icon}
-            onClick={() => onClick(element.type)}
+            icon={tool.icon}
+            onClick={() => onClick(tool.type)}
             className="h-4 w-4 p-2"
           />
         </div>
