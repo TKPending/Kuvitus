@@ -2,6 +2,7 @@ import { RootState } from "@/app/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+  faRuler,
   faPen,
   faSquare,
   faArrowPointer,
@@ -17,7 +18,7 @@ const CanvasToolBarComponent = () => {
 
   const drawingToolOptions: DrawingToolType[] = [
     { type: "selection", icon: faArrowPointer },
-    { type: "line", icon: faPen },
+    { type: "line", icon: faRuler },
     { type: "rectangle", icon: faSquare },
     { type: "pencil", icon: faPencil },
     { type: "text", icon: faT },

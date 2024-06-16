@@ -1,4 +1,4 @@
-import { DrawingType, DrawingToolType } from "./DrawingTypes";
+import { DrawingType, DrawingToolType, UserDrawingAction } from "./DrawingTypes";
 import { SubType } from "./SubType";
 
 export interface GoalType {
