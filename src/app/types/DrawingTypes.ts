@@ -1,22 +1,13 @@
-export interface ElementType {
-  id: number;
-  roughElement: any;
-  x1: number;
-  y1: number;
-  x2: number;
-  y2: number;
-}
+import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
-export interface DrawingToolType {
-  type: string;
-  icon: any;
-}
+export interface Coordinates {
+    x1: number;
+    y1: number;
+    x2: number;
+    y2: number;
+};
 
-export const Tools = {
-  pan: "pan",
-  selection: "selection",
-  rectangle: "rectangle",
-  line: "line",
-  pencil: "pencil",
-  text: "text",
+export interface DrawingToolsType {
+    type: string;
+    icon: IconDefinition;
 };
