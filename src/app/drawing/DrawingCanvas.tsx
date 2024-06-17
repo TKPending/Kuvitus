@@ -4,15 +4,16 @@ import { RootState } from "@/app/redux/store";
 import { useSelector } from "react-redux";
 import { createElement } from "./actions/createElement";
 import { updateElement } from "./actions/updateElement";
+import { adjustElementCoordinates } from "./actions/adjustElementCoordinates";
 import { getRelativeCoordinates } from "./retrieval/getRelativeCoordinates";
 import { getElementAtPosition } from "./retrieval/getElementAtPosition";
+import { getCursorForPointer } from "./retrieval/getCursorForPointer";
+import { getResizedCoordinates } from "./retrieval/getResizedCoordinates";
 import { DrawingToolsType } from "@/app/types/DrawingTypes";
 import CanvasToolBarComponent from "@/app/components/custom/toolbar/CanvasToolBarComponent";
 
 const DrawingCanvas = () => {
-  const currentTool: DrawingToolsType = useSelector(
-    (state: RootState) => state.goal.drawingToolType
-  );
+  const currentTool: DrawingToolsType = useSelector((state: RootState) => state.goal.drawingToolType);
   const [elements, setElements] = useState<any[]>([]);
   const [userAction, setUserAction] = useState<string>("");
   const [selectedElement, setSelectedElement] = useState<any>(null);
@@ -39,16 +40,18 @@ const DrawingCanvas = () => {
         const offsetX = clientX - clickedElement.x1;
         const offsetY = clientY - clickedElement.y1;
 
-        setSelectedElement({...clickedElement, offsetX, offsetY})
-        setUserAction("moving");
+        setSelectedElement({...clickedElement, offsetX, offsetY});
+
+        if (clickedElement.position === "inside") {
+          setUserAction("moving");
+        } else {
+          setUserAction("resizing");
+        }
       }
     } else {
       const id = elements.length;
-      const element = createElement(
-        id,
-        { x1: clientX, y1: clientY, x2: clientX, y2: clientY },
-        currentTool.type
-      );
+      const element = createElement(id, { x1: clientX, y1: clientY, x2: clientX, y2: clientY }, currentTool.type);
+      setSelectedElement(element)
       setElements((prevState) => [...prevState, element]);
 
       setUserAction("drawing");
@@ -58,8 +61,16 @@ const DrawingCanvas = () => {
   const handleMouseMove = (event: React.MouseEvent) => {
     const { clientX, clientY } = getRelativeCoordinates(event);
 
+    if (currentTool.type === "selection") {
+      const element = getElementAtPosition(clientX, clientY, elements);
+      // @ts-ignore
+      event.target.style.cursor = element
+        ? getCursorForPointer(element.position)
+        : "default"
+    }
+
     if (userAction === "drawing") {
-      const index = elements.length - 1;
+      const index = selectedElement.id;
       const { x1, y1 } = elements[index];
 
       updateElement(index, x1, y1, clientX, clientY, currentTool.type, elements, setElements);
@@ -72,10 +83,23 @@ const DrawingCanvas = () => {
       const newY1 = clientY - offsetY;
 
       updateElement(id, newX1, newY1, newX1 + width, newY1 + height, type, elements, setElements);
+    } else if (userAction === "resizing") {
+        const { id, type, position, ...coordinates } = selectedElement;
+        const { x1, y1, x2, y2 } = getResizedCoordinates(clientX, clientY, position, coordinates);
+
+        updateElement(id, x1, y1, x2, y2, type, elements, setElements);
     }
   };
 
-  const handleMouseUp = (event: React.MouseEvent) => {
+  const handleMouseUp = () => {
+    const index = selectedElement.id
+    const { id, type } = elements[index];
+
+    if (userAction === "drawing" || userAction == "resizing") {
+      const { x1, y1, x2, y2 } = adjustElementCoordinates(elements[index]);
+      updateElement(id, x1, y1, x2, y2, type, elements, setElements);
+    };
+
     setUserAction("none");
     setSelectedElement(null);
   };
@@ -88,7 +112,7 @@ const DrawingCanvas = () => {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        className={`h-full w-full ${selectedElement && "cursor-move"}`}
+        className={`h-full w-full`}
       ></canvas>
     </div>
   );
