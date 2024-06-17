@@ -11,6 +11,7 @@ import { getCursorForPointer } from "./retrieval/getCursorForPointer";
 import { getResizedCoordinates } from "./retrieval/getResizedCoordinates";
 import { DrawingToolsType } from "@/app/types/DrawingTypes";
 import CanvasToolBarComponent from "@/app/components/custom/toolbar/CanvasToolBarComponent";
+import CanvasRevisionComponent from "../components/custom/revision/CanvasRevisionComponent";
 
 const DrawingCanvas = () => {
   const currentTool: DrawingToolsType = useSelector((state: RootState) => state.goal.drawingToolType);
@@ -92,17 +93,27 @@ const DrawingCanvas = () => {
   };
 
   const handleMouseUp = () => {
-    const index = selectedElement.id
-    const { id, type } = elements[index];
-
-    if (userAction === "drawing" || userAction == "resizing") {
-      const { x1, y1, x2, y2 } = adjustElementCoordinates(elements[index]);
-      updateElement(id, x1, y1, x2, y2, type, elements, setElements);
-    };
+    if (selectedElement) {
+      const index = selectedElement.id
+      const { id, type } = elements[index];
+  
+      if (userAction === "drawing" || userAction == "resizing") {
+        const { x1, y1, x2, y2 } = adjustElementCoordinates(elements[index]);
+        updateElement(id, x1, y1, x2, y2, type, elements, setElements);
+      };
+    }
 
     setUserAction("none");
     setSelectedElement(null);
   };
+
+  const handleOnUndo = () => {
+
+  };
+
+  const handleRedo = () => {
+
+  }
 
   return (
     <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
@@ -114,6 +125,7 @@ const DrawingCanvas = () => {
         onMouseUp={handleMouseUp}
         className={`h-full w-full`}
       ></canvas>
+      <CanvasRevisionComponent onUndo={handleOnUndo} onRedo={handleRedo} />
     </div>
   );
 };
