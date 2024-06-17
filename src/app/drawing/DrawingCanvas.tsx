@@ -4,10 +4,8 @@ import { RootState } from "@/app/redux/store"
 import { useSelector } from "react-redux";
 import { createElement } from "./actions/createElement";
 import { getRelativeCoordinates } from "./retrieval/getRelativeCoordinates";
-import { Coordinates, DrawingToolsType } from "@/app/types/DrawingTypes";
+import { DrawingToolsType } from "@/app/types/DrawingTypes";
 import CanvasToolBarComponent from "@/app/components/custom/toolbar/CanvasToolBarComponent";
-
-const generator = rough.generator();
 
 const DrawingCanvas = () => {
   const currentTool: DrawingToolsType = useSelector((state: RootState) => state.goal.drawingToolType);
