@@ -1,7 +1,7 @@
 import rough from "roughjs";
 import { Coordinates } from "@/app/types/DrawingTypes";
 
-export const createElement = (coordinates: Coordinates, tool: string) => {
+export const createElement = (id: number, coordinates: Coordinates, tool: string) => {
     const generator = rough.generator();
 
     const {x1, x2, y1, y2} = coordinates;
@@ -10,5 +10,5 @@ export const createElement = (coordinates: Coordinates, tool: string) => {
         ? generator.line(x1, y1, x2, y2)
         : generator.rectangle(x1, y1, x2 - x1, y2 - y1);
 
-    return {...coordinates, roughElement };
+    return {id, type: tool, ...coordinates, roughElement };
   };
