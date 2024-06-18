@@ -22,11 +22,13 @@ import CanvasTextAreaComponent from "@/app/components/custom/textarea/CanvasText
 import { setDrawingTool } from "@/app/redux/slices/goal/goalSlice";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
 import CanvasDeleteOptionsContainer from "../container/CanvasDeleteOptionsContainer";
+import CanvasErrorComponent from "../components/CanvasErrorComponent";
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();
   const currentTool: DrawingToolsType = useSelector((state: RootState) => state.goal.drawingToolType);
   const displayDeleteOptions: boolean = useSelector((state: RootState) => state.goal.drawingCanvas.displayDeleteOption);
+  const isError: boolean = useSelector((state: RootState) => state.goal.drawingCanvas.isError);
   const { elements, setElements, undo, redo } = useHistory([]);
   const [userAction, setUserAction] = useState<ActionsType>("none");
   const [selectedElement, setSelectedElement] = useState<ElementType | null>(
@@ -260,6 +262,7 @@ const DrawingCanvas = () => {
   return (
     <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
       <CanvasToolBarComponent />
+      {isError && <CanvasErrorComponent />}
       {displayDeleteOptions && <CanvasDeleteOptionsContainer />}
       {userAction === "writing" ? (
         <CanvasTextAreaComponent
