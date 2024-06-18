@@ -2,11 +2,14 @@ import { RoughCanvas } from "roughjs/bin/canvas";
 import { ElementType } from "@/app/types/DrawingTypes";
 import getStroke from "perfect-freehand";
 import { getSvgPathFromStroke } from "../retrieval/getSvgPathFromStroke";
+import { setCanvasErrorMessage } from "@/app/redux/slices/goal/goalSlice";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 
 export const drawElement = (
   roughCanvas: RoughCanvas,
   context: CanvasRenderingContext2D,
   element: ElementType,
+  dispatch: Dispatch<UnknownAction>,
 ) => {
   switch (element.type) {
     case "line":
@@ -29,6 +32,8 @@ export const drawElement = (
       context.fillText(text, element.x1, element.y1);
       break;
     default:
+      const errorMessage: string = "Problem creating a new element";
+      dispatch(setCanvasErrorMessage(errorMessage));
       break;
   }
 };

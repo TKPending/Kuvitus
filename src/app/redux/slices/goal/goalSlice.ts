@@ -19,9 +19,15 @@ import {
   removeTagFromSubGoalReducer,
   addSubGoalTagReducer,
   updateSubGoalStatusReducer,
-  updateSubGoalDueDateReducer
-}  from "./subGoalReducer"
-import { canvasErrorMessageReducer, canvasErrorReducer, deleteOptionsReducer, deleteAllElementsReducer, updateDrawingToolReducer } from "./drawingReducer";
+  updateSubGoalDueDateReducer,
+} from "./subGoalReducer";
+import {
+  canvasErrorMessageReducer,
+  canvasErrorReducer,
+  deleteOptionsReducer,
+  deleteAllElementsReducer,
+  updateDrawingToolReducer,
+} from "./drawingReducer";
 
 const UNCOMPLETE = 0;
 
@@ -42,9 +48,9 @@ const initialState: GoalType = {
   drawingCanvas: {
     isError: false,
     errorMessage: "",
-    displayDeleteOption:  false,
+    displayDeleteOption: false,
     deleteAll: false,
-  }
+  },
 };
 
 const goalSlice = createSlice({

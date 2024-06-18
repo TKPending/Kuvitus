@@ -1,10 +1,13 @@
 import rough from "roughjs";
 import { Coordinates, ElementType } from "@/app/types/DrawingTypes";
+import { setCanvasErrorMessage } from "@/app/redux/slices/goal/goalSlice";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 
 export const createElement = (
   id: number,
   coordinates: Coordinates,
-  tool: string
+  tool: string,
+  dispatch: Dispatch<UnknownAction>,
 ): ElementType => {
   const generator = rough.generator();
   const { x1, x2, y1, y2 } = coordinates;
@@ -22,6 +25,8 @@ export const createElement = (
     case "text": 
       return { id, type: tool, x1, y1, x2, y2, text: "" };
     default:
+      const errorMessage: string = "Problem creating a new element";
+      dispatch(setCanvasErrorMessage(errorMessage));
       throw new Error("Invalid tool type");
   }
 };

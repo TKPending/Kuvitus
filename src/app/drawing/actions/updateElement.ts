@@ -1,5 +1,7 @@
 import { ElementType } from "@/app/types/DrawingTypes";
 import { createElement } from "./createElement";
+import { setCanvasErrorMessage } from "@/app/redux/slices/goal/goalSlice";
+import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 
 export const updateElement = (
   id: number,
@@ -10,6 +12,7 @@ export const updateElement = (
   type: string,
   elements: ElementType[],
   setElements: (e: ElementType[], overwrite?: boolean) => void,
+  dispatch: Dispatch<UnknownAction>,
   text?: string
 ) => {
   const elementsCopy = [...elements];
@@ -42,9 +45,10 @@ export const updateElement = (
           };
         }
       }
-
       break;
     default:
+      const errorMessage: string = "Problem updating location of element.";
+      dispatch(setCanvasErrorMessage(errorMessage));
       break;
   }
 

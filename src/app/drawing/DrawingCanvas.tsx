@@ -49,7 +49,7 @@ const DrawingCanvas = () => {
     elements.forEach((element: ElementType) => {
       if (userAction === "writing" && selectedElement!.id === element.id)
         return;
-      drawElement(roughCanvas, canvasContext, element);
+      drawElement(roughCanvas, canvasContext, element, dispatch);
     });
     canvasContext.restore();
   }, [elements, userAction, selectedElement]);
@@ -116,7 +116,8 @@ const DrawingCanvas = () => {
       const element = createElement(
         id,
         { x1: clientX, y1: clientY, x2: clientX, y2: clientY },
-        currentTool.type
+        currentTool.type,
+        dispatch
       );
       setSelectedElement(element);
       setElements((prevState) => [...prevState, element]);
@@ -148,7 +149,8 @@ const DrawingCanvas = () => {
         clientY,
         currentTool.type,
         elements,
-        setElements
+        setElements,
+        dispatch,
       );
     } else if (userAction === "moving" && selectedElement) {
       if (selectedElement.type === "pencil" && selectedElement.points) {
@@ -183,7 +185,8 @@ const DrawingCanvas = () => {
             type,
             elements,
             setElements,
-            text
+            dispatch,
+            text,
           );
         }
       }
@@ -196,7 +199,7 @@ const DrawingCanvas = () => {
         coordinates
       );
 
-      updateElement(id, x1, y1, x2, y2, type, elements, setElements);
+      updateElement(id, x1, y1, x2, y2, type, elements, setElements, dispatch);
     }
   };
 
@@ -224,7 +227,7 @@ const DrawingCanvas = () => {
         adjustmentRequired(type)
       ) {
         const { x1, y1, x2, y2 } = adjustElementCoordinates(elements[index]);
-        updateElement(id, x1, y1, x2, y2, type, elements, setElements);
+        updateElement(id, x1, y1, x2, y2, type, elements, setElements, dispatch);
       }
     }
 
@@ -255,6 +258,7 @@ const DrawingCanvas = () => {
       type,
       elements,
       setElements,
+      dispatch,
       event.target.value
     );
   };

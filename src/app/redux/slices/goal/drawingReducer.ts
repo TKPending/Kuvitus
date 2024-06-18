@@ -1,6 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { GoalType } from "@/app/types/GoalType";
-import { DrawingCanvas, DrawingToolsType } from "@/app/types/DrawingTypes";
+import { DrawingToolsType } from "@/app/types/DrawingTypes";
 
 export const updateDrawingToolReducer = (
   state: GoalType,
