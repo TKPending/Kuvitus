@@ -17,9 +17,16 @@ export const drawElement = (
       if (element.points) {
         const stroke = getSvgPathFromStroke(getStroke(element.points, {
           size: 4,
+
         }));
         context.fill(new Path2D(stroke));
       }
+      break;
+    case "text":
+      context.textBaseline = "top"
+      context.font = "16px Arial";
+      const text = element.text || "";
+      context.fillText(text, element.x1, element.y1);
       break;
     default:
       break;

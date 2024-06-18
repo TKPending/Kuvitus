@@ -14,7 +14,7 @@ import { setDrawingTool } from "@/app/redux/slices/goal/goalSlice";
 const CanvasToolBarComponent = () => {
   const dispatch = useDispatch();
   const currentTool: DrawingToolsType = useSelector((state: RootState) => state.goal.drawingToolType);
-
+  
   const drawingToolOptions: DrawingToolsType[] = [
     { type: "selection", icon: faArrowPointer },
     { type: "line", icon: faPen },

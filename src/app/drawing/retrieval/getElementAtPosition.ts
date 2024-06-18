@@ -53,6 +53,8 @@ const positionWithinElement = (x: number, y: number, element: ElementType) => {
     });
 
     return betweenAnyPoint ? "inside" : null;
+  } else if (type === "text") {
+      return x >= x1 && x <= x2 && y >= y1 && y <= y2 ? "inside" : null;
   } else {
     const on = onLine(x1, y1, x2, y2, x, y);
     const start = nearPoint(x, y, x1, y1, "start");

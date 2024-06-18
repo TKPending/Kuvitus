@@ -30,6 +30,7 @@ export interface ElementType {
 };
 
 export type ActionsType =
+  | "selection"
   | "writing"
   | "drawing"
   | "moving"
