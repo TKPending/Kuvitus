@@ -21,7 +21,7 @@ import {
   updateSubGoalStatusReducer,
   updateSubGoalDueDateReducer
 }  from "./subGoalReducer"
-import { updateDrawingToolReducer } from "./drawingReducer";
+import { canvasErrorMessageReducer, canvasErrorReducer, deleteOptionsReducer, deleteAllElementsReducer, updateDrawingToolReducer } from "./drawingReducer";
 
 const UNCOMPLETE = 0;
 
@@ -39,6 +39,12 @@ const initialState: GoalType = {
     type: "selection",
     icon: "",
   },
+  drawingCanvas: {
+    isError: false,
+    errorMessage: "",
+    displayDeleteOption:  false,
+    deleteAll: false,
+  }
 };
 
 const goalSlice = createSlice({
@@ -65,6 +71,10 @@ const goalSlice = createSlice({
     setSubGoalDueDate: updateSubGoalDueDateReducer,
 
     setDrawingTool: updateDrawingToolReducer,
+    setCanvasError: canvasErrorReducer,
+    setCanvasErrorMessage: canvasErrorMessageReducer,
+    setDeleteOptionVisible: deleteOptionsReducer,
+    deleteAllElements: deleteAllElementsReducer,
   },
 });
 
@@ -89,6 +99,10 @@ export const {
   setSubGoalDueDate,
 
   setDrawingTool,
+  setCanvasError,
+  setCanvasErrorMessage,
+  setDeleteOptionVisible,
+  deleteAllElements,
 } = goalSlice.actions;
 
 export default goalSlice.reducer;

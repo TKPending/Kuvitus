@@ -1,9 +1,26 @@
-import { useState } from "react";
+import { RootState } from "@/app/redux/store";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import { ElementType } from "@/app/types/DrawingTypes";
+import { deleteAllElements } from "@/app/redux/slices/goal/goalSlice";
 
 export const useHistory = (initialState: ElementType[]) => {
+  const dispatch = useDispatch();
+  const deleteAll: boolean = useSelector((state: RootState) => state.goal.drawingCanvas.deleteAll);
   const [index, setIndex] = useState<number>(0);
   const [history, setHistory] = useState<ElementType[][]>([initialState]);
+
+  useEffect(() => {
+    const deleteElements = () => {
+      if (deleteAll) {
+        setHistory(prevState => [...prevState, []]);
+        setIndex((prevState) => prevState + 1);
+        dispatch(deleteAllElements(false));
+      }
+    }
+
+    deleteElements();
+  }, [deleteAll]);
 
   const setState = (
     action: ElementType[] | ((current: ElementType[]) => ElementType[]),

@@ -1,5 +1,3 @@
-import { IconDefinition } from "@fortawesome/free-solid-svg-icons";
-
 export interface Coordinates {
   x1: number;
   y1: number;
@@ -9,7 +7,7 @@ export interface Coordinates {
 
 export interface DrawingToolsType {
   type: string;
-  icon: IconDefinition;
+  icon: any;
 }
 
 export interface ElementType {
@@ -37,3 +35,10 @@ export type ActionsType =
   | "panning"
   | "resizing"
   | "none";
+
+export interface DrawingCanvas {
+  isError: boolean;
+  errorMessage: string;
+  displayDeleteOption: boolean;
+  deleteAll: boolean;
+};

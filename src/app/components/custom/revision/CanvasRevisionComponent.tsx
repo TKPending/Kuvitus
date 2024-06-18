@@ -1,3 +1,5 @@
+import { RootState } from "@/app/redux/store";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -5,6 +7,7 @@ import {
   faRotateRight,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
+import { setDeleteOptionVisible } from "@/app/redux/slices/goal/goalSlice";
 
 type Props = {
   onUndo: () => void;
@@ -12,17 +15,21 @@ type Props = {
 };
 
 const CanvasRevisionComponent = ({ onUndo, onRedo }: Props) => {
+  const dispatch = useDispatch();
   const [isOptionHovered, setIsOptionHovered] = useState<string | null>(null);
-
-  const revisionOptions = [
-    { type: "undo", icon: faRotateLeft, action: onUndo },
-    { type: "redo", icon: faRotateRight, action: onRedo },
-    { type: "delete-all", icon: faTrash, action: null },
-  ];
-
+  
   const handleOptionHover = (option: string) => {
     setIsOptionHovered(option);
   };
+
+  const handleDisplayDelete = () => {
+    dispatch(setDeleteOptionVisible(true));
+  }
+  const revisionOptions = [
+    { type: "undo", icon: faRotateLeft, action: onUndo },
+    { type: "redo", icon: faRotateRight, action: onRedo },
+    { type: "delete-all", icon: faTrash, action: handleDisplayDelete },
+  ];
 
   return (
     <div className="absolute left-10 bottom-2 h-12 flex items-center justify-center gap-4">

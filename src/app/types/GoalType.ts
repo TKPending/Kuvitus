@@ -1,4 +1,4 @@
-import { DrawingType, DrawingToolType, UserDrawingAction } from "./DrawingTypes";
+import { ElementType, DrawingToolsType, DrawingCanvas } from "./DrawingTypes";
 import { SubType } from "./SubType";
 
 export interface GoalType {
@@ -10,6 +10,7 @@ export interface GoalType {
     goalTags: string[];
     goalDueDate: string;
     goalSteps: SubType[];
-    drawingElements: DrawingType[];
-    drawingToolType:  DrawingToolType;
+    drawingElements: ElementType[];
+    drawingToolType:  DrawingToolsType;
+    drawingCanvas: DrawingCanvas;
 };
