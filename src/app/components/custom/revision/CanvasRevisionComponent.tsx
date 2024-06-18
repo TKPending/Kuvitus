@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRotateLeft, faRotateRight } from "@fortawesome/free-solid-svg-icons";
+import {
+  faRotateLeft,
+  faRotateRight,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 
 type Props = {
   onUndo: () => void;
@@ -13,6 +17,7 @@ const CanvasRevisionComponent = ({ onUndo, onRedo }: Props) => {
   const revisionOptions = [
     { type: "undo", icon: faRotateLeft, action: onUndo },
     { type: "redo", icon: faRotateRight, action: onRedo },
+    { type: "delete-all", icon: faTrash, action: null },
   ];
 
   const handleOptionHover = (option: string) => {
@@ -26,7 +31,13 @@ const CanvasRevisionComponent = ({ onUndo, onRedo }: Props) => {
           key={index}
           className="flex flex-col items-center justify-center gap-2"
         >
-          <p className={`${isOptionHovered === option.type ? "decoration-black scale-110" : "text-white"} transition duration-500 text-xs`}>
+          <p
+            className={`${
+              isOptionHovered === option.type
+                ? "decoration-black scale-110"
+                : "text-white"
+            } transition duration-500 text-xs`}
+          >
             {option.type}
           </p>
           <FontAwesomeIcon
@@ -34,7 +45,10 @@ const CanvasRevisionComponent = ({ onUndo, onRedo }: Props) => {
             onClick={option.action}
             onMouseOver={() => handleOptionHover(option.type)}
             onMouseLeave={() => setIsOptionHovered(null)}
-            className="hover:cursor-pointer hover:scale-105 bg-neutral-400 rounded-full p-2"
+            className={`hover:cursor-pointer hover:scale-105 bg-neutral-400 rounded-full p-2 
+              ${option.type === "delete-all" && "bg-red-600 bg-opacity-40 hover:bg-opacity-80 transition duration-400"}
+              
+            `}
           />
         </div>
       ))}
