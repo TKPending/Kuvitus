@@ -13,8 +13,9 @@ export const useHistory = (initialState: ElementType[]) => {
   useEffect(() => {
     const deleteElements = () => {
       if (deleteAll) {
-        setHistory(prevState => [...prevState, []]);
-        setIndex((prevState) => prevState + 1);
+        setHistory(prevState => [...prevState.slice(0, index + 1), []]);
+        setIndex(prevState => prevState + 1);
+
         dispatch(deleteAllElements(false));
       }
     }
