@@ -3,6 +3,7 @@ import React, { useLayoutEffect, useState, useEffect, useRef } from "react";
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "@/app/hooks/useHistory";
+import usePressedKeys from "@/app/hooks/usePressedKeys";
 import { createElement } from "./actions/createElement";
 import { updateElement } from "./actions/updateElement";
 import { drawElement } from "./actions/drawElement";
@@ -21,8 +22,8 @@ import CanvasRevisionComponent from "@/app/components/custom/revision/CanvasRevi
 import CanvasTextAreaComponent from "@/app/components/custom/textarea/CanvasTextAreaComponent";
 import { setDrawingTool } from "@/app/redux/slices/goal/goalSlice";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
-import CanvasDeleteOptionsContainer from "../container/CanvasDeleteOptionsContainer";
-import CanvasErrorComponent from "../components/CanvasErrorComponent";
+import CanvasDeleteOptionsContainer from "@/app/container/CanvasDeleteOptionsContainer"
+import CanvasErrorComponent from "@/app/components/CanvasErrorComponent"
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();
@@ -32,7 +33,10 @@ const DrawingCanvas = () => {
   const { elements, setElements, undo, redo } = useHistory([]);
   const [userAction, setUserAction] = useState<ActionsType>("none");
   const [selectedElement, setSelectedElement] = useState<ElementType | null>(null);
+  const [panOffset, setPanOffset] = useState({x: 0, y: 0});
+  const [startMouesPanPosition, setStartMousePanPosition] = useState({x: 0, y: 0});
   const textAreaRef = useRef<HTMLTextAreaElement>();
+  const pressedKeys = usePressedKeys();
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
@@ -40,7 +44,10 @@ const DrawingCanvas = () => {
     canvas.width = canvas.parentElement?.clientWidth || 0;
     canvas.height = canvas.parentElement?.clientHeight || 0;
     const canvasContext = canvas.getContext("2d") as CanvasRenderingContext2D;
+
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+    canvasContext.save();
+    canvasContext.translate(panOffset.x, panOffset.y);
 
     const roughCanvas = rough.canvas(canvas);
 
@@ -50,22 +57,41 @@ const DrawingCanvas = () => {
       drawElement(roughCanvas, canvasContext, element, dispatch);
     });
     canvasContext.restore();
-  }, [elements, userAction, selectedElement]);
+  }, [elements, userAction, selectedElement, panOffset]);
 
   useEffect(() => {
     const undoRedoFunction = (event: KeyboardEvent) => {
-      if ((event.metaKey || event.ctrlKey) && event.key === "z") {
-        if (event.shiftKey) {
+      if (event.ctrlKey || event.metaKey) {
+        if (event.key === "z") {
+          if (event.shiftKey) {
+            redo();
+          } else {
+            undo();
+          }
+        } else if (event.key === "y") {
           redo();
-        } else {
-          undo();
         }
       }
     };
 
     document.addEventListener("keydown", undoRedoFunction);
-    return () => document.addEventListener("keydown", undoRedoFunction);
+    return () => {
+      document.removeEventListener("keydown", undoRedoFunction);
+    };
   }, [undo, redo]);
+
+  useEffect(() => {
+    const scalingFactor = 0.7; // Adjust this value to control the speed
+    const panFunction = (event: WheelEvent) => {
+      setPanOffset((prevState) => ({
+        x: prevState.x - event.deltaX * scalingFactor,
+        y: prevState.y - event.deltaY * scalingFactor,
+      }));
+    };
+
+    document.addEventListener("wheel", panFunction);
+    return () => document.removeEventListener("wheel", panFunction);
+  }, []);
 
   useEffect(() => {
     const textArea = textAreaRef.current;
@@ -80,7 +106,12 @@ const DrawingCanvas = () => {
   const handleMouseDown = (event: React.MouseEvent) => {
     if (userAction === "writing") return;
 
-    const { clientX, clientY } = getRelativeCoordinates(event);
+    const { clientX, clientY } = getRelativeCoordinates(event, {x: panOffset.x, y: panOffset.y});
+
+    if (event.button === 1 || pressedKeys.has(" ")) {
+      setUserAction("panning");
+      setStartMousePanPosition({x: clientX, y: clientY});
+    }
 
     if (currentTool.type === "selection") {
       const clickedElement = getElementAtPosition(clientX, clientY, elements);
@@ -125,7 +156,17 @@ const DrawingCanvas = () => {
   };
 
   const handleMouseMove = (event: React.MouseEvent) => {
-    const { clientX, clientY } = getRelativeCoordinates(event);
+    const { clientX, clientY } = getRelativeCoordinates(event, {x: panOffset.x, y: panOffset.y});
+
+    if (userAction === "panning") {
+      const deltaX = clientX - startMouesPanPosition.x;
+      const deltaY = clientX - startMouesPanPosition.y;
+      setPanOffset(prevState => ({
+        x: panOffset.x + deltaX,
+        y: panOffset.y + deltaY,
+      }));
+      return;
+    }
 
     if (currentTool.type === "selection") {
       const element = getElementAtPosition(clientX, clientY, elements);
@@ -205,7 +246,7 @@ const DrawingCanvas = () => {
     ["line", "rectangle"].includes(tool);
 
   const handleMouseUp = (event: React.MouseEvent) => {
-    const { clientX, clientY } = getRelativeCoordinates(event);
+    const { clientX, clientY } = getRelativeCoordinates(event, {x: panOffset.x, y: panOffset.y});
 
     if (selectedElement) {
       if (
@@ -262,7 +303,7 @@ const DrawingCanvas = () => {
   };
 
   return (
-    <div className="relative z-10 flex items-center justify-center h-full w-full overflow-hidden">
+    <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
       <CanvasToolBarComponent />
       {isError && <CanvasErrorComponent />}
       {displayDeleteOptions && <CanvasDeleteOptionsContainer />}
@@ -271,6 +312,7 @@ const DrawingCanvas = () => {
           textAreaRef={textAreaRef}
           y={selectedElement?.y1}
           x={selectedElement?.x1}
+          panOffset={panOffset}
           handleOnBlur={handleOnBlur}
         />
       ) : null}
@@ -279,7 +321,8 @@ const DrawingCanvas = () => {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        className={`h-full w-full z-10`}
+        className={`h-full w-full absolute z-0`}
+        style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
       ></canvas>
       <CanvasRevisionComponent displayTrashCan={elements.length > 0} onUndo={undo} onRedo={redo} />
     </div>
