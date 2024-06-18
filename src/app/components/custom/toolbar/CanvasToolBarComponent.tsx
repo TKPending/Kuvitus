@@ -28,9 +28,9 @@ const CanvasToolBarComponent = () => {
   };
 
   return (
-    <div className="absolute border-black top-4 border-4 rounded-lg bg-white flex items-center justify-center overflow-hidden">
+    <div className="absolute shadow-2xl top-4 p-2 rounded-lg flex items-center justify-center gap-2 overflow-hidden">
       {drawingToolOptions.map((tool: DrawingToolsType, index: number) => (
-        <div key={index} className={`cursor-pointer ${currentTool.type === tool.type ? "bg-neutral-600 text-white" : "hover:bg-black hover:text-white"} transition duration-200`}>
+        <div key={index} className={`cursor-pointer ${currentTool.type === tool.type ? "bg-neutral-600 text-white" : "hover:bg-black hover:text-white"} transition duration-200 rounded-lg`}>
           <FontAwesomeIcon
             icon={tool.icon}
             onClick={() => handleToolChange(drawingToolOptions[index])}
