@@ -31,6 +31,7 @@ const CanvasRevisionComponent = ({ onUndo, onRedo }: Props) => {
           </p>
           <FontAwesomeIcon
             icon={option.icon}
+            onClick={option.action}
             onMouseOver={() => handleOptionHover(option.type)}
             onMouseLeave={() => setIsOptionHovered(null)}
             className="hover:cursor-pointer hover:scale-105 bg-neutral-400 rounded-full p-2"

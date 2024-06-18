@@ -1,3 +1,5 @@
+import { ElementType } from "@/app/types/DrawingTypes";
+
 const distance = (a: { x: number; y: number }, b: { x: number; y: number }) => {
   return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
 };
@@ -6,7 +8,7 @@ const nearPoint = (x: number, y: number, x1: number, y1: number, area: string) =
   return Math.abs(x - x1) < 5 && Math.abs(y - y1) < 5 ? area : null;
 };
 
-const positionWithinElement = (x: number, y: number, element: any) => {
+const positionWithinElement = (x: number, y: number, element: ElementType) => {
   const { type, x1, x2, y1, y2 } = element;
 
   if (type === "rectangle") {
@@ -33,7 +35,7 @@ const positionWithinElement = (x: number, y: number, element: any) => {
   }
 };
 
-export const getElementAtPosition = (x: number, y: number, elements: any[]) => {
+export const getElementAtPosition = (x: number, y: number, elements: ElementType[]) => {
   return elements
     .map((element) => ({...element, position: positionWithinElement(x, y, element)}))
     .find((element) => element.position !== null);

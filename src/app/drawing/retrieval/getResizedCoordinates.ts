@@ -3,7 +3,7 @@ import { Coordinates } from "@/app/types/DrawingTypes";
 export const getResizedCoordinates = (
   clientX: number,
   clientY: number,
-  positionOnElement: string,
+  positionOnElement: string | null | undefined,
   coordinates: Coordinates
 ) => {
   const { x1, y1, x2, y2 } = coordinates;

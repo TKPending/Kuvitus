@@ -1,7 +1,8 @@
 import rough from "roughjs";
-import React, { useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect, useState, useEffect } from "react";
 import { RootState } from "@/app/redux/store";
 import { useSelector } from "react-redux";
+import { useHistory } from "@/app/hooks/useHistory";
 import { createElement } from "./actions/createElement";
 import { updateElement } from "./actions/updateElement";
 import { adjustElementCoordinates } from "./actions/adjustElementCoordinates";
@@ -9,16 +10,15 @@ import { getRelativeCoordinates } from "./retrieval/getRelativeCoordinates";
 import { getElementAtPosition } from "./retrieval/getElementAtPosition";
 import { getCursorForPointer } from "./retrieval/getCursorForPointer";
 import { getResizedCoordinates } from "./retrieval/getResizedCoordinates";
-import { DrawingToolsType } from "@/app/types/DrawingTypes";
+import { DrawingToolsType, ElementType, ActionsType } from "@/app/types/DrawingTypes";
 import CanvasToolBarComponent from "@/app/components/custom/toolbar/CanvasToolBarComponent";
-import CanvasRevisionComponent from "../components/custom/revision/CanvasRevisionComponent";
+import CanvasRevisionComponent from "@/app/components/custom/revision/CanvasRevisionComponent";
 
 const DrawingCanvas = () => {
   const currentTool: DrawingToolsType = useSelector((state: RootState) => state.goal.drawingToolType);
-  const [elements, setElements] = useState<any[]>([]);
-  const [userAction, setUserAction] = useState<string>("");
-  const [selectedElement, setSelectedElement] = useState<any>(null);
-
+  const { elements, setElements, undo, redo } = useHistory([]);
+  const [userAction, setUserAction] = useState<ActionsType>("none");
+  const [selectedElement, setSelectedElement] = useState<ElementType | null>(null);
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
     // Keeps drawing relative to parent div
@@ -32,6 +32,21 @@ const DrawingCanvas = () => {
     elements.forEach(({ roughElement }) => roughCanvas.draw(roughElement));
   }, [elements]);
 
+  useEffect(() => {
+    const undoRedoFunction = (event: KeyboardEvent) => {
+      if ((event.metaKey || event.ctrlKey) && event.key === "z") {
+        if (event.shiftKey) {
+          redo()
+        } else {
+          undo();
+        }
+      }
+    }
+
+    document.addEventListener("keydown", undoRedoFunction);
+    return () => document.addEventListener("keydown", undoRedoFunction);
+  }, [undo, redo]);
+
   const handleMouseDown = (event: React.MouseEvent) => {
     const { clientX, clientY } = getRelativeCoordinates(event);
 
@@ -42,6 +57,7 @@ const DrawingCanvas = () => {
         const offsetY = clientY - clickedElement.y1;
 
         setSelectedElement({...clickedElement, offsetX, offsetY});
+        setElements(prevState => prevState)
 
         if (clickedElement.position === "inside") {
           setUserAction("moving");
@@ -67,24 +83,28 @@ const DrawingCanvas = () => {
       // @ts-ignore
       event.target.style.cursor = element
         ? getCursorForPointer(element.position)
-        : "default"
+        : "default";
     }
 
-    if (userAction === "drawing") {
+    if (userAction === "drawing" && selectedElement) {
       const index = selectedElement.id;
       const { x1, y1 } = elements[index];
 
       updateElement(index, x1, y1, clientX, clientY, currentTool.type, elements, setElements);
 
-    } else if (userAction === "moving") {
+    } else if (userAction === "moving" && selectedElement) {
       const { id, x1, y1, x2, y2, type, offsetX, offsetY } = selectedElement;
       const width = x2 - x1;
       const height = y2 - y1;
-      const newX1 = clientX - offsetX;
-      const newY1 = clientY - offsetY;
 
-      updateElement(id, newX1, newY1, newX1 + width, newY1 + height, type, elements, setElements);
-    } else if (userAction === "resizing") {
+      if (offsetX && offsetY) {
+        const newX1 = clientX - offsetX;
+        const newY1 = clientY - offsetY;
+
+        updateElement(id, newX1, newY1, newX1 + width, newY1 + height, type, elements, setElements);
+      }
+
+    } else if (userAction === "resizing" && selectedElement) {
         const { id, type, position, ...coordinates } = selectedElement;
         const { x1, y1, x2, y2 } = getResizedCoordinates(clientX, clientY, position, coordinates);
 
@@ -107,14 +127,6 @@ const DrawingCanvas = () => {
     setSelectedElement(null);
   };
 
-  const handleOnUndo = () => {
-
-  };
-
-  const handleRedo = () => {
-
-  }
-
   return (
     <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
       <CanvasToolBarComponent />
@@ -125,7 +137,7 @@ const DrawingCanvas = () => {
         onMouseUp={handleMouseUp}
         className={`h-full w-full`}
       ></canvas>
-      <CanvasRevisionComponent onUndo={handleOnUndo} onRedo={handleRedo} />
+      <CanvasRevisionComponent onUndo={undo} onRedo={redo} />
     </div>
   );
 };

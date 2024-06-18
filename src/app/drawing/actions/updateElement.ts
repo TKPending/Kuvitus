@@ -1,3 +1,4 @@
+import { ElementType } from "@/app/types/DrawingTypes";
 import { createElement } from "./createElement";
 
 export const updateElement = (
@@ -7,12 +8,14 @@ export const updateElement = (
   x2: number,
   y2: number,
   type: string,
-  elements: any[],
-  setElements: (e: any[]) => void,
+  elements: ElementType[],
+  setElements: (e: ElementType[], overwrite?: boolean) => void
 ) => {
   const updatedElement = createElement(id, { x1, y1, x2, y2 }, type);
-
   const elementsCopy = [...elements];
-  elementsCopy[id] = updatedElement;
-  setElements(elementsCopy);
+  
+  if (JSON.stringify(elementsCopy[id]) !== JSON.stringify(updatedElement)) {
+    elementsCopy[id] = updatedElement;
+    setElements(elementsCopy, true);
+  }
 };

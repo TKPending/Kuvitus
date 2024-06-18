@@ -1,4 +1,6 @@
-export const adjustElementCoordinates = (element: any) => {
+import { ElementType } from "@/app/types/DrawingTypes";
+
+export const adjustElementCoordinates = (element: ElementType) => {
   const { type, x1, y1, x2, y2 } = element;
   if (type === "rectangle") {
     const minX = Math.min(x1, x2);
