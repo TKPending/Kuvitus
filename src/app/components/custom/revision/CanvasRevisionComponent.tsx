@@ -1,5 +1,4 @@
-import { RootState } from "@/app/redux/store";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -10,11 +9,12 @@ import {
 import { setDeleteOptionVisible } from "@/app/redux/slices/goal/goalSlice";
 
 type Props = {
+  displayTrashCan: boolean;
   onUndo: () => void;
   onRedo: () => void;
 };
 
-const CanvasRevisionComponent = ({ onUndo, onRedo }: Props) => {
+const CanvasRevisionComponent = ({ displayTrashCan, onUndo, onRedo }: Props) => {
   const dispatch = useDispatch();
   const [isOptionHovered, setIsOptionHovered] = useState<string | null>(null);
   
@@ -36,7 +36,7 @@ const CanvasRevisionComponent = ({ onUndo, onRedo }: Props) => {
       {revisionOptions.map((option, index) => (
         <div
           key={index}
-          className="flex flex-col items-center justify-center gap-2"
+          className={`${option.type === "delete-all" && !displayTrashCan && "hidden"} flex flex-col items-center justify-center gap-2`}
         >
           <p
             className={`${

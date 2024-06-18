@@ -31,9 +31,7 @@ const DrawingCanvas = () => {
   const isError: boolean = useSelector((state: RootState) => state.goal.drawingCanvas.isError);
   const { elements, setElements, undo, redo } = useHistory([]);
   const [userAction, setUserAction] = useState<ActionsType>("none");
-  const [selectedElement, setSelectedElement] = useState<ElementType | null>(
-    null
-  );
+  const [selectedElement, setSelectedElement] = useState<ElementType | null>(null);
   const textAreaRef = useRef<HTMLTextAreaElement>();
 
   useLayoutEffect(() => {
@@ -264,7 +262,7 @@ const DrawingCanvas = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
+    <div className="relative z-10 flex items-center justify-center h-full w-full overflow-hidden">
       <CanvasToolBarComponent />
       {isError && <CanvasErrorComponent />}
       {displayDeleteOptions && <CanvasDeleteOptionsContainer />}
@@ -281,9 +279,9 @@ const DrawingCanvas = () => {
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
-        className={`h-full w-full`}
+        className={`h-full w-full z-10`}
       ></canvas>
-      <CanvasRevisionComponent onUndo={undo} onRedo={redo} />
+      <CanvasRevisionComponent displayTrashCan={elements.length > 0} onUndo={undo} onRedo={redo} />
     </div>
   );
 };

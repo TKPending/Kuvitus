@@ -2,7 +2,7 @@ import { RootState } from "@/app/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
-  faPen,
+  faSlash,
   faSquare,
   faArrowPointer,
   faT,
@@ -17,7 +17,7 @@ const CanvasToolBarComponent = () => {
   
   const drawingToolOptions: DrawingToolsType[] = [
     { type: "selection", icon: faArrowPointer },
-    { type: "line", icon: faPen },
+    { type: "line", icon: faSlash},
     { type: "rectangle", icon: faSquare },
     { type: "pencil", icon: faPencil },
     { type: "text", icon: faT },
@@ -28,14 +28,14 @@ const CanvasToolBarComponent = () => {
   };
 
   return (
-    <div className="absolute shadow-2xl top-4 p-2 rounded-lg flex items-center justify-center gap-2 overflow-hidden">
+    <div className="z-50 absolute shadow-2xl top-4 p-2 rounded-lg flex items-center justify-center gap-2 overflow-hidden">
       {drawingToolOptions.map((tool: DrawingToolsType, index: number) => (
         <div key={index} className={`cursor-pointer ${currentTool.type === tool.type ? "bg-neutral-600 text-white" : "hover:bg-black hover:text-white"} transition duration-200 rounded-lg`}>
-          <FontAwesomeIcon
+          {<FontAwesomeIcon
             icon={tool.icon}
             onClick={() => handleToolChange(drawingToolOptions[index])}
             className="h-4 w-4 p-2"
-          />
+          />}
         </div>
       ))}
     </div>
