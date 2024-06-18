@@ -23,7 +23,7 @@ const CanvasDeleteOptionsContainer = () => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
         containerRef.current &&
-        !containerRef.current.contains(event.target)
+        !containerRef.current.contains(event.target as Node)
       ) {
         dispatch(setDeleteOptionVisible(false));
       }
