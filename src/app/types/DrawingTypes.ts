@@ -25,6 +25,8 @@ export interface ElementType {
   position?: string | null;
   points?: { x: number; y: number }[];
   text?: string;
+  xOffsets?: number[];
+  yOffsets?: number[];
 };
 
 export type ActionsType =
@@ -34,4 +36,3 @@ export type ActionsType =
   | "panning"
   | "resizing"
   | "none";
-

@@ -1,10 +1,9 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import { ElementType } from "@/app/types/DrawingTypes";
 
 export const useHistory = (initialState: ElementType[]) => {
   const [index, setIndex] = useState<number>(0);
   const [history, setHistory] = useState<ElementType[][]>([initialState]);
-  const prevHistoryRef = useRef<ElementType[][]>(history);
 
   const setState = (
     action: ElementType[] | ((current: ElementType[]) => ElementType[]),
@@ -16,16 +15,11 @@ export const useHistory = (initialState: ElementType[]) => {
     if (overwrite) {
       const historyCopy = [...history];
       historyCopy[index] = newState;
-      if (JSON.stringify(historyCopy) !== JSON.stringify(prevHistoryRef.current)) {
-        setHistory(historyCopy);
-        prevHistoryRef.current = historyCopy;
-      }
+      setHistory(historyCopy);
     } else {
       const updatedState = [...history].slice(0, index + 1);
-      const newHistory = [...updatedState, newState];
-      setHistory(newHistory);
+      setHistory([...updatedState, newState]);
       setIndex((prevState) => prevState + 1);
-      prevHistoryRef.current = newHistory;
     }
   };
 

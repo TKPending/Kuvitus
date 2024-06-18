@@ -11,11 +11,21 @@ export const updateElement = (
   elements: ElementType[],
   setElements: (e: ElementType[], overwrite?: boolean) => void
 ) => {
-  const updatedElement = createElement(id, { x1, y1, x2, y2 }, type);
   const elementsCopy = [...elements];
   
-  if (JSON.stringify(elementsCopy[id]) !== JSON.stringify(updatedElement)) {
-    elementsCopy[id] = updatedElement;
-    setElements(elementsCopy, true);
+  switch (type) {
+    case "line":
+    case "rectangle":
+      const updatedElement = createElement(id, { x1, y1, x2, y2 }, type);
+      elementsCopy[id] = updatedElement;
+      break;
+    case "pencil":
+      const existingPoints = elementsCopy[id].points || [];
+      elementsCopy[id].points = [...existingPoints, { x: x2, y: y2 }];
+      break;
+    default:
+      break;
   }
+
+  setElements(elementsCopy, true);
 };
