@@ -6,7 +6,7 @@ type Props = {
   handleDispatch: (option: number) => void;
 };
 
-const GoalStatusContainer = ({ status, onSave, handleDispatch }: Props) => {
+const StatusComponent = ({ status, onSave, handleDispatch }: Props) => {
   const [progressClicked, setProgressClicked] = useState<boolean>(false);
   const options: string[] = ["Uncomplete", "Completed", "Pending"];
 
@@ -52,4 +52,4 @@ const GoalStatusContainer = ({ status, onSave, handleDispatch }: Props) => {
   );
 };
 
-export default GoalStatusContainer;
+export default StatusComponent;

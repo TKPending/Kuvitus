@@ -33,6 +33,7 @@ export const addSubGoalReducer = (
     subStatus: 2,
     subTags: [],
     subDueDate: "",
+    subCompleteDate: "",
     isPressed: false,
   });
 };
@@ -126,6 +127,20 @@ export const updateSubGoalDueDateReducer = (
   state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === AP.subUID) {
       return { ...goal, subDueDate: AP.newDate };
+    }
+    return goal;
+  });
+};
+
+export const updateSubGoalCompleteDateReducer = (
+  state: GoalType,
+  action: PayloadAction<{ subUID: string; completeDate: string }>
+) => {
+  const AP = action.payload;
+
+  state.subGoals = state.subGoals.map((goal) => {
+    if (goal.subUID === AP.subUID) {
+      return { ...goal, subCompleteDate: AP.completeDate };
     }
     return goal;
   });

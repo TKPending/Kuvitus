@@ -4,9 +4,11 @@ import CalendarComponent from "@/app/components/custom/calendar/CalendarComponen
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
 import {
+  setSubGoalCompleteDate,
   setSubGoalDueDate,
   setSubGoalStatus,
 } from "@/app/redux/slices/goal/goalSlice";
+import { getCurrentDate } from "@/app/util/getCurrentDate";
 
 const COMPLETED: number = 1;
 const PENDING: number = 2;
@@ -29,6 +31,13 @@ const SubGoalDueDateContainer = ({ subUID, dueDate, status }: Props) => {
         newStatus: option,
       })
     );
+    if (option === COMPLETED) {
+      const completeDate: string = getCurrentDate();
+      dispatch(setSubGoalCompleteDate({
+        subUID,
+        completeDate,
+      }))
+    }
   };
 
   const handleDateChange = (newDate: string) => {

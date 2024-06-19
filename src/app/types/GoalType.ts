@@ -9,6 +9,7 @@ export interface GoalType {
     depth: "basic" | "medium" | "advanced"; // (Basic, Medium, Advanced)
     tags: string[];
     dueDate: string;
+    completeDate: string;
     subGoals: SubType[];
     drawingElements: ElementType[];
     drawingToolType:  DrawingToolsType;

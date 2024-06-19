@@ -3,9 +3,10 @@ import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import ReturnHomeComponent from "@/app/components/ReturnHomeComponent";
 import TextInputComponent from "@/app/components/TextInputComponent";
-import { setGoalStatus, setGoalTitle } from "@/app/redux/slices/goal/goalSlice";
+import { setCompleteDate, setGoalStatus, setGoalTitle } from "@/app/redux/slices/goal/goalSlice";
 import StatusComponent from "@/app/components/StatusComponent";
 import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
+import { getCurrentDate } from "../util/getCurrentDate";
 
 const GoalOverviewHeaderContainer = () => {
   const dispatch = useDispatch();
@@ -21,6 +22,8 @@ const GoalOverviewHeaderContainer = () => {
 
   const handleStatusChange = (option: number) => {
     dispatch(setGoalStatus(option));
+    const currentDate: string = getCurrentDate();
+    dispatch(setCompleteDate(currentDate));
   }
 
   return (

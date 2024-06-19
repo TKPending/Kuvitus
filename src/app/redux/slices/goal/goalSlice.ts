@@ -2,6 +2,7 @@ import { GoalType } from "@/app/types/GoalType";
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addToGoalTagsReducer,
+  updateGoalCompleteDateReducer,
   includeGoalDateReducer,
   loadGoalReducer,
   processGoalDepthReducer,
@@ -20,6 +21,7 @@ import {
   addSubGoalTagReducer,
   updateSubGoalStatusReducer,
   updateSubGoalDueDateReducer,
+  updateSubGoalCompleteDateReducer,
 } from "./subGoalReducer";
 import {
   canvasErrorMessageReducer,
@@ -39,6 +41,7 @@ const initialState: GoalType = {
   depth: "basic",
   tags: [],
   dueDate: "",
+  completeDate: "",
   subGoals: [],
   drawingElements: [],
   drawingToolType: {
@@ -65,6 +68,7 @@ const goalSlice = createSlice({
     setGoalTags: addToGoalTagsReducer,
     removeGoalTag: removeFromGoalTagsReducer,
     setGoalDate: includeGoalDateReducer,
+    setCompleteDate: updateGoalCompleteDateReducer,
 
     setSubGoalFocus: subGoalFocusedReducer,
     removeSubGoal: removeSubGoalReducer,
@@ -75,6 +79,7 @@ const goalSlice = createSlice({
     removeSubGoalTag: removeTagFromSubGoalReducer,
     setSubGoalStatus: updateSubGoalStatusReducer,
     setSubGoalDueDate: updateSubGoalDueDateReducer,
+    setSubGoalCompleteDate: updateSubGoalCompleteDateReducer,
 
     setDrawingTool: updateDrawingToolReducer,
     setCanvasError: canvasErrorReducer,
@@ -93,6 +98,7 @@ export const {
   setGoalTags,
   removeGoalTag,
   setGoalDate,
+  setCompleteDate,
 
   setSubGoalFocus,
   removeSubGoal,
@@ -103,6 +109,7 @@ export const {
   removeSubGoalTag,
   setSubGoalStatus,
   setSubGoalDueDate,
+  setSubGoalCompleteDate,
 
   setDrawingTool,
   setCanvasError,

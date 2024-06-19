@@ -5,5 +5,6 @@ export interface SubType {
   subStatus: number | 0 |  1 | 2; //(Uncomplete, Complete, Pending);
   subTags: string[];
   subDueDate: string;
+  subCompleteDate: string;
   isPressed: boolean;
 };

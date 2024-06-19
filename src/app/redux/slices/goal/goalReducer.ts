@@ -64,3 +64,10 @@ export const includeGoalDateReducer = (
 ) => {
   state.dueDate = action.payload;
 };
+
+export const updateGoalCompleteDateReducer = (
+  state: GoalType,
+  action: PayloadAction<string>
+) => {
+  state.completeDate = action.payload;
+};
