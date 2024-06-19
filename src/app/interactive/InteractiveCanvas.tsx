@@ -48,7 +48,7 @@ const InteractiveCanvas = () => {
     }, []);
 
     return (
-        <div className="relative h-screen w-screen">
+        <div className="relative h-screen max-h-screen w-screen max-w-screen ">
             <KuvitusLayout />
             {localGoals.map((goal: LocalGoalType, index: number) => (
                 <InteractiveGoalLayout key={index} goal={goal} />
