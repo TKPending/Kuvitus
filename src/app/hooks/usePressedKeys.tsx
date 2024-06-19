@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-const usePressedKey = () => {
-  const [pressedKeys, setPressedKeys] = useState(new Set());
+export const usePressedKeys = () => {
+  const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -14,17 +14,15 @@ const usePressedKey = () => {
         updatedKeys.delete(event.key);
         return updatedKeys;
       });
+    };
 
-      window.addEventListener("keydown", handleKeyDown);
-      window.addEventListener("keyup", handleKeyUp);
-      return () => {
-        window.addEventListener("keydown", handleKeyDown);
-        window.addEventListener("keyup", handleKeyUp);
-      };
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
     };
   }, []);
 
   return pressedKeys;
 };
-
-export default usePressedKey;

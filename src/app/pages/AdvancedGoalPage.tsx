@@ -14,7 +14,7 @@ const AdvancedGoalPage = ({ goalUID }: Props) => {
     const dispatch = useDispatch();
 
     return (
-        <div className="h-screen w-screen max-h-screen max-w-screen flex">
+        <div className="fixed h-screen w-screen max-h-screen max-w-screen flex">
             <div className="flex flex-col gap-4 h-screen w-full p-4">
                 <GoalDescriptionLayout />
                 <DrawLayout />

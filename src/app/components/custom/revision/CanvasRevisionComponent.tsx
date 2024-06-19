@@ -32,7 +32,7 @@ const CanvasRevisionComponent = ({ displayTrashCan, onUndo, onRedo }: Props) => 
   ];
 
   return (
-    <div className="absolute left-10 bottom-2 h-12 flex items-center justify-center gap-4">
+    <div className="flex items-center justify-center gap-4">
       {revisionOptions.map((option, index) => (
         <div
           key={index}
