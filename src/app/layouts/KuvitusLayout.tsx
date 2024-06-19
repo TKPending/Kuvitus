@@ -23,7 +23,7 @@ const KuvitusLayout = ({ home=true }: Props) => {
 
     setTimeout(() => {
       setIsVisible(false);
-    }, 2500);
+    }, 3000);
 
     return () => {
       animation.destroy(); // Clean up the animation when the component is unmounted
@@ -36,11 +36,12 @@ const KuvitusLayout = ({ home=true }: Props) => {
         !isVisible && "hidden"
       } absolute z-20 bg-white top-0 left-0 h-screen w-screen flex flex-col items-center justify-center`}
     >
-      <div className="flex">
+      <div className="flex items-center justify-center">
         <p className="text-7xl font-semibold text-blue-400">Kuvitus</p>
         <div ref={animationContainer} className="h-24 w-24"></div>
       </div>
       {!home && <p className="text-blue-400">Fetching...</p>}
+      {home && <p className="text-red-400">Currently everything is stored in the session storage</p>}
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
   addLocalGoalReducer,
+  addSessionGoalsReducer,
   goalDraggedPositionReducer,
   goalDraggedReducer,
   localGoalFocusedReducer,
@@ -20,6 +21,7 @@ const localGoalSlice = createSlice({
   initialState,
   reducers: {
     addLocalGoal: addLocalGoalReducer,
+    addSessionGoals: addSessionGoalsReducer,
     removeLocalGoal: removeLocalGoalReducer,
     setLocalGoalFocused: localGoalFocusedReducer,
     setLocalGoalUnfocused: localGoalUnfocusedReducer,
@@ -31,6 +33,7 @@ const localGoalSlice = createSlice({
 
 export const {
   addLocalGoal,
+  addSessionGoals,
   removeLocalGoal,
   setLocalGoalFocused,
   setLocalGoalUnfocused,

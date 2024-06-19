@@ -17,6 +17,13 @@ export const addLocalGoalReducer = (
   });
 };
 
+export const addSessionGoalsReducer = (
+  state: LocalGoalStateType,
+  action: PayloadAction<LocalGoalType[]>
+) => {
+  state.goals = action.payload;
+};
+
 export const removeLocalGoalReducer = (
   state: LocalGoalStateType,
   action: PayloadAction<string>

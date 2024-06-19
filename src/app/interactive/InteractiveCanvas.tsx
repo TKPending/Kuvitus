@@ -2,60 +2,98 @@
 
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import AddGoalButtonComponent from "@/app/components/interactive/AddGoalButtonComponent";
 import InteractiveGoalLayout from "@/app/layouts/InteractiveGoalLayout";
-import { GoalType } from "@/app/types/GoalType";
 import { getRandomPosition } from "@/app/util/getRandomPosition";
-import { BASIC, MEDIUM, ADVANCED } from "@/temp/tempGoalData";
+import {v4 as uuid} from 'uuid';
 import { LocalGoalType } from "@/app/types/LocalGoalType";
-import { addLocalGoal, updateLocalPositions } from "@/app/redux/slices/localGoals/localGoalsSlice";
-import KuvitusLayout from "../layouts/KuvitusLayout";
+import {
+  addLocalGoal,
+  addSessionGoals,
+  updateLocalPositions,
+} from "@/app/redux/slices/localGoals/localGoalsSlice";
+import KuvitusLayout from "@/app/layouts/KuvitusLayout";
+import SessionService from "@/services/sessionStorage/sessionService";
 
 const InteractiveCanvas = () => {
-    const dispatch = useDispatch();
-    const localGoals = useSelector((state: RootState) => state.localGoals.goals);
+  const dispatch = useDispatch();
+  const localGoals: LocalGoalType[] = useSelector(
+    (state: RootState) => state.localGoals.goals
+  );
+  const requestRef = useRef<number>();
 
-    const [iterator, setIterator] = useState(0);
-    const requestRef = useRef<number>();
-    const tempgoals: GoalType[] = [BASIC, MEDIUM, ADVANCED];
-
-    const handleAddGoal = () => {
-        const localNewGoal = {
-            goal: tempgoals[iterator],
-            position: getRandomPosition(),
-            velocity: { 
-                vx: (Math.random() * 4 - 2), // Increase speed range
-                vy: (Math.random() * 4 - 2), 
-                vt: (Math.random() * 4 - 2), 
-                vb: (Math.random() * 4 - 2) 
-            },
-            isFocused: false,
-            isDragged: false,
-        }
-        dispatch(addLocalGoal(localNewGoal));
-        setIterator((prevIterator) => (prevIterator + 1) % tempgoals.length);
+  const handleAddGoal = () => {
+    const UID = uuid();
+    const localNewGoal = {
+      goal: {
+        uID: UID,
+        title: "Enter Goal",
+        description: "",
+        status: 0,
+        depth: "basic",
+        tags: [],
+        dueDate: "",
+        completeDate: "",
+        subGoals: [],
+        drawingElements: [],
+        drawingToolType: {
+          type: "selection",
+          icon: "",
+        },
+        drawingCanvas: {
+          isError: false,
+          errorMessage: "",
+          displayDeleteOption: false,
+          deleteAll: false,
+        },
+      },
+      position: getRandomPosition(),
+      velocity: {
+        vx: Math.random() * 4 - 2,
+        vy: Math.random() * 4 - 2,
+        vt: Math.random() * 4 - 2,
+        vb: Math.random() * 4 - 2,
+      },
+      isFocused: false,
+      isDragged: false,
     };
 
-    const animate = () => {
-        dispatch(updateLocalPositions());
-        requestRef.current = requestAnimationFrame(animate);
+    SessionService.addSessionGoal(localNewGoal);
+    dispatch(addLocalGoal(localNewGoal));
+  };
+
+  const animate = () => {
+    dispatch(updateLocalPositions());
+    requestRef.current = requestAnimationFrame(animate);
+  };
+
+  useEffect(() => {
+    requestRef.current = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(requestRef.current!);
+  }, []);
+
+  useEffect(() => {
+    const fetchGoals = () => {
+        // Handle if null is returned
+      const goals = SessionService.kuvitusSessionCheck(localGoals);
+      if (goals && goals.length > 0) {
+        dispatch(addSessionGoals(goals));
+      }
     };
 
-    useEffect(() => {
-        requestRef.current = requestAnimationFrame(animate);
-        return () => cancelAnimationFrame(requestRef.current!);
-    }, []);
+    fetchGoals();
+  }, []);
 
-    return (
-        <div className="relative h-screen max-h-screen w-screen max-w-screen ">
-            <KuvitusLayout />
-            {localGoals.map((goal: LocalGoalType, index: number) => (
-                <InteractiveGoalLayout key={index} goal={goal} />
-            ))}
-            <AddGoalButtonComponent onClick={handleAddGoal} />
-        </div>
-    );
+  return (
+    <div className="relative h-screen max-h-screen w-screen max-w-screen ">
+      <KuvitusLayout />
+      {localGoals.map((goal: LocalGoalType, index: number) => (
+        <InteractiveGoalLayout key={index} goal={goal} />
+      ))}
+      <AddGoalButtonComponent onClick={handleAddGoal} />
+    </div>
+  );
 };
 
 export default InteractiveCanvas;
