@@ -6,7 +6,7 @@ import {
 } from "@/app/redux/slices/goal/goalSlice";
 import TextInputComponent from "@/app/components/TextInputComponent"
 import AddTagsComponent from "@/app/components/subgoals/AddTagsComponent";
-import SubGoalDueDateContainer from "@/app/container/subgoals/SubGoalDueDateContainer";
+import SubGoalDueDateContainer from "@/app/containers/subgoals/SubGoalDueDateContainer";
 import TagsContainer from "../TagsContainer";
 
 type Props = {

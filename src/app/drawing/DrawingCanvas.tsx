@@ -139,10 +139,15 @@ const DrawingCanvas = () => {
   const handleMouseDown = (event: React.MouseEvent) => {
     if (userAction === "writing") return;
 
-    const { clientX, clientY } = getRelativeCoordinates(event, {
-      x: panOffset.x,
-      y: panOffset.y,
-    }, scaleOffset, scale);
+    const { clientX, clientY } = getRelativeCoordinates(
+      event,
+      {
+        x: panOffset.x,
+        y: panOffset.y,
+      },
+      scaleOffset,
+      scale
+    );
 
     if (event.button === 1 || pressedKeys.has(" ")) {
       setUserAction("panning");
@@ -192,10 +197,15 @@ const DrawingCanvas = () => {
   };
 
   const handleMouseMove = (event: React.MouseEvent) => {
-    const { clientX, clientY } = getRelativeCoordinates(event, {
-      x: panOffset.x,
-      y: panOffset.y,
-    }, scaleOffset, scale);
+    const { clientX, clientY } = getRelativeCoordinates(
+      event,
+      {
+        x: panOffset.x,
+        y: panOffset.y,
+      },
+      scaleOffset,
+      scale
+    );
 
     if (userAction === "panning") {
       const deltaX = clientX - startMouesPanPosition.x;
@@ -282,10 +292,15 @@ const DrawingCanvas = () => {
   };
 
   const handleMouseUp = (event: React.MouseEvent) => {
-    const { clientX, clientY } = getRelativeCoordinates(event, {
-      x: panOffset.x,
-      y: panOffset.y,
-    }, scaleOffset, scale);
+    const { clientX, clientY } = getRelativeCoordinates(
+      event,
+      {
+        x: panOffset.x,
+        y: panOffset.y,
+      },
+      scaleOffset,
+      scale
+    );
 
     if (selectedElement) {
       if (
@@ -352,36 +367,38 @@ const DrawingCanvas = () => {
   };
 
   return (
-    <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
-      <CanvasToolBarComponent />
-      {isError && <CanvasErrorComponent />}
-      {displayDeleteOptions && <CanvasSureDeleteComponent />}
-      {userAction === "writing" ? (
-        <CanvasTextAreaComponent
-          textAreaRef={textAreaRef}
-          y={selectedElement?.y1}
-          x={selectedElement?.x1}
-          panOffset={panOffset}
+    <div className="h-3/4 p-4 flex items-center justify-center">
+      <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
+        <CanvasToolBarComponent />
+        {isError && <CanvasErrorComponent />}
+        {displayDeleteOptions && <CanvasSureDeleteComponent />}
+        {userAction === "writing" ? (
+          <CanvasTextAreaComponent
+            textAreaRef={textAreaRef}
+            y={selectedElement?.y1}
+            x={selectedElement?.x1}
+            panOffset={panOffset}
+            scale={scale}
+            scaleOffset={scaleOffset}
+            handleOnBlur={handleOnBlur}
+          />
+        ) : null}
+        <canvas
+          id="canvas"
+          onMouseDown={handleMouseDown}
+          onMouseMove={handleMouseMove}
+          onMouseUp={handleMouseUp}
+          className={`h-full w-full absolute z-0`}
+          style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
+        ></canvas>
+        <CanvasControllerContainer
           scale={scale}
-          scaleOffset={scaleOffset}
-          handleOnBlur={handleOnBlur}
+          displayTrashCan={elements.length > 0}
+          onUndo={undo}
+          onRedo={redo}
+          handleZoom={handleOnZoom}
         />
-      ) : null}
-      <canvas
-        id="canvas"
-        onMouseDown={handleMouseDown}
-        onMouseMove={handleMouseMove}
-        onMouseUp={handleMouseUp}
-        className={`h-full w-full absolute z-0`}
-        style={{ transform: `translate(${panOffset.x}px, ${panOffset.y}px)` }}
-      ></canvas>
-      <CanvasControllerContainer
-        scale={scale}
-        displayTrashCan={elements.length > 0}
-        onUndo={undo}
-        onRedo={redo}
-        handleZoom={handleOnZoom}
-      />
+      </div>
     </div>
   );
 };

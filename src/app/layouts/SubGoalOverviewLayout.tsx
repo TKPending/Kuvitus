@@ -8,7 +8,7 @@ import { ADVANCED } from "@/temp/tempGoalData";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import AddSubGoalButtonComponent from "@/app/components/subgoals/AddSubGoalButtonComponent";
 
-const StepsLayout = () => {
+const SubGoalOverviewLayout = () => {
   const dispatch = useDispatch();
   const subGoals: SubType[] = useSelector(
     (state: RootState) => state.goal.subGoals
@@ -50,4 +50,4 @@ const StepsLayout = () => {
   );
 };
 
-export default StepsLayout;
+export default SubGoalOverviewLayout;

@@ -1,4 +1,4 @@
-import AdvancedGoalPage from "@/app/pages/AdvancedGoalPage";
+import DetailedGoalPage from "@/app/pages/DetailedGoalPage";
 
 type Props = {
     params: {goalUID: string};
@@ -7,7 +7,7 @@ type Props = {
 const GoalPage = ({ params }: Props) => {
     const goalUID: string = params.goalUID;
 
-    return <AdvancedGoalPage goalUID={goalUID} />
+    return <DetailedGoalPage goalUID={goalUID} />
 };
 
 export default GoalPage;

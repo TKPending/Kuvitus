@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import TagsComponent from "@/app/components/TagsComponent";
 import {
   setSubGoalFocus,
   setSubGoalTitle,
@@ -8,7 +7,7 @@ import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
-import TagsContainer from "./TagsContainer";
+import TagsContainer from "../TagsContainer";
 
 type Props = {
   UID: string;
