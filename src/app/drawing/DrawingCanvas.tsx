@@ -12,6 +12,7 @@ import { getRelativeCoordinates } from "./retrieval/getRelativeCoordinates";
 import { getElementAtPosition } from "./retrieval/getElementAtPosition";
 import { getCursorForPointer } from "./retrieval/getCursorForPointer";
 import { getResizedCoordinates } from "./retrieval/getResizedCoordinates";
+import { adjustmentRequired } from "./util/adjustmentRequired";
 import {
   DrawingToolsType,
   ElementType,
@@ -280,9 +281,6 @@ const DrawingCanvas = () => {
       updateElement(id, x1, y1, x2, y2, type, elements, setElements, dispatch);
     }
   };
-
-  const adjustmentRequired = (tool: any) =>
-    ["line", "rectangle"].includes(tool);
 
   const handleMouseUp = (event: React.MouseEvent) => {
     const { clientX, clientY } = getRelativeCoordinates(event, {

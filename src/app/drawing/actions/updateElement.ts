@@ -20,7 +20,7 @@ export const updateElement = (
   switch (type) {
     case "line":
     case "rectangle":
-      const updatedElement = createElement(id, { x1, y1, x2, y2 }, type);
+      const updatedElement = createElement(id, { x1, y1, x2, y2 }, type, dispatch);
       elementsCopy[id] = updatedElement;
       break;
     case "pencil":
@@ -40,7 +40,7 @@ export const updateElement = (
           const coord = { x1, y1, x2: x1 + textWidth, y2: y1 + textHeight };
 
           elementsCopy[id] = {
-            ...createElement(id, coord, type),
+            ...createElement(id, coord, type, dispatch),
             text,
           };
         }

@@ -39,7 +39,7 @@ const CanvasSureDeleteComponent = () => {
   return (
     <div
       ref={containerRef}
-      className="absolute flex flex-col gap-8 border-2 border-black p-4 rounded-lg shadow-lg"
+      className="absolute z-10 flex flex-col gap-8 border-2 border-black p-4 rounded-lg shadow-lg"
     >
       <p className="text-2xl">Are you sure you want to delete all elements?</p>
 
