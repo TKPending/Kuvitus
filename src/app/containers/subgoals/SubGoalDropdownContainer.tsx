@@ -6,8 +6,8 @@ import {
 } from "@/app/redux/slices/goal/goalSlice";
 import TextInputComponent from "@/app/components/TextInputComponent"
 import AddTagsComponent from "@/app/components/subgoals/AddTagsComponent";
-import SubGoalDateLayout from "@/app/layouts/SubGoalDateLayout"
-import TagsContainer from "./TagsContainer";
+import SubGoalDueDateContainer from "@/app/container/subgoals/SubGoalDueDateContainer";
+import TagsContainer from "../TagsContainer";
 
 type Props = {
   UID: string;
@@ -66,8 +66,7 @@ const SubGoalDropdownContainer = ({
         <AddTagsComponent subUID={UID} />
       </div>
 
-      <SubGoalDateLayout subUID={UID} dueDate={dueDate} status={status} />
-
+      <SubGoalDueDateContainer subUID={UID} dueDate={dueDate} status={status} />
     </div>
   );
 };

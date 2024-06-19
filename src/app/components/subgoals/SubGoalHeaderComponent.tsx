@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ProgressionComponent from "@/app/components/custom/progression/ProgressionComponent";
 import { SubType } from "@/app/types/SubType";
 
-const StepsHeaderContainer = () => {
+const SubGoalHeaderComponent = () => {
   const subGoals: SubType[] = useSelector((state: RootState) => state.goal.subGoals);
 
   return (
@@ -14,4 +14,4 @@ const StepsHeaderContainer = () => {
   );
 };
 
-export default StepsHeaderContainer;
+export default SubGoalHeaderComponent;

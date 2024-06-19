@@ -1,7 +1,7 @@
 import { RootState } from "@/app/redux/store";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import StepsHeaderContainer from "@/app/container/StepsHeaderContainer";
+import SubGoalHeaderComponent from "@/app/components/subgoals/SubGoalHeaderComponent";
 import { SubType } from "@/app/types/SubType";
 import SubGoalLayout from "./SubGoalLayout";
 import { ADVANCED } from "@/temp/tempGoalData";
@@ -26,7 +26,7 @@ const StepsLayout = () => {
 
   return (
     <div className="h-screen w-full p-8 flex flex-col ">
-      <StepsHeaderContainer />
+      <SubGoalHeaderComponent />
 
       <div className="flex-1 p-4 overflow-y-auto">
         {subGoals.length > 0 ? (

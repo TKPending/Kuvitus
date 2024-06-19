@@ -4,10 +4,10 @@ import { useSelector, useDispatch } from "react-redux";
 import ReturnHomeComponent from "@/app/components/ReturnHomeComponent";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import { setGoalStatus, setGoalTitle } from "@/app/redux/slices/goal/goalSlice";
-import GoalStatusContainer from "./GoalStatusContainer";
+import StatusComponent from "@/app/components/StatusComponent";
 import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
 
-const GoalTitleContainer = () => {
+const GoalOverviewHeaderContainer = () => {
   const dispatch = useDispatch();
   const title: string = useSelector((state: RootState) => state.goal.title);
   const status: number = useSelector((state: RootState) => state.goal.status);
@@ -26,7 +26,7 @@ const GoalTitleContainer = () => {
   return (
     <div className="flex h-auto items-center gap-6">
       <ReturnHomeComponent />
-      <GoalStatusContainer status={status} handleDispatch={(option) => handleStatusChange(option)} />
+      <StatusComponent status={status} handleDispatch={(option) => handleStatusChange(option)} />
       <TextInputComponent
         text={title}
         size="text-4xl"
@@ -39,4 +39,4 @@ const GoalTitleContainer = () => {
   );
 };
 
-export default GoalTitleContainer;
+export default GoalOverviewHeaderContainer;

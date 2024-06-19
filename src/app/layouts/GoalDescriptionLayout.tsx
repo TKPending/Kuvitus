@@ -1,13 +1,13 @@
-import GoalTitleContainer from "@/app/container/GoalTitleContainer";
-import GoalDescriptionContainer from "@/app/container/GoalDescriptionContainer";
+import GoalOverviewHeaderContainer from "@/app/containers/GoalOverviewHeaderContainer";
+import GoalDescriptionComponent from "@/app/components/goalOverview/GoalDescriptionComponent";
 
-const GoalDescriptionLayout = () => {
+const GoalOverviewLayout = () => {
   return (
     <div className="flex flex-col gap-4 h-1/4 p-4">
-      <GoalTitleContainer />
-      <GoalDescriptionContainer />
+      <GoalOverviewHeaderContainer />
+      <GoalDescriptionComponent />
     </div>
   );
 };
 
-export default GoalDescriptionLayout;
+export default GoalOverviewLayout;

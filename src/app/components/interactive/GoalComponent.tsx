@@ -10,7 +10,7 @@ import {
   setLocalGoalDrag,
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import { getGoalDimensions } from "@/app/util/getGoalDimensions";
-import TagsContainer from "@/app/container/TagsContainer";
+import TagsContainer from "@/app/containers/TagsContainer";
 import ProgressionComponent from "@/app/components/custom/progression/ProgressionComponent";
 
 

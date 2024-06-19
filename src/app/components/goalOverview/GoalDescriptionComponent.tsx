@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import { setGoalDescription } from "@/app/redux/slices/goal/goalSlice";
 
-const GoalDescriptionContainer = () => {
+const GoalDescriptionComponent = () => {
   const dispatch = useDispatch();
   const description: string = useSelector(
     (state: RootState) => state.goal.description
@@ -30,4 +30,4 @@ const GoalDescriptionContainer = () => {
   );
 };
 
-export default GoalDescriptionContainer;
+export default GoalDescriptionComponent;

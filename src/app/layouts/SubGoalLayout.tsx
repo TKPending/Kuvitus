@@ -1,7 +1,7 @@
 import { SubType } from "@/app/types/SubType";
-import SubGoalFrontContainer from "@/app/container/SubGoalFrontContainer";
-import SubGoalDropdownContainer from "@/app/container/SubGoalDropdownContainer";
-import DeleteSubGoalContainer from "../container/DeleteSubGoalContainer";
+import SubGoalFrontContainer from "@/app/containers/subgoals/SubGoalFrontContainer";
+import SubGoalDropdownContainer from "@/app/containers/subgoals/SubGoalDropdownContainer";
+import DeleteSubGoalContainer from "@/app/containers/subgoals/DeleteSubGoalContainer";
 
 type Props = {
   subGoal: SubType;

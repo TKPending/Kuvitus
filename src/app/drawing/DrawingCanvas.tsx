@@ -24,7 +24,7 @@ import { setDrawingTool } from "@/app/redux/slices/goal/goalSlice";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
 import CanvasSureDeleteComponent from "@/app/components/canvas/CanvasSureDeleteComponent";
 import CanvasErrorComponent from "@/app/components/canvas/CanvasErrorComponent";
-import CanvasControllerContainer from "@/app/container/CanvasControllerContainer";
+import CanvasControllerContainer from "@/app/containers/CanvasControllerContainer";
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();
