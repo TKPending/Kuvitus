@@ -6,7 +6,7 @@ import { SubType } from "@/app/types/SubType";
 import SubGoalLayout from "./SubGoalLayout";
 import { ADVANCED } from "@/temp/tempGoalData";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
-import AddSubGoalButtonComponent from "../components/AddSubGoalButtonComponent";
+import AddSubGoalButtonComponent from "@/app/components/subgoals/AddSubGoalButtonComponent"
 
 const StepsLayout = () => {
   const dispatch = useDispatch();

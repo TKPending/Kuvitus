@@ -2,7 +2,7 @@ import { GoalType } from "@/app/types/GoalType";
 
 export const BASIC: GoalType = {
     goalUID: "1",
-    goalTitle: "Lose 5KG",
+    goalTitle: "Drink Water Today",
     goalDescription: "",
     goalStatus: 0,
     goalDepth: "basic",
@@ -14,7 +14,7 @@ export const BASIC: GoalType = {
 
 export const MEDIUM: GoalType = {
     goalUID: "2",
-    goalTitle: "Lose 5KG",
+    goalTitle: "Researching Bowling",
     goalDescription: "This is a medium goal",
     goalStatus: 1,
     goalDepth: "medium",
@@ -73,7 +73,7 @@ export const ADVANCED: GoalType = {
             subUID: "5",
             subTitle: "Get Adequate Sleep",
             subDetails: "Ensure 7-8 hours of quality sleep per night.",
-            subStatus: 0,
+            subStatus: 1,
             subTags: ["Health", "Sleep"],
             subDueDate: "08/06/2024",
             isPressed: false,

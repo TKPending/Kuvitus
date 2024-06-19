@@ -1,6 +1,6 @@
 import { useState } from "react";
-import DeleteSubGoalButtonComponent from "../components/DeleteSubGoalButtonComponent";
-import ConfirmDeletionComponent from "../components/custom/subgoal/ConfirmDeletionComponent";
+import DeleteSubGoalButtonComponent from "@/app/components/subgoals/DeleteSubGoalButtonComponent";
+import ConfirmDeletionComponent from "@/app/components/subgoals/ConfirmDeletionComponent";
 
 type Props = {
   subGoalUID: string;

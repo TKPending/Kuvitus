@@ -27,9 +27,9 @@ const StatusDateContainer = ({ subUID, status, dueDate }: Props) => {
   };
 
   return (
-    <div className="flex px-8 gap-6">
+    <div className="flex gap-4">
+      {status !== 1 && <GoalDateComponent dueDate={dueDate} handleDispatch={handleDateChange} />}
       <GoalStatusContainer status={status} handleDispatch={handleStatusChange} />
-      <GoalDateComponent dueDate={dueDate} handleDispatch={handleDateChange} />
     </div>
   );
 };

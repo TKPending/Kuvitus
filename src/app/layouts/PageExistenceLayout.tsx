@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import NotFoundButtonComponent from "@/app/components/NotFoundButtonComponent";
+import NotFoundButtonComponent from "@/app/components/notFound/NotFoundButtonComponent";
 
 const PageExistenceLayout = () => {
   const router = useRouter();

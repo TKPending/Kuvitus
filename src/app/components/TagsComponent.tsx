@@ -1,21 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
-import { removeSubGoalTag } from "../redux/slices/goal/goalSlice";
+import { faXmark } from "@fortawesome/free-solid-svg-icons";
+import { removeSubGoalTag } from "@/app/redux/slices/goal/goalSlice";
 
 type Props = {
   title: string;
   button?: boolean;
-  UID?: string;
-  onClick?: (e: React.MouseEvent<any>) => void;
+  subUID?: string;
+  handleDeletion?: (e: React.MouseEvent<any>) => void;
 };
 
 const TagsComponent = ({
   title,
   button = true,
-  UID,
-  onClick = (e: React.MouseEvent<any>) => e.stopPropagation(),
+  subUID,
+  handleDeletion = (e: React.MouseEvent<any>) => e.stopPropagation(),
 }: Props) => {
   const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -23,24 +23,25 @@ const TagsComponent = ({
   const handleTagDeletion = async (e: React.MouseEvent<any> ,tag: string) => {
     dispatch(
       removeSubGoalTag({
-        subUID: UID,
+        subUID,
         tagToRemove: tag,
       })
     );
 
-    onClick(e)
+    // Deal with in backend
+    // handleDeletion(e);
   };
 
   return (
     <div
       className={`h-4 w-auto px-2 ${
-        button ? "bg-black bg-opacity-60" : ""
+        button ? "bg-black bg-opacity-60" : "border-2 border-black rounded-lg"
       } flex items-center justify-center gap-2`}
     >
       <p
         className={`${
-          button ? "text-white" : "text-white"
-        } w-auto text-white text-xs`}
+          button ? "text-white" : "text-black"
+        } w-auto text-xs`}
       >
         {title}
       </p>

@@ -5,7 +5,7 @@ type Props = {
   onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
 };
 
-const GoalButtonComponent = ({ title, onClick }: Props) => {
+const GoalOptionComponent = ({ title, onClick }: Props) => {
   return (
     <div
       onClick={onClick}
@@ -22,4 +22,4 @@ const GoalButtonComponent = ({ title, onClick }: Props) => {
   );
 };
 
-export default GoalButtonComponent;
+export default GoalOptionComponent;

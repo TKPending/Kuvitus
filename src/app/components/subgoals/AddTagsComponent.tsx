@@ -43,6 +43,7 @@ const AddTagsComponent = ({ subUID }: Props) => {
   };
 
   const handleNewTagSave = async () => {
+    // Handle in backend
     dispatch(addSubGoalTag({
         subUID: subUID,
         tagToAdd: newTag,

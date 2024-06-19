@@ -3,7 +3,7 @@
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
-import AddGoalButtonComponent from "@/app/components/AddGoalButtonComponent";
+import AddGoalButtonComponent from "@/app/components/interactive/AddGoalButtonComponent";
 import FocusedGoalLayout from "@/app/layouts/FocusedGoalLayout";
 import { GoalType } from "@/app/types/GoalType";
 import { getRandomPosition } from "@/app/util/getRandomPosition";

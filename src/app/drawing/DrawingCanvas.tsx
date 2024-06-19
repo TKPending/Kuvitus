@@ -18,12 +18,12 @@ import {
   ElementType,
   ActionsType,
 } from "@/app/types/DrawingTypes";
-import CanvasToolBarComponent from "@/app/components/canvasComponents/CanvasToolBarComponent";
-import CanvasTextAreaComponent from "@/app/components/canvasComponents/CanvasTextAreaComponent";
+import CanvasToolBarComponent from "@/app/components/canvas/CanvasToolBarComponent";
+import CanvasTextAreaComponent from "@/app/components/canvas/CanvasTextAreaComponent";
 import { setDrawingTool } from "@/app/redux/slices/goal/goalSlice";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
-import CanvasSureDeleteComponent from "@/app/components/canvasComponents/CanvasSureDeleteComponent";
-import CanvasErrorComponent from "@/app/components/canvasComponents/CanvasErrorComponent";
+import CanvasSureDeleteComponent from "@/app/components/canvas/CanvasSureDeleteComponent";
+import CanvasErrorComponent from "@/app/components/canvas/CanvasErrorComponent";
 import CanvasControllerContainer from "@/app/container/CanvasControllerContainer";
 
 const DrawingCanvas = () => {
@@ -110,7 +110,6 @@ const DrawingCanvas = () => {
 
   useEffect(() => {
     const panOrZoomFunction = (event: WheelEvent) => {
-      console.log(pressedKeys);
       if (pressedKeys.has("Meta") || pressedKeys.has("Control")) {
         handleOnZoom(event.deltaY * -0.01);
       } else {

@@ -8,6 +8,7 @@ import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
+import TagsContainer from "./TagsContainer";
 
 type Props = {
   UID: string;
@@ -52,7 +53,7 @@ const SubGoalFrontContainer = ({
   return (
     <div
       onClick={handleSubGoalFocus}
-      className="min-h-16 cursor-pointer bg-black text-white flex items-center justify-around p-4"
+      className="min-h-16 cursor-pointer bg-black text-white flex items-center justify-around p-4 px-6"
     >
       <TextInputComponent
         text={title}
@@ -61,15 +62,11 @@ const SubGoalFrontContainer = ({
       />
 
       {!isPressed && (
-        <div className="flex flex-col items-center justify-center gap-4 w-full">
-          <div className="flex gap-2">
-            {tags.map((subject: string, index: number) => (
-              <TagsComponent key={index} button={false} title={subject} />
-            ))}
-          </div>
+        <div className="flex flex-col items-center justify-center gap-4 w-full p-2">
+          <TagsContainer tags={tags} subUID={UID} />
 
           {dueDate && status !== 1 && (
-            <div className="flex items-center gap-2 text-base">
+            <div className="w-full justify-end px-4 flex items-center gap-2 text-base">
               <p>{dueDate}</p>
               <p className={`text-xs ${remainingDaysStyle.style}`}>
                 {remainingDaysStyle.text}
@@ -78,7 +75,7 @@ const SubGoalFrontContainer = ({
           )}
 
           {status === 1 && (
-            <div className="flex items-center text-base">
+            <div className="w-full flex items-center justify-end px-4 text-base">
               <p className="text-green-600">Completed</p>
             </div>
           )}
