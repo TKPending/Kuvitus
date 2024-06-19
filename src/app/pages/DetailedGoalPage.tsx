@@ -5,6 +5,7 @@ import GoalOverviewLayout from "@/app/layouts/GoalOveriewLayout";
 import StepsLayout from "@/app/layouts/SubGoalOverviewLayout";
 import { GoalType } from "@/app/types/GoalType";
 import DrawingCanvas from "@/app/drawing/DrawingCanvas";
+import KuvitusLayout from "../layouts/KuvitusLayout";
 
 type Props = {
     goalUID: string;
@@ -15,6 +16,7 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
 
     return (
         <div className="fixed h-screen w-screen max-h-screen max-w-screen flex">
+            <KuvitusLayout home={false} />
             <div className="flex flex-col gap-4 h-screen w-full p-4">
                 <GoalOverviewLayout />
                 <DrawingCanvas />

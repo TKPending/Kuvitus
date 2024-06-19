@@ -10,6 +10,7 @@ import { getRandomPosition } from "@/app/util/getRandomPosition";
 import { BASIC, MEDIUM, ADVANCED } from "@/temp/tempGoalData";
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import { addLocalGoal, updateLocalPositions } from "@/app/redux/slices/localGoals/localGoalsSlice";
+import KuvitusLayout from "../layouts/KuvitusLayout";
 
 const InteractiveCanvas = () => {
     const dispatch = useDispatch();
@@ -48,6 +49,7 @@ const InteractiveCanvas = () => {
 
     return (
         <div className="relative h-screen w-screen">
+            <KuvitusLayout />
             {localGoals.map((goal: LocalGoalType, index: number) => (
                 <InteractiveGoalLayout key={index} goal={goal} />
             ))}
