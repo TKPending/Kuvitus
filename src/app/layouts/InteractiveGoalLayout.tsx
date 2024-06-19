@@ -1,5 +1,5 @@
-import GoalContainer from "@/app/container/GoalContainer";
-import GoalOptionsContainer from "@/app/container/GoalOptionsContainer";
+import GoalComponent from "@/app/components/interactive/GoalComponent";
+import GoalOptionsComponent from "@/app/components/interactive/GoalOptionsComponent";
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import { PositionType } from "@/app/types/PositionType";
 import { GoalType } from "@/app/types/GoalType";
@@ -22,12 +22,11 @@ const FocusedGoalLayout = ({ goal }: Props) => {
         top: `${position.y}px`,
       }}
     >
-      <GoalOptionsContainer goalUID={goalUID} isFocused={isFocused} />
-      <GoalContainer
-        goalUID={goalUID}
-        isFocused={isFocused}
-        position={position}
-        goal={actualGoal}
+      <GoalOptionsComponent goalUID={goalUID} isFocused={isFocused} />
+      <GoalComponent
+      goalUID={goalUID}
+      isFocused={isFocused}
+      goal={actualGoal}
       />
     </div>
   );
