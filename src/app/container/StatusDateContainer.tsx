@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import GoalStatusContainer from "./GoalStatusContainer";
-import GoalDateComponent from "@/app/components/custom/date/GoalDateComponent";
+import CalendarComponent from "@/app/components/custom/calendar/CalendarComponent";
 import { setSubGoalDueDate, setSubGoalStatus } from "@/app/redux/slices/goal/goalSlice";
 
 type Props = {
@@ -28,7 +28,7 @@ const StatusDateContainer = ({ subUID, status, dueDate }: Props) => {
 
   return (
     <div className="flex gap-4">
-      {status !== 1 && <GoalDateComponent dueDate={dueDate} handleDispatch={handleDateChange} />}
+      {status !== 1 && <CalendarComponent dueDate={dueDate} handleDispatch={handleDateChange} />}
       <GoalStatusContainer status={status} handleDispatch={handleStatusChange} />
     </div>
   );

@@ -1,13 +1,12 @@
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import GoalDateComponent from "@/app/components/custom/date/GoalDateComponent";
+import CalendarComponent from "@/app/components/custom/calendar/CalendarComponent";
 import { setGoalDate } from "@/app/redux/slices/goal/goalSlice";
 import { GoalType } from "@/app/types/GoalType";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
-import { getDaysLeftStyle } from "../util/getDaysLeftStyle";
+import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
 
-const GoalTitleDateContainer = () => {
+const GoalDateComponent = () => {
   const dispatch = useDispatch();
   const darkMode: boolean = true;
   const goal: GoalType | null = useSelector((state: RootState) => state.goal);
@@ -26,7 +25,7 @@ const GoalTitleDateContainer = () => {
       </div>
 
       {goal?.goalDueDate && (
-        <GoalDateComponent
+        <CalendarComponent
           dueDate={goal.goalDueDate}
           handleDispatch={handleDateChange}
         />
@@ -35,4 +34,4 @@ const GoalTitleDateContainer = () => {
   );
 };
 
-export default GoalTitleDateContainer;
+export default GoalDateComponent;

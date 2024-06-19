@@ -10,7 +10,7 @@ type Props = {
   handleDispatch: (newDate: string) => void;
 };
 
-const GoalDateComponent = ({ dueDate, handleDispatch }: Props) => {
+const CalendarComponent = ({ dueDate, handleDispatch }: Props) => {
   const [isDateClicked, setIsDateClicked] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
 
@@ -55,4 +55,4 @@ const GoalDateComponent = ({ dueDate, handleDispatch }: Props) => {
   );
 };
 
-export default GoalDateComponent;
+export default CalendarComponent;

@@ -5,7 +5,7 @@ import ReturnHomeComponent from "@/app/components/ReturnHomeComponent";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import { setGoalStatus, setGoalTitle } from "@/app/redux/slices/goal/goalSlice";
 import GoalStatusContainer from "./GoalStatusContainer";
-import GoalTitleDateContainer from "./GoalTitleDateContainer";
+import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
 
 const GoalTitleContainer = () => {
   const dispatch = useDispatch();
@@ -34,7 +34,7 @@ const GoalTitleContainer = () => {
         onSave={handleOnSave}
         onChange={handleOnChange}
       />
-      <GoalTitleDateContainer />
+      <GoalDateComponent />
     </div>
   );
 };
