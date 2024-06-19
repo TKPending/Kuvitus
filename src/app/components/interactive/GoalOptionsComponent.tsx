@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { removeLocalGoal } from "@/app/redux/slices/localGoals/localGoalsSlice";
+import SessionService from "@/services/sessionStorage/sessionService";
 
 type Props = {
   goalUID: string;
@@ -13,6 +14,7 @@ const GoalOptionsComponent = ({ goalUID, isFocused }: Props) => {
 
   const handleDeleteGoal = (e: React.MouseEvent<HTMLDivElement>) => {
     dispatch(removeLocalGoal(goalUID));
+    SessionService.deleteSessionGoal(goalUID);
     // Handle in backend
   };
 
