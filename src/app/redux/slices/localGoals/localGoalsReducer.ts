@@ -22,7 +22,7 @@ export const removeLocalGoalReducer = (
   action: PayloadAction<string>
 ) => {
   state.goals = state.goals.filter(
-    (goal) => goal.goal.goalUID !== action.payload
+    (goal) => goal.goal.uID !== action.payload
   );
 };
 
@@ -31,7 +31,7 @@ export const localGoalFocusedReducer = (
   action: PayloadAction<string>
 ) => {
   state.goals = state.goals.map((goal) => {
-    if (goal.goal.goalUID === action.payload) {
+    if (goal.goal.uID === action.payload) {
       state.blockedProximity = goal.position;
       return { ...goal, isFocused: true };
     }
@@ -44,7 +44,7 @@ export const localGoalUnfocusedReducer = (
   action: PayloadAction<string>
 ) => {
   state.goals = state.goals.map((goal) => {
-    if (goal.goal.goalUID === action.payload) {
+    if (goal.goal.uID === action.payload) {
       state.blockedProximity = { x: 0, y: 0, t: 0, b: 0 };
       return { ...goal, isFocused: false };
     }
@@ -90,7 +90,7 @@ export const goalDraggedReducer = (
   action: PayloadAction<string>
 ) => {
   state.goals = state.goals.map((goal) => {
-    if (goal.goal.goalUID === action.payload) {
+    if (goal.goal.uID === action.payload) {
       return { ...goal, isDragged: !goal.isDragged };
     }
     return goal;
@@ -102,7 +102,7 @@ export const goalDraggedPositionReducer = (
   action: PayloadAction<{ UID: string; newPositions: PositionType }>
 ) => {
   state.goals = state.goals.map((goal) => {
-    if (goal.goal.goalUID === action.payload.UID && goal.isDragged) {
+    if (goal.goal.uID === action.payload.UID && goal.isDragged) {
       const { x, y, t, b } = goal.position;
       goal.position = {
         x: x + action.payload.newPositions.x,

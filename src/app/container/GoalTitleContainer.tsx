@@ -9,8 +9,8 @@ import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
 
 const GoalTitleContainer = () => {
   const dispatch = useDispatch();
-  const title: string = useSelector((state: RootState) => state.goal.goalTitle);
-  const status: number = useSelector((state: RootState) => state.goal.goalStatus);
+  const title: string = useSelector((state: RootState) => state.goal.title);
+  const status: number = useSelector((state: RootState) => state.goal.status);
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue: string = e.target.value;

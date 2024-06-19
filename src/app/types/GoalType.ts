@@ -2,14 +2,14 @@ import { ElementType, DrawingToolsType, DrawingCanvas } from "./DrawingTypes";
 import { SubType } from "./SubType";
 
 export interface GoalType {
-    goalUID: string;
-    goalTitle: string;
-    goalDescription: string;
-    goalStatus: number | 0 | 1 | 2; // (Uncomplete, Complete, Pending)
-    goalDepth: "basic" | "medium" | "advanced"; // (Basic, Medium, Advanced)
-    goalTags: string[];
-    goalDueDate: string;
-    goalSteps: SubType[];
+    uID: string;
+    title: string;
+    description: string;
+    status: number | 0 | 1 | 2; // (Uncomplete, Complete, Pending)
+    depth: "basic" | "medium" | "advanced"; // (Basic, Medium, Advanced)
+    tags: string[];
+    dueDate: string;
+    subGoals: SubType[];
     drawingElements: ElementType[];
     drawingToolType:  DrawingToolsType;
     drawingCanvas: DrawingCanvas;

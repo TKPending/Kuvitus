@@ -4,7 +4,7 @@ import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import AddGoalButtonComponent from "@/app/components/interactive/AddGoalButtonComponent";
-import FocusedGoalLayout from "@/app/layouts/FocusedGoalLayout";
+import InteractiveGoalLayout from "@/app/layouts/InteractiveGoalLayout";
 import { GoalType } from "@/app/types/GoalType";
 import { getRandomPosition } from "@/app/util/getRandomPosition";
 import { BASIC, MEDIUM, ADVANCED } from "@/temp/tempGoalData";
@@ -49,7 +49,7 @@ const InteractiveCanvas = () => {
     return (
         <div className="relative h-screen w-screen">
             {localGoals.map((goal: LocalGoalType, index: number) => (
-                <FocusedGoalLayout key={index} goal={goal} />
+                <InteractiveGoalLayout key={index} goal={goal} />
             ))}
             <AddGoalButtonComponent onClick={handleAddGoal} />
         </div>

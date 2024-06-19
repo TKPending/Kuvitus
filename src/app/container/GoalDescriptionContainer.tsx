@@ -7,7 +7,7 @@ import { setGoalDescription } from "@/app/redux/slices/goal/goalSlice";
 const GoalDescriptionContainer = () => {
   const dispatch = useDispatch();
   const description: string = useSelector(
-    (state: RootState) => state.goal.goalDescription
+    (state: RootState) => state.goal.description
   );
 
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

@@ -32,14 +32,14 @@ import {
 const UNCOMPLETE = 0;
 
 const initialState: GoalType = {
-  goalUID: "",
-  goalTitle: "",
-  goalDescription: "",
-  goalStatus: UNCOMPLETE,
-  goalDepth: "basic",
-  goalTags: [],
-  goalDueDate: "",
-  goalSteps: [],
+  uID: "",
+  title: "",
+  description: "",
+  status: UNCOMPLETE,
+  depth: "basic",
+  tags: [],
+  dueDate: "",
+  subGoals: [],
   drawingElements: [],
   drawingToolType: {
     type: "selection",

@@ -1,38 +1,38 @@
 import { GoalType } from "@/app/types/GoalType";
 
 export const BASIC: GoalType = {
-    goalUID: "1",
-    goalTitle: "Drink Water Today",
-    goalDescription: "",
-    goalStatus: 0,
-    goalDepth: "basic",
-    goalTags: [],
-    goalDueDate: "",
-    goalSteps: [],
+    uID: "1",
+    title: "Drink Water Today",
+    description: "",
+    status: 0,
+    depth: "basic",
+    tags: [],
+    dueDate: "",
+    subGoals: [],
     drawingElements: [],
 };
 
 export const MEDIUM: GoalType = {
-    goalUID: "2",
-    goalTitle: "Researching Bowling",
-    goalDescription: "This is a medium goal",
-    goalStatus: 1,
-    goalDepth: "medium",
-    goalTags: ["Fitness", "Discipline"],
-    goalDueDate: "01/06/2024",
-    goalSteps: [],
+    uID: "2",
+    title: "Researching Bowling",
+    description: "This is a medium goal",
+    status: 1,
+    depth: "medium",
+    tags: ["Fitness", "Discipline"],
+    dueDate: "01/06/2024",
+    subGoals: [],
     drawingElements: [],
 };
 
 export const ADVANCED: GoalType = {
-    goalUID: "3",
-    goalTitle: "Lose 5KG",
-    goalDescription: "I am getting fat and I want to lose weight",
-    goalStatus: 1,
-    goalDepth: "advanced",
-    goalTags: ["Fitness", "Discipline", "Fun"],
-    goalDueDate: "01/06/2024",
-    goalSteps: [
+    uID: "3",
+    title: "Lose 5KG",
+    description: "I am getting fat and I want to lose weight",
+    status: 1,
+    depth: "advanced",
+    tags: ["Fitness", "Discipline", "Fun"],
+    dueDate: "01/06/2024",
+    subGoals: [
         {
             subUID: "1",
             subTitle: "Start a Balanced Diet",

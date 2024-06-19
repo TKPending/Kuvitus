@@ -10,7 +10,7 @@ const GoalDateComponent = () => {
   const dispatch = useDispatch();
   const darkMode: boolean = true;
   const goal: GoalType | null = useSelector((state: RootState) => state.goal);
-  const remainingDays: number = daysUntilCompletion(goal.goalDueDate);
+  const remainingDays: number = daysUntilCompletion(goal.dueDate);
   const remainingDaysSyle: { text: string, style: string } = getDaysLeftStyle(remainingDays, darkMode);
 
   const handleDateChange = (newDate: string) => {
@@ -20,13 +20,13 @@ const GoalDateComponent = () => {
   return (
     <div className="flex items-center justify-center gap-4">
       <div className="flex flex-col items-center">
-        <p className="text-2xl font-semibold">{goal?.goalDueDate}</p>
+        <p className="text-2xl font-semibold">{goal?.dueDate}</p>
         <p className={`font-semibold text-xs ${remainingDaysSyle.style}`}>{remainingDaysSyle.text}</p>
       </div>
 
-      {goal?.goalDueDate && (
+      {goal?.dueDate && (
         <CalendarComponent
-          dueDate={goal.goalDueDate}
+          dueDate={goal.dueDate}
           handleDispatch={handleDateChange}
         />
       )}

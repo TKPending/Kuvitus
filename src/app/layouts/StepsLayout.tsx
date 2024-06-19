@@ -6,18 +6,20 @@ import { SubType } from "@/app/types/SubType";
 import SubGoalLayout from "./SubGoalLayout";
 import { ADVANCED } from "@/temp/tempGoalData";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
-import AddSubGoalButtonComponent from "@/app/components/subgoals/AddSubGoalButtonComponent"
+import AddSubGoalButtonComponent from "@/app/components/subgoals/AddSubGoalButtonComponent";
 
 const StepsLayout = () => {
   const dispatch = useDispatch();
-  const steps: SubType[] = useSelector((state: RootState) => state.goal.goalSteps);
+  const subGoals: SubType[] = useSelector(
+    (state: RootState) => state.goal.subGoals
+  );
 
   useEffect(() => {
     const handle = () => {
       dispatch(setGoal(ADVANCED));
     };
 
-    if (steps.length === 0) {
+    if (subGoals.length === 0) {
       handle();
     }
   });
@@ -27,8 +29,8 @@ const StepsLayout = () => {
       <StepsHeaderContainer />
 
       <div className="flex-1 p-4 overflow-y-auto">
-        {steps.length > 0 ? (
-          steps.map((goal: SubType, index: number) => (
+        {subGoals.length > 0 ? (
+          subGoals.map((goal: SubType, index: number) => (
             <SubGoalLayout key={index} subGoal={goal} />
           ))
         ) : (

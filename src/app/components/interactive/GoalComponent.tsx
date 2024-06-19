@@ -10,7 +10,7 @@ import {
   setLocalGoalDrag,
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import { getGoalDimensions } from "@/app/util/getGoalDimensions";
-import TagsContainer from "../../container/TagsContainer";
+import TagsContainer from "@/app/container/TagsContainer";
 import ProgressionComponent from "@/app/components/custom/progression/ProgressionComponent";
 
 
@@ -27,10 +27,8 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
     x: 0,
     y: 0,
   });
-  const { tags, title, dueDate, subGoals } = goal;
-  const dimensions: { height: number; width: number } = getGoalDimensions(
-    goal.goalDepth
-  );
+  const { tags, title, dueDate, subGoals, depth } = goal;
+  const dimensions: { height: number; width: number } = getGoalDimensions(depth);
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setStartPos({ x: e.clientX, y: e.clientY });

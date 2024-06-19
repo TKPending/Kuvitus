@@ -1,12 +1,11 @@
 import { GoalType } from "@/app/types/GoalType";
-import { SubType } from "@/app/types/SubType";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export const subGoalFocusedReducer = (
   state: GoalType,
   action: PayloadAction<string>
 ) => {
-  state.goalSteps = state.goalSteps.map((goal) => {
+  state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === action.payload) {
       return { ...goal, isPressed: !goal.isPressed };
     }
@@ -18,7 +17,7 @@ export const removeSubGoalReducer = (
   state: GoalType,
   action: PayloadAction<string>
 ) => {
-  state.goalSteps = state.goalSteps.filter(
+  state.subGoals = state.subGoals.filter(
     (goal) => goal.subUID !== action.payload
   );
 };
@@ -27,7 +26,7 @@ export const addSubGoalReducer = (
   state: GoalType,
   action: PayloadAction<string>
 ) => {
-  state.goalSteps.push({
+  state.subGoals.push({
     subUID: action.payload,
     subTitle: "Enter goal title",
     subDetails: "Enter details about the subgoal you want to achieve",
@@ -44,7 +43,7 @@ export const updateSubGoalTitleReducer = (
 ) => {
   const AP = action.payload;
 
-  state.goalSteps = state.goalSteps.map((goal) => {
+  state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === AP.subUID) {
       return { ...goal, subTitle: AP.newTitle };
     }
@@ -58,7 +57,7 @@ export const updateSubGoalDescriptionReducer = (
 ) => {
   const AP = action.payload;
 
-  state.goalSteps = state.goalSteps.map((goal) => {
+  state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === AP.subUID) {
       return { ...goal, subDetails: AP.newDesc };
     }
@@ -75,7 +74,7 @@ export const removeTagFromSubGoalReducer = (
     return;
   }
 
-  state.goalSteps = state.goalSteps.map((goal) => {
+  state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === AP.subUID) {
       const updatedTags: string[] = goal.subTags.filter(
         (tags) => tags !== AP.tagToRemove
@@ -96,7 +95,7 @@ export const addSubGoalTagReducer = (
     return;
   }
 
-  state.goalSteps = state.goalSteps.map((goal) => {
+  state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === AP.subUID) {
       return { ...goal, subTags: [...goal.subTags, AP.tagToAdd] };
     }
@@ -110,7 +109,7 @@ export const updateSubGoalStatusReducer = (
 ) => {
   const AP = action.payload;
 
-  state.goalSteps = state.goalSteps.map((goal) => {
+  state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === AP.subUID) {
       return { ...goal, subStatus: AP.newStatus };
     }
@@ -124,7 +123,7 @@ export const updateSubGoalDueDateReducer = (
 ) => {
   const AP = action.payload;
 
-  state.goalSteps = state.goalSteps.map((goal) => {
+  state.subGoals = state.subGoals.map((goal) => {
     if (goal.subUID === AP.subUID) {
       return { ...goal, subDueDate: AP.newDate };
     }

@@ -8,8 +8,8 @@ type Props = {
   goal: LocalGoalType;
 };
 
-const FocusedGoalLayout = ({ goal }: Props) => {
-  const goalUID: string = goal.goal.goalUID;
+const InteractiveGoalLayout = ({ goal }: Props) => {
+  const goalUID: string = goal.goal.uID;
   const isFocused: boolean = goal.isFocused;
   const position: PositionType = goal.position;
   const actualGoal: GoalType = goal.goal;
@@ -32,4 +32,4 @@ const FocusedGoalLayout = ({ goal }: Props) => {
   );
 };
 
-export default FocusedGoalLayout;
+export default InteractiveGoalLayout;
