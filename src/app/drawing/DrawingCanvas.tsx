@@ -17,13 +17,13 @@ import {
   ElementType,
   ActionsType,
 } from "@/app/types/DrawingTypes";
-import CanvasToolBarComponent from "@/app/components/custom/toolbar/CanvasToolBarComponent";
-import CanvasTextAreaComponent from "@/app/components/custom/textarea/CanvasTextAreaComponent";
+import CanvasToolBarComponent from "@/app/components/canvasComponents/CanvasToolBarComponent";
+import CanvasTextAreaComponent from "@/app/components/canvasComponents/CanvasTextAreaComponent";
 import { setDrawingTool } from "@/app/redux/slices/goal/goalSlice";
 import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
-import CanvasDeleteOptionsContainer from "@/app/container/CanvasDeleteOptionsContainer";
-import CanvasErrorComponent from "@/app/components/CanvasErrorComponent";
-import CanvasControllerContainer from "../container/CanvasControllerContainer";
+import CanvasSureDeleteComponent from "@/app/components/canvasComponents/CanvasSureDeleteComponent";
+import CanvasErrorComponent from "@/app/components/canvasComponents/CanvasErrorComponent";
+import CanvasControllerContainer from "@/app/container/CanvasControllerContainer";
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();
@@ -358,7 +358,7 @@ const DrawingCanvas = () => {
     <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
       <CanvasToolBarComponent />
       {isError && <CanvasErrorComponent />}
-      {displayDeleteOptions && <CanvasDeleteOptionsContainer />}
+      {displayDeleteOptions && <CanvasSureDeleteComponent />}
       {userAction === "writing" ? (
         <CanvasTextAreaComponent
           textAreaRef={textAreaRef}

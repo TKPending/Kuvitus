@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/app/redux/store";
-import { setCanvasError } from "../redux/slices/goal/goalSlice";
+import { setCanvasError } from "@/app/redux/slices/goal/goalSlice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleExclamation, faX } from "@fortawesome/free-solid-svg-icons";
 

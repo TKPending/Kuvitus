@@ -1,5 +1,5 @@
-import CanvasRevisionComponent from "@/app/components/custom/revision/CanvasRevisionComponent";
-import CanvasZoomComponent from "@/app/components/custom/zoom/CanvasZoomComponent";
+import CanvasRevisionComponent from "@/app/components/canvasComponents/CanvasRevisionComponent";
+import CanvasZoomComponent from "@/app/components/canvasComponents/CanvasZoomComponent";
 
 type Props = {
   scale: number;

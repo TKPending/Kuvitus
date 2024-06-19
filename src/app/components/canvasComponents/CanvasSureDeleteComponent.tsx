@@ -5,7 +5,7 @@ import {
   setDeleteOptionVisible,
 } from "@/app/redux/slices/goal/goalSlice";
 
-const CanvasDeleteOptionsContainer = () => {
+const CanvasSureDeleteComponent = () => {
   const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
   const options = ["Resume", "Delete"];
@@ -62,4 +62,4 @@ const CanvasDeleteOptionsContainer = () => {
   );
 };
 
-export default CanvasDeleteOptionsContainer;
+export default CanvasSureDeleteComponent;
