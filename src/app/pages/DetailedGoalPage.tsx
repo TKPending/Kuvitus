@@ -1,30 +1,41 @@
-"use client"
+"use client";
 
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import GoalOverviewLayout from "@/app/layouts/GoalOveriewLayout";
 import StepsLayout from "@/app/layouts/SubGoalOverviewLayout";
-import { GoalType } from "@/app/types/GoalType";
 import DrawingCanvas from "@/app/drawing/DrawingCanvas";
-import KuvitusLayout from "../layouts/KuvitusLayout";
+import KuvitusLayout from "@/app/layouts/KuvitusLayout";
+import SessionService from "@/services/sessionStorage/sessionService";
+import { setGoal } from "@/app/redux/slices/goal/goalSlice";
+import { ActiveGoalType } from "@/app/types/ActiveGoalType";
 
 type Props = {
-    goalUID: string;
+  goalUID: string;
 };
 
 const DetailedGoalPage = ({ goalUID }: Props) => {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    return (
-        <div className="fixed h-screen w-screen max-h-screen max-w-screen flex">
-            <KuvitusLayout home={false} />
-            <div className="flex flex-col gap-4 h-screen w-full p-4">
-                <GoalOverviewLayout />
-                <DrawingCanvas />
-            </div>
+  useEffect(() => {
+    const goal: ActiveGoalType | null =
+      SessionService.fetchSpecificGoal(goalUID);
+    if (goal) {
+      dispatch(setGoal(goal.goal));
+    }
+  }, []);
 
-            <StepsLayout />
-        </div>
-    )
+  return (
+    <div className="h-screen w-screen max-h-screen max-w-screen flex overscroll-y-none">
+      <KuvitusLayout home={false} />
+      <div className="flex flex-col gap-4 h-screen w-full p-4">
+        <GoalOverviewLayout />
+        <DrawingCanvas />
+      </div>
+
+      <StepsLayout />
+    </div>
+  );
 };
 
 export default DetailedGoalPage;

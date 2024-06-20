@@ -1,11 +1,8 @@
 import { RootState } from "@/app/redux/store";
-import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import SubGoalHeaderComponent from "@/app/components/subgoals/SubGoalHeaderComponent";
 import { SubType } from "@/app/types/SubType";
 import SubGoalLayout from "./SubGoalLayout";
-import { ADVANCED } from "@/temp/tempGoalData";
-import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import AddSubGoalButtonComponent from "@/app/components/subgoals/AddSubGoalButtonComponent";
 
 const SubGoalOverviewLayout = () => {
@@ -13,16 +10,6 @@ const SubGoalOverviewLayout = () => {
   const subGoals: SubType[] = useSelector(
     (state: RootState) => state.goal.subGoals
   );
-
-  useEffect(() => {
-    const handle = () => {
-      dispatch(setGoal(ADVANCED));
-    };
-
-    if (subGoals.length === 0) {
-      handle();
-    }
-  });
 
   return (
     <div className="h-screen w-full p-8 flex flex-col ">

@@ -7,18 +7,21 @@ import { setCompleteDate, setGoalStatus, setGoalTitle } from "@/app/redux/slices
 import StatusComponent from "@/app/components/StatusComponent";
 import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
 import { getCurrentDate } from "../util/getCurrentDate";
+import SessionService from "@/services/sessionStorage/sessionService";
 
 const GoalOverviewHeaderContainer = () => {
   const dispatch = useDispatch();
-  const title: string = useSelector((state: RootState) => state.goal.title);
-  const status: number = useSelector((state: RootState) => state.goal.status);
+  const goal = useSelector((state: RootState) => state.goal);
+  const { title, status } = goal;
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const newValue: string = e.target.value;
     dispatch(setGoalTitle(newValue));
   };
 
-  const handleOnSave = async () => {};
+  const handleOnSave = async () => {
+    SessionService.updateValue(goal.uID, "title", title);
+  };
 
   const handleStatusChange = (option: number) => {
     dispatch(setGoalStatus(option));
