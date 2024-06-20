@@ -1,5 +1,8 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeSubGoal } from "@/app/redux/slices/goal/goalSlice";
+import SessionService from "@/services/sessionStorage/sessionService";
+import { GoalType } from "@/app/types/GoalType";
+import { RootState } from "@/app/redux/store";
 
 type Props = {
   subGoalUID: string;
@@ -8,12 +11,14 @@ type Props = {
 
 const ConfirmDeletionComponent = ({ subGoalUID, onClickState }: Props) => {
   const dispatch = useDispatch();
+  const { uID }: GoalType = useSelector((state: RootState) => state.goal);
 
   const handleGoalDeletion = async () => {
     // Remove from Redux
     dispatch(removeSubGoal(subGoalUID));
 
     // Handle in backend
+    SessionService.removeSubGoal(uID, subGoalUID);
 
     onClickState();
   };

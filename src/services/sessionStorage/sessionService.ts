@@ -1,6 +1,7 @@
 import { GoalType } from "@/app/types/GoalType";
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
+import { SubType } from "@/app/types/SubType";
 
 class SessionService {
   private fetchSessionGoals() {
@@ -25,7 +26,7 @@ class SessionService {
       index,
       goal,
     };
-  }
+  };
 
   public kuvitusSessionCheck(localGoals: LocalGoalType[]) {
     const kuvitus = sessionStorage.getItem("application");
@@ -80,6 +81,33 @@ class SessionService {
     
     const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
     sessionGoals[specificGoal.index].goal[key] = value;
+
+    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+  };
+
+  public addSubGoal(goalUID: string, subGoal: SubType) {
+    const specificGoal: ActiveGoalType | null = this.fetchGoal(goalUID);
+    if (!specificGoal) {
+      return;
+    }
+
+    const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
+    sessionGoals[specificGoal.index].goal.subGoals.push(subGoal);
+
+    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+  };
+
+  public removeSubGoal(goalUID: string, subGoalUID: string) {
+    const specificGoal: ActiveGoalType | null = this.fetchGoal(goalUID);
+    if (!specificGoal) {
+      return;
+    }
+
+    const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
+    const mainGoal: GoalType = sessionGoals[specificGoal.index].goal;
+    mainGoal.subGoals = mainGoal.subGoals.filter(
+      (sg: SubType) => sg.subUID !== subGoalUID
+    );
 
     sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
   }
