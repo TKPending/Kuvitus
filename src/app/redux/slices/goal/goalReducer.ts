@@ -58,7 +58,7 @@ export const removeFromGoalTagsReducer = (
   state.tags = state.tags.filter((tag) => tag !== action.payload);
 };
 
-export const includeGoalDateReducer = (
+export const updateGoalDueDateReducer = (
   state: GoalType,
   action: PayloadAction<string>
 ) => {

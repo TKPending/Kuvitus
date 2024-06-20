@@ -9,6 +9,7 @@ const ReturnHomeComponent = () => {
   const [isHovered, setIsHover] = useState<boolean>(false);
 
   const handleReturnHome = () => {
+    sessionStorage.setItem("specificGoal", "");
     router.push("/");
   };
 

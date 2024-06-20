@@ -3,13 +3,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   addToGoalTagsReducer,
   updateGoalCompleteDateReducer,
-  includeGoalDateReducer,
   loadGoalReducer,
   processGoalDepthReducer,
   removeFromGoalTagsReducer,
   updateGoalDescriptionReducer,
   updateGoalStatusReducer,
   updateGoalTitleReducer,
+  updateGoalDueDateReducer,
 } from "./goalReducer";
 import {
   subGoalFocusedReducer,
@@ -67,7 +67,7 @@ const goalSlice = createSlice({
     setGoalProgression: processGoalDepthReducer,
     setGoalTags: addToGoalTagsReducer,
     removeGoalTag: removeFromGoalTagsReducer,
-    setGoalDate: includeGoalDateReducer,
+    setGoalDueDate: updateGoalDueDateReducer,
     setCompleteDate: updateGoalCompleteDateReducer,
 
     setSubGoalFocus: subGoalFocusedReducer,
@@ -97,7 +97,7 @@ export const {
   setGoalProgression,
   setGoalTags,
   removeGoalTag,
-  setGoalDate,
+  setGoalDueDate,
   setCompleteDate,
 
   setSubGoalFocus,

@@ -26,7 +26,7 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
     x: 0,
     y: 0,
   });
-  const { tags, title, dueDate, subGoals, depth } = goal;
+  const { tags, title, dueDate, subGoals, status, depth } = goal;
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setStartPos({ x: e.clientX, y: e.clientY });
@@ -96,7 +96,7 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
             {subGoals.length > 0 && (
               <ProgressionComponent subGoals={subGoals} />
             )}
-            {dueDate && (
+            {dueDate && status !== 1 && (
               <p className="text-xs">
                 Due Date: <span className="font-semibold">{dueDate}</span>
               </p>
