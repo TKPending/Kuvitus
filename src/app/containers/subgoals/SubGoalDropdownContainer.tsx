@@ -1,5 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { RootState } from "@/app/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setSubGoalDetails,
   setSubGoalFocus,
@@ -7,7 +8,9 @@ import {
 import TextInputComponent from "@/app/components/TextInputComponent"
 import AddTagsComponent from "@/app/components/subgoals/AddTagsComponent";
 import SubGoalDueDateContainer from "@/app/containers/subgoals/SubGoalDueDateContainer";
-import TagsContainer from "../TagsContainer";
+import TagsContainer from "@/app/containers/TagsContainer";
+import SessionService from "@/services/sessionStorage/sessionService";
+import { GoalType } from "@/app/types/GoalType";
 
 type Props = {
   UID: string;
@@ -25,6 +28,7 @@ const SubGoalDropdownContainer = ({
   tags,
 }: Props) => {
   const dispatch = useDispatch();
+  const goalUID: string = useSelector((state: RootState) => state.goal.uID);
 
   const handleSubGoalFocus = () => {
     dispatch(setSubGoalFocus(UID));
@@ -42,8 +46,10 @@ const SubGoalDropdownContainer = ({
       })
     );
   };
-
-  const handleOnSave = async () => {};
+  
+  const handleOnSave = async () => {
+    SessionService.updateSubGoalValue(goalUID, UID, "subDetails", details);
+  };
 
   return (
     <div

@@ -85,6 +85,22 @@ class SessionService {
     sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
   };
 
+  public updateSubGoalValue<K extends keyof SubType>(goalUID: string, subUID: string, key: K, value: SubType[K]) {
+    const specificGoal: ActiveGoalType | null = this.fetchGoal(goalUID);
+    if (!specificGoal) return;
+  
+    const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
+    const subGoals: SubType[] = sessionGoals[specificGoal.index].goal.subGoals;
+  
+    const index: number = subGoals.findIndex((subGoal: SubType) => subGoal.subUID === subUID);
+    if (index === -1) return; 
+  
+    subGoals[index][key] = value;
+  
+    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+  };
+  
+
   public addSubGoal(goalUID: string, subGoal: SubType) {
     const specificGoal: ActiveGoalType | null = this.fetchGoal(goalUID);
     if (!specificGoal) {
@@ -110,7 +126,7 @@ class SessionService {
     );
 
     sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
-  }
+  };
 }
 
 export default new SessionService();
