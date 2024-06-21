@@ -22,9 +22,7 @@ const TagsComponent = ({
       } flex items-center justify-center gap-2`}
     >
       <p
-        className={`${
-          button ? "text-white" : "text-black"
-        } w-auto text-xs`}
+        className={`text-red-400 w-auto text-xs`}
       >
         {title}
       </p>

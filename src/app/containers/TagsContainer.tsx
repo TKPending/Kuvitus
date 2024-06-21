@@ -4,7 +4,7 @@ type Props = {
   tags: string[];
   subUID?: string;
   button?: boolean;
-  onRemoval: (tagToRemove: string) => void;
+  onRemoval?: (tagToRemove: string) => void;
 };
 
 const TagsContainer = ({

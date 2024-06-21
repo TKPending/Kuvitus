@@ -1,4 +1,5 @@
-import { useDispatch } from "react-redux";
+import { RootState } from "@/app/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import {
   setSubGoalFocus,
   setSubGoalTitle,
@@ -7,7 +8,8 @@ import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
-import TagsContainer from "../TagsContainer";
+import TagsContainer from "@/app/containers/TagsContainer";
+import SessionService from "@/services/sessionStorage/SessionService";
 
 type Props = {
   UID: string;
@@ -27,6 +29,7 @@ const SubGoalFrontContainer = ({
   isPressed,
 }: Props) => {
   const dispatch = useDispatch();
+  const goalUID: string = useSelector((state: RootState) => state.goal.uID);
   const remainingDays: number = daysUntilCompletion(dueDate);
   const remainingDaysStyle: { text: string, style: string} = getDaysLeftStyle(remainingDays);
 
@@ -34,7 +37,9 @@ const SubGoalFrontContainer = ({
     dispatch(setSubGoalFocus(UID));
   };
 
-  const handleTitleSave = async () => {};
+  const handleTitleSave = () => {
+    SessionService.updateSubGoalValue(goalUID, UID, "subTitle", title);
+  };
 
   const handleTitleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -62,7 +67,7 @@ const SubGoalFrontContainer = ({
 
       {!isPressed && (
         <div className="flex flex-col items-center justify-center gap-4 w-full p-2">
-          <TagsContainer tags={tags} subUID={UID} />
+          <TagsContainer tags={tags} subUID={UID} button={false} />
 
           {dueDate && status !== 1 && (
             <div className="w-full justify-end px-4 flex items-center gap-2 text-base">
