@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { RootState } from "@/app/redux/store";
+import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlus,
@@ -9,6 +10,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import { addSubGoalTag, removeSubGoalTag } from "@/app/redux/slices/goal/goalSlice";
+import SessionService from "@/services/sessionStorage/SessionService";
 
 type Props = {
     subUID: string;
@@ -16,6 +18,7 @@ type Props = {
 
 const AddTagsComponent = ({ subUID }: Props) => {
   const dispatch = useDispatch();
+  const goalUID: string = useSelector((state: RootState) => state.goal.uID);
   const [isTagActive, setIsTagActive] = useState<boolean>(false);
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [newTag, setNewTag] = useState<string>("");
@@ -32,12 +35,12 @@ const AddTagsComponent = ({ subUID }: Props) => {
 
   const handleTagDeletion = (e: React.MouseEvent<any>) => {
     e.stopPropagation();
-    dispatch(
-      removeSubGoalTag({
+    dispatch(removeSubGoalTag({
         subUID: subUID,
         tagToRemove: newTag,
       })
     );
+
     setNewTag("");
     setIsTagActive(false);
   };
@@ -48,6 +51,7 @@ const AddTagsComponent = ({ subUID }: Props) => {
         subUID: subUID,
         tagToAdd: newTag,
     }));
+    SessionService.addSubGoalTag(goalUID, subUID, newTag);
 
     setNewTag("");
     setIsTagActive(false);

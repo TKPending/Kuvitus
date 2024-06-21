@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   setSubGoalDetails,
   setSubGoalFocus,
+  removeSubGoalTag,
 } from "@/app/redux/slices/goal/goalSlice";
 import TextInputComponent from "@/app/components/TextInputComponent"
 import AddTagsComponent from "@/app/components/subgoals/AddTagsComponent";
 import SubGoalDueDateContainer from "@/app/containers/subgoals/SubGoalDueDateContainer";
 import TagsContainer from "@/app/containers/TagsContainer";
 import SessionService from "@/services/sessionStorage/SessionService";
-import { GoalType } from "@/app/types/GoalType";
 
 type Props = {
   UID: string;
@@ -47,8 +47,17 @@ const SubGoalDropdownContainer = ({
     );
   };
   
-  const handleOnSave = async () => {
+  const handleOnSave = () => {
     SessionService.updateSubGoalValue(goalUID, UID, "subDetails", details);
+  };
+  
+  const handleTagDeletion = (tag: string) => {
+    dispatch(removeSubGoalTag({
+        subUID: UID,
+        tagToRemove: tag,
+      })
+    );
+    SessionService.removeSubGoalTag(goalUID, UID, tag);
   };
 
   return (
@@ -68,7 +77,7 @@ const SubGoalDropdownContainer = ({
       </div>
 
       <div className="flex gap-4 w-full p-2 items-center justify-end">
-        <TagsContainer tags={tags} subUID={UID} />
+        <TagsContainer tags={tags} subUID={UID} onRemoval={handleTagDeletion} />
         <AddTagsComponent subUID={UID} />
       </div>
 
