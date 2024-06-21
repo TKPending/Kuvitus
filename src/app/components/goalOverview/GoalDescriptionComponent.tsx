@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import { setGoalDescription } from "@/app/redux/slices/goal/goalSlice";
 import { GoalType } from "@/app/types/GoalType";
-import SessionService from "@/services/sessionStorage/sessionService";
+import SessionService from "@/services/sessionStorage/SessionService";
 
 const GoalDescriptionComponent = () => {
   const dispatch = useDispatch();

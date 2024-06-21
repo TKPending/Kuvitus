@@ -7,7 +7,7 @@ import { setCompleteDate, setGoalStatus, setGoalTitle, setGoalDueDate } from "@/
 import StatusComponent from "@/app/components/StatusComponent";
 import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
 import { getCurrentDate } from "../util/getCurrentDate";
-import SessionService from "@/services/sessionStorage/sessionService";
+import SessionService from "@/services/sessionStorage/SessionService";
 import { GoalType } from "../types/GoalType";
 
 const GoalOverviewHeaderContainer = () => {

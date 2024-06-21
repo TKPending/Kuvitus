@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import {v4 as uuid} from 'uuid';
 import { addSubGoal } from "@/app/redux/slices/goal/goalSlice";
-import SessionService from "@/services/sessionStorage/sessionService";
+import SessionService from "@/services/sessionStorage/SessionService";
 import { GoalType } from "@/app/types/GoalType";
 import { RootState } from "@/app/redux/store";
 import { SubType } from "@/app/types/SubType";

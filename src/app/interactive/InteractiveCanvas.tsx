@@ -14,7 +14,7 @@ import {
   updateLocalPositions,
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import KuvitusLayout from "@/app/layouts/KuvitusLayout";
-import SessionService from "@/services/sessionStorage/sessionService";
+import SessionService from "@/services/sessionStorage/SessionService";
 
 const InteractiveCanvas = () => {
   const dispatch = useDispatch();

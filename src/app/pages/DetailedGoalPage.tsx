@@ -6,7 +6,7 @@ import GoalOverviewLayout from "@/app/layouts/GoalOveriewLayout";
 import StepsLayout from "@/app/layouts/SubGoalOverviewLayout";
 import DrawingCanvas from "@/app/drawing/DrawingCanvas";
 import KuvitusLayout from "@/app/layouts/KuvitusLayout";
-import SessionService from "@/services/sessionStorage/sessionService";
+import SessionService from "@/services/sessionStorage/SessionService";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
 

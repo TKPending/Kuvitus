@@ -9,7 +9,7 @@ import TextInputComponent from "@/app/components/TextInputComponent"
 import AddTagsComponent from "@/app/components/subgoals/AddTagsComponent";
 import SubGoalDueDateContainer from "@/app/containers/subgoals/SubGoalDueDateContainer";
 import TagsContainer from "@/app/containers/TagsContainer";
-import SessionService from "@/services/sessionStorage/sessionService";
+import SessionService from "@/services/sessionStorage/SessionService";
 import { GoalType } from "@/app/types/GoalType";
 
 type Props = {
