@@ -26,10 +26,10 @@ const StatusComponent = ({ status, onSave, handleDispatch }: Props) => {
       <p
         className={`p-2 cursor-pointer rounded-lg text-white ${
           status === 0
-            ? "bg-red-600"
+            ? "bg-kuvitus-uncomplete"
             : status === 1
-            ? "bg-green-600"
-            : "bg-neutral-400"
+            ? "bg-kuvitus-completed"
+            : "bg-kuvitus-pending"
         }`}
         onClick={handleInitialClick} // Toggle dropdown visibility
       >

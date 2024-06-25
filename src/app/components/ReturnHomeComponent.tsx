@@ -19,7 +19,7 @@ const ReturnHomeComponent = () => {
         icon={isHovered ? solidLeft : regularLeft}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        className="text-6xl transition-all duration-400 cursor-pointer"
+        className="text-6xl transition-all duration-400 cursor-pointer text-kuvitus-primary-blue"
       />
     </div>
   );

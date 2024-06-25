@@ -20,7 +20,7 @@ const config: Config = {
         "kuvitus-secondary-blue": "#B4D6EE",
         "kuvitus-background": "#F2F2FF",
         "kuvitus-completed": "#12B419",
-        "kuvitus-uncomplete": "#12B419",
+        "kuvitus-uncomplete": "#CE3737",
         "kuvitus-pending": "#ABB1AB",
         "kuvitus-sub-background": "#D9D9D9",
       }

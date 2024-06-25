@@ -28,16 +28,16 @@ const GoalDateComponent = () => {
   return (
     <div className="flex items-center justify-center gap-4">
       {status === 1 ? (
-        <div>
+        <div className="flex flex-col flex-wrap items-center justify-center">
           {completeDate && (
-            <p className="font-semibold">
+            <p className="font-semibold flex items-center justify-center flex-col">
               Completed: <span className="text-green-600">{completeDate}</span>
             </p>
           )}
         </div>
       ) : (
-        <div className="flex flex-col items-center">
-          <p className="text-2xl font-semibold">{dueDate}</p>
+        <div className="flex flex-col items-center w-32">
+          <p className="text-base font-semibold">Due: {dueDate}</p>
           <p className={`font-semibold text-xs ${remainingDaysSyle.style}`}>
             {dueDate && remainingDaysSyle.text}
           </p>

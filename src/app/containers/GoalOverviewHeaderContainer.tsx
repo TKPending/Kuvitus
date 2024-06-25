@@ -40,12 +40,12 @@ const GoalOverviewHeaderContainer = () => {
   }
 
   return (
-    <div className="flex h-auto items-center gap-6">
+    <div className="flex h-auto items-center gap-4">
       <ReturnHomeComponent />
       <StatusComponent status={status} handleDispatch={(option) => handleStatusChange(option)} />
       <TextInputComponent
         text={title}
-        size="text-4xl"
+        size="text-2xl"
         customStyle="font-semibold flex-wrap"
         onSave={handleOnSave}
         onChange={handleOnChange}
