@@ -30,7 +30,7 @@ const CanvasToolBarComponent = () => {
   return (
     <div className="absolute z-10 shadow-2xl top-4 p-2 rounded-lg flex items-center justify-center gap-2 overflow-hidden">
       {drawingToolOptions.map((tool: DrawingToolsType, index: number) => (
-        <div key={index} className={`cursor-pointer ${currentTool.type === tool.type ? "bg-neutral-600 text-white" : "hover:bg-black hover:text-white"} transition duration-200 rounded-lg`}>
+        <div key={index} className={`cursor-pointer ${currentTool.type === tool.type ? "bg-kuvitus-primary-blue text-white" : "hover:bg-kuvitus-secondary-blue hover:text-white"} transition duration-200 rounded-lg`}>
           {<FontAwesomeIcon
             icon={tool.icon}
             onClick={() => handleToolChange(drawingToolOptions[index])}

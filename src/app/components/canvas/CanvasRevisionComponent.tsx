@@ -41,7 +41,7 @@ const CanvasRevisionComponent = ({ displayTrashCan, onUndo, onRedo }: Props) => 
           <p
             className={`${
               isOptionHovered === option.type
-                ? "decoration-black scale-110"
+                ? "text-kuvitus-secondary-blue scale-110"
                 : "text-white"
             } transition duration-500 text-xs`}
           >
@@ -52,8 +52,8 @@ const CanvasRevisionComponent = ({ displayTrashCan, onUndo, onRedo }: Props) => 
             onClick={option.action}
             onMouseOver={() => handleOptionHover(option.type)}
             onMouseLeave={() => setIsOptionHovered(null)}
-            className={`hover:cursor-pointer hover:scale-105 bg-neutral-400 rounded-full p-2 
-              ${option.type === "delete-all" && "bg-red-600 bg-opacity-40 hover:bg-opacity-80 transition duration-400"}
+            className={`hover:cursor-pointer hover:scale-105 rounded-full p-2 
+              ${option.type === "delete-all" ? "bg-kuvitus-uncomplete bg-opacity-40 hover:bg-opacity-80 transition duration-400" : "bg-kuvitus-secondary-blue"}
               
             `}
           />

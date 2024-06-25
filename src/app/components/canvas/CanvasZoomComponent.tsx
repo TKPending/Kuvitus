@@ -9,7 +9,7 @@ type Props = {
 
 const CanvasZoomComponent = ({ scale, onZoomIn, onZoomOut }: Props) => {
   const style =
-    "flex items-center justify-center cursor-pointer hover:scale-105 transition duration-200 h-8 w-8 rounded-lg bg-neutral-300";
+    "flex items-center justify-center cursor-pointer hover:scale-105 hover:bg-kuvitus-primary-blue transition duration-200 h-8 w-8 rounded-lg bg-kuvitus-secondary-blue";
 
   return (
     <div className="flex items justify-center gap-2">
