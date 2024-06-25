@@ -21,10 +21,12 @@ const GoalDescriptionComponent = () => {
   };
 
   return (
-    <div className="h-full border-4 border-black rounded-lg p-4">
+    <div className="h-full rounded-lg p-4">
+      <p className="text-xl">Description:</p>
       <TextInputComponent
         text={description}
         size="big"
+        customStyle="px-2"
         input={false}
         onSave={handleOnSave}
         onChange={handleDescriptionChange}
