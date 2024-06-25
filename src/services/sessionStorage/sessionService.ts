@@ -180,6 +180,13 @@ class SessionService {
 
     sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
   }
+
+  public fetchDrawingCanvas(goalUID: string) {
+    const specificGoal = this.fetchGoal(goalUID);
+    if (!specificGoal) return [];
+
+    return specificGoal.goal.drawingElements;
+  }
 }
 
 export default new SessionService();

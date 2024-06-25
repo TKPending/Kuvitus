@@ -3,9 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { ElementType } from "@/app/types/DrawingTypes";
 import { deleteAllElements } from "@/app/redux/slices/goal/goalSlice";
+import SessionService from "@/services/sessionStorage/SessionService";
 
 export const useHistory = (initialState: ElementType[]) => {
   const dispatch = useDispatch();
+  const goalUID: string = useSelector((state: RootState) => state.goal.uID);
   const deleteAll: boolean = useSelector((state: RootState) => state.goal.drawingCanvas.deleteAll);
   const [index, setIndex] = useState<number>(0);
   const [history, setHistory] = useState<ElementType[][]>([initialState]);
@@ -17,11 +19,21 @@ export const useHistory = (initialState: ElementType[]) => {
         setIndex(prevState => prevState + 1);
 
         dispatch(deleteAllElements(false));
+        SessionService.updateValue(goalUID, "drawingElements", []);
       }
     }
 
     deleteElements();
   }, [deleteAll]);
+
+  useEffect(() => {
+    setHistory([initialState]);
+  }, [initialState]);
+
+  const updateSessionStorage = (history: ElementType[][]) => {
+    const mostRecentVersion: ElementType[] = history[history.length - 1];
+    SessionService.updateValue(goalUID, "drawingElements", mostRecentVersion);
+  };
 
   const setState = (
     action: ElementType[] | ((current: ElementType[]) => ElementType[]),
@@ -34,9 +46,11 @@ export const useHistory = (initialState: ElementType[]) => {
       const historyCopy = [...history];
       historyCopy[index] = newState;
       setHistory(historyCopy);
+      updateSessionStorage(historyCopy);
     } else {
       const updatedState = [...history].slice(0, index + 1);
       setHistory([...updatedState, newState]);
+      updateSessionStorage([...updatedState, newState]);
       setIndex((prevState) => prevState + 1);
     }
   };

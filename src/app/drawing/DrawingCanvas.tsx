@@ -25,9 +25,11 @@ import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
 import CanvasSureDeleteComponent from "@/app/components/canvas/CanvasSureDeleteComponent";
 import CanvasErrorComponent from "@/app/components/canvas/CanvasErrorComponent";
 import CanvasControllerContainer from "@/app/containers/CanvasControllerContainer";
+import SessionService from "@/services/sessionStorage/SessionService";
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();
+  const goalUID: string = useSelector((state: RootState) => state.goal.uID);
   const currentTool: DrawingToolsType = useSelector(
     (state: RootState) => state.goal.drawingToolType
   );
@@ -37,7 +39,8 @@ const DrawingCanvas = () => {
   const isError: boolean = useSelector(
     (state: RootState) => state.goal.drawingCanvas.isError
   );
-  const { elements, setElements, undo, redo } = useHistory([]);
+  const [initialElements, setInitialElements] = useState<ElementType[]>([]);
+  const { elements, setElements, undo, redo } = useHistory(initialElements);
   const [userAction, setUserAction] = useState<ActionsType>("none");
   const [selectedElement, setSelectedElement] = useState<ElementType | null>(
     null
@@ -51,6 +54,15 @@ const DrawingCanvas = () => {
   const [scaleOffset, setScaleOffset] = useState({ x: 0, y: 0 });
   const textAreaRef = useRef<HTMLTextAreaElement>();
   const pressedKeys = usePressedKeys();
+
+  useEffect(() => {
+    if (goalUID) {
+      const storedElements = SessionService.fetchDrawingCanvas(goalUID);
+      if (storedElements) {
+        setInitialElements(storedElements);
+      }
+    }
+  }, [goalUID]);
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
