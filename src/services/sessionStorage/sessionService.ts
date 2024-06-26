@@ -10,7 +10,7 @@ class SessionService {
       sessionGoals!
     ) as LocalGoalType[];
     // Handle Error
-
+    
     return jsonGoal;
   }
 

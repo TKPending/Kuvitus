@@ -15,6 +15,7 @@ const GoalOptionsComponent = ({ goalUID, isFocused }: Props) => {
   const handleDeleteGoal = (e: React.MouseEvent<HTMLDivElement>) => {
     dispatch(removeLocalGoal(goalUID));
     SessionService.deleteSessionGoal(goalUID);
+    sessionStorage.removeItem("specificGoal");
     // Handle in backend
   };
 
