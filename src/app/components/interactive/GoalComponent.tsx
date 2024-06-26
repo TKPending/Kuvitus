@@ -26,7 +26,9 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
     x: 0,
     y: 0,
   });
-  const { tags, title, dueDate, subGoals, status, depth } = goal;
+  const { tags, title, dueDate, subGoals, status } = goal;
+  const subGoalsAmount: number = subGoals.length;
+  const completedSubGoals: number = subGoals.filter(subGoal => subGoal.subStatus === 1).length;
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setStartPos({ x: e.clientX, y: e.clientY });
@@ -83,24 +85,25 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
-      className={`relative flex flex-col overflow-auto gap-2 hover:bg-opacity-60 bg-black rounded-lg bg-opacity-40 py-2 px-4 shadow-lg ${
+      className={`relative flex flex-col overflow-auto gap-2 bg-kuvitus-secondary-blue hover:bg-kuvitus-primary-blue transition duration-400 rounded-lg bg-opacity-40 py-2 px-4 shadow-lg ${
         isDragging ? "cursor-move" : "cursor-pointer"
       }`}
     >
       <div className="flex items-center justify-center gap-8">
         <p className="font-semibold select-none">{title}</p>
 
-        {dueDate || subGoals.length > 0 ? (
+        {dueDate || subGoalsAmount > 0 ? (
           <div className="flex flex-col items-center gap-2">
             {tags.length > 0 && <TagsContainer tags={tags} button={false} />}
-            {subGoals.length > 0 && (
-              <ProgressionComponent subGoals={subGoals} />
-            )}
             {dueDate && status !== 1 && (
-              <p className="text-xs">
-                Due Date: <span className="font-semibold">{dueDate}</span>
-              </p>
+              <div className="flex items-center justify-center flex-col">
+                <p className="text-xs">
+                  Due Date: <span className="font-semibold">{dueDate}</span>
+                </p>
+                <p className="text-xs">{completedSubGoals} / {subGoalsAmount} Tasks Completed</p>
+              </div>
             )}
+            {status === 1 && <p className='text-kuvitus-completed'>Completed</p>}
           </div>
         ) : null}
       </div>

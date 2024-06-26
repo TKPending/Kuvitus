@@ -42,11 +42,9 @@ const GoalOptionsComponent = ({ goalUID, isFocused }: Props) => {
             onClick={option.handleChange}
             className={`${
               option.title === "Delete"
-                ? "bg-red-400"
-                : option.title === "View"
-                ? "bg-neutral-200"
-                : "bg-neutral-200"
-            } flex items-center justify-center cursor-pointer rounded shadow-lg h-6 w-12 z-50`}
+                ? "bg-red-400 hover:bg-kuvitus-uncomplete"
+                : "bg-kuvitus-pending hover:bg-kuvitus-secondary-blue"
+            } flex items-center justify-center transition duration-200 cursor-pointer rounded shadow-lg h-6 w-12 z-50`}
           >
             <p className="text-xs font-semibold">{option.title}</p>
           </div>
