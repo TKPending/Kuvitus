@@ -58,7 +58,8 @@ const SubGoalFrontContainer = ({
   return (
     <div
       onClick={handleSubGoalFocus}
-      className="min-h-16 cursor-pointer bg-kuvitus-primary-blue border-white border-2 text-white flex items-center justify-around p-4 px-6"
+      className={`min-h-16 cursor-pointer bg-kuvitus-primary-blue border-white border-2 text-white flex items-center justify-around p-2 px-6 
+        ${isPressed ? "rounde-tr-xl rounded-tl-xl" : "rounded-xl"}`}
     >
       <TextInputComponent
         text={title}

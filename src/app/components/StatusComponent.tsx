@@ -21,8 +21,10 @@ const StatusComponent = ({ status, button=true, onSave, handleDispatch }: Props)
 
   const handleOptionClick = (e: React.MouseEvent<HTMLParagraphElement>, option: number) => {
     e.stopPropagation();
-    handleDispatch(option);
-    setProgressClicked(false);
+    if (handleDispatch) {
+      handleDispatch(option);
+      setProgressClicked(false);
+    }
   };
 
   return (
