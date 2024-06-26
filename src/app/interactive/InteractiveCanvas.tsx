@@ -15,6 +15,7 @@ import {
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
+import NavigationBarComponent from "../components/interactive/NavigationBarComponent";
 
 const InteractiveCanvas = () => {
   const dispatch = useDispatch();
@@ -88,6 +89,7 @@ const InteractiveCanvas = () => {
 
   return (
     <div className="relative h-screen max-h-screen w-screen max-w-screen overflow-hidden">
+      <NavigationBarComponent />
       <KuvitusLayout />
       {localGoals.length === 0 && (
         <div className='h-full w-full flex items-center justify-center'>

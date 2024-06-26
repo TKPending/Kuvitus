@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* Custom CSS for the underline animation */
+.underline-animation {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .underline-animation::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -2px;
+    left: 0;
+    background-color: currentColor;
+    visibility: hidden;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .underline-animation:hover::after {
+    visibility: visible;
+    width: 100%;
+  }
+  
