@@ -10,8 +10,6 @@ import {
   setLocalGoalDrag,
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import TagsContainer from "@/app/containers/TagsContainer";
-import ProgressionComponent from "@/app/components/custom/progression/ProgressionComponent";
-
 
 type Props = {
   goalUID: string;
@@ -85,12 +83,12 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       onMouseMove={handleMouseMove}
-      className={`relative flex flex-col overflow-auto gap-2 bg-kuvitus-secondary-blue hover:bg-kuvitus-primary-blue transition duration-400 rounded-lg bg-opacity-40 py-2 px-4 shadow-lg ${
+      className={`relative w-300px flex flex-col overflow-auto gap-2 bg-kuvitus-secondary-blue hover:bg-kuvitus-primary-blue transition duration-400 rounded-lg bg-opacity-40 py-2 px-4 shadow-lg ${
         isDragging ? "cursor-move" : "cursor-pointer"
       }`}
     >
       <div className="flex items-center justify-center gap-8">
-        <p className="font-semibold select-none">{title}</p>
+        <p className="font-semibold select-none min-w-[80px] max-w-[300px] text-base">{title}</p>
 
         {dueDate || subGoalsAmount > 0 ? (
           <div className="flex flex-col items-center gap-2">
@@ -100,7 +98,7 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
                 <p className="text-xs">
                   Due Date: <span className="font-semibold">{dueDate}</span>
                 </p>
-                <p className="text-xs">{completedSubGoals} / {subGoalsAmount} Tasks Completed</p>
+                {subGoalsAmount > 0 && <p className="text-xs">{completedSubGoals} / {subGoalsAmount} Tasks Completed</p>}
               </div>
             )}
             {status === 1 && <p className='text-kuvitus-completed'>Completed</p>}

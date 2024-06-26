@@ -37,7 +37,7 @@ const GoalDateComponent = () => {
         </div>
       ) : (
         <div className="flex flex-col items-center w-32">
-          <p className="text-base font-semibold">Due: {dueDate}</p>
+          {dueDate && <p className="text-base font-semibold">Due: {dueDate}</p>}
           <p className={`font-semibold text-xs ${remainingDaysSyle.style}`}>
             {dueDate && remainingDaysSyle.text}
           </p>
