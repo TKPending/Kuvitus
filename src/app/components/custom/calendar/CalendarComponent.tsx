@@ -49,7 +49,7 @@ const CalendarComponent = ({ dueDate, handleDispatch }: Props) => {
         onChange={handleDateChanged}
         dateFormat="DD/mm/yyyy"
         todayButton="Due Today?"
-        className="p-2 rounded-md shadow-md"
+        className="p-2 rounded-md shadow-md bg-white"
       />
     </div>
   );

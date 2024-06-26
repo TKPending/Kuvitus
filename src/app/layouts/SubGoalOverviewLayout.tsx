@@ -12,10 +12,10 @@ const SubGoalOverviewLayout = () => {
   );
 
   return (
-    <div className="h-screen w-full p-8 flex flex-col ">
+    <div className="h-screen w-full p-8 flex flex-col">
       <SubGoalHeaderComponent />
 
-      <div className="flex-1 p-4 overflow-y-auto">
+      <div className="flex-1 p-4 overflow-y-auto bg-kuvitus-sub-background">
         {subGoals.length > 0 ? (
           subGoals.map((goal: SubType, index: number) => (
             <SubGoalLayout key={index} subGoal={goal} />

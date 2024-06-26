@@ -17,12 +17,10 @@ const TagsComponent = ({
 
   return (
     <div
-      className={`h-4 w-auto px-2 ${
-        button ? "bg-black bg-opacity-60" : "border-2 border-black rounded-lg"
-      } flex items-center justify-center gap-2`}
+      className={`h-6 w-auto px-2 bg-white rounded-lg flex items-center justify-center gap-2`}
     >
       <p
-        className={`text-red-400 w-auto text-xs`}
+        className={`text-black w-auto text-base`}
       >
         {title}
       </p>
@@ -30,7 +28,7 @@ const TagsComponent = ({
         <FontAwesomeIcon
           icon={faXmark}
           onClick={() => handleDeletion(title)}
-          className="cursor-pointer hover:text-red-400"
+          className="cursor-pointer hover:text-kuvitus-uncomplete"
         />
       )}
     </div>

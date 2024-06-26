@@ -48,6 +48,7 @@ const SubGoalDueDateContainer = ({ subUID, dueDate, status }: Props) => {
       }));
       SessionService.updateSubGoalValue(goalUID, subUID, "subCompleteDate", "");
     }
+    SessionService.updateSubGoalValue(goalUID, subUID, "subStatus", option);
   };
 
   const handleDateChange = (newDate: string) => {

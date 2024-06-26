@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import GoalOverviewLayout from "@/app/layouts/GoalOveriewLayout";
-import StepsLayout from "@/app/layouts/SubGoalOverviewLayout";
+import SubGoalOverviewLayout from "@/app/layouts/SubGoalOverviewLayout";
 import DrawingCanvas from "@/app/drawing/DrawingCanvas";
 import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
@@ -33,7 +33,7 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
         <DrawingCanvas />
       </div>
 
-      <StepsLayout />
+      <SubGoalOverviewLayout />
     </div>
   );
 };

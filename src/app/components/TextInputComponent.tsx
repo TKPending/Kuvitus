@@ -51,7 +51,7 @@ const TextInputComponent = ({
       onBlur={onSave}
       placeholder={placeholder}
       disabled={isDisabled}
-      className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
+      className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-kuvitus-primary-blue`}
     />
   ) : (
     <textarea

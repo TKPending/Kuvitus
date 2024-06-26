@@ -29,7 +29,7 @@ const AddSubGoalButtonComponent = () => {
 
   return (
     <div className="text-white my-10 flex items-center justify-center text-xl">
-      <p onClick={handleAddSubGoal} className="cursor-pointer hover:scale-105 transition duration-200 bg-black p-4 rounded-lg font-semibold">
+      <p onClick={handleAddSubGoal} className="cursor-pointer hover:scale-105 transition duration-200 bg-kuvitus-primary-blue p-4 rounded-lg font-semibold">
         Add a sub goal
       </p>
     </div>

@@ -10,6 +10,7 @@ import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
 import TagsContainer from "@/app/containers/TagsContainer";
 import SessionService from "@/services/sessionStorage/SessionService";
+import StatusComponent from "@/app/components/StatusComponent";
 
 type Props = {
   UID: string;
@@ -57,10 +58,11 @@ const SubGoalFrontContainer = ({
   return (
     <div
       onClick={handleSubGoalFocus}
-      className="min-h-16 cursor-pointer bg-black text-white flex items-center justify-around p-4 px-6"
+      className="min-h-16 cursor-pointer bg-kuvitus-primary-blue border-white border-2 text-white flex items-center justify-around p-4 px-6"
     >
       <TextInputComponent
         text={title}
+        customStyle="text-xl"
         onSave={handleTitleSave}
         onChange={handleTitleChange}
       />
@@ -69,20 +71,10 @@ const SubGoalFrontContainer = ({
         <div className="flex flex-col items-center justify-center gap-4 w-full p-2">
           <TagsContainer tags={tags} subUID={UID} button={false} />
 
-          {dueDate && status !== 1 && (
-            <div className="w-full justify-end px-4 flex items-center gap-2 text-base">
-              <p>{dueDate}</p>
-              <p className={`text-xs ${remainingDaysStyle.style}`}>
-                {remainingDaysStyle.text}
-              </p>
-            </div>
-          )}
-
-          {status === 1 && (
-            <div className="w-full flex items-center justify-end px-4 text-base">
-              <p className="text-green-600">Completed</p>
-            </div>
-          )}
+          <div className="w-full gap-4 flex items-center justify-end px-4 text-base">
+            {dueDate && status !== 1 && <p>{dueDate}</p>}
+            <StatusComponent status={status} button={false} />
+          </div>
         </div>
       )}
     </div>

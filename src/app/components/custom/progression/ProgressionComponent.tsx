@@ -27,9 +27,9 @@ const ProgressionComponent = ({ subGoals }: Props) => {
     <div className="flex items-center justify-center rounded-full h-16 w-16">
       <p className="font-semibold">
         <CircularProgressbar value={percentage} text={`${percentage}%`} styles={buildStyles({
-          textColor: "#696969",
-          pathColor: "#696969",
-          trailColor: "#F8F8FF"
+          textColor: "#fff",
+          pathColor: "#D9D9D9",
+          trailColor: "#fff"
         })} />
       </p>
     </div>

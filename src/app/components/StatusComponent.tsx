@@ -2,15 +2,19 @@ import React, { useState } from "react";
 
 type Props = {
   status: number;
+  button?: boolean;
   onSave?: () => void;
-  handleDispatch: (option: number) => void;
+  handleDispatch?: (option: number) => void;
 };
 
-const StatusComponent = ({ status, onSave, handleDispatch }: Props) => {
+const StatusComponent = ({ status, button=true, onSave, handleDispatch }: Props) => {
   const [progressClicked, setProgressClicked] = useState<boolean>(false);
   const options: string[] = ["Uncomplete", "Completed", "Pending"];
 
   const handleInitialClick = (e: React.MouseEvent<HTMLParagraphElement>) => {
+    if (!button) {
+      return;
+    }
     e.stopPropagation();
     setProgressClicked(!progressClicked);
   };
@@ -36,7 +40,7 @@ const StatusComponent = ({ status, onSave, handleDispatch }: Props) => {
         {status === 0 ? "Uncomplete" : status === 1 ? "Completed" : "Pending"}
       </p>
       {progressClicked && (
-        <div className="absolute top-full left-0 mt-1 bg-white shadow-md rounded-md">
+        <div className="absolute z-50 top-full left-0 mt-1 bg-white shadow-md rounded-md">
           {options.map((option: string, index: number) => (
             <p
               key={index}

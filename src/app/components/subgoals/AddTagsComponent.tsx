@@ -20,7 +20,6 @@ const AddTagsComponent = ({ subUID }: Props) => {
   const dispatch = useDispatch();
   const goalUID: string = useSelector((state: RootState) => state.goal.uID);
   const [isTagActive, setIsTagActive] = useState<boolean>(false);
-  const [isHovered, setIsHovered] = useState<boolean>(false);
   const [newTag, setNewTag] = useState<string>("");
 
   const handleTagActive = (e: React.MouseEvent<any>) => {
@@ -61,26 +60,23 @@ const AddTagsComponent = ({ subUID }: Props) => {
     <div className="h-4 flex items-center justify-center">
       {!isTagActive ? (
         <FontAwesomeIcon
-          icon={!isHovered ? faPlus : faPlusCircle}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
+          icon={faPlus}
           onClick={handleTagActive}
-          className="cursor-pointer text-white"
+          className="cursor-pointer text-white hover:text-kuvitus-primary-blue font-semibold text-xl transition-duration-200"
         />
       ) : (
         <div className="flex gap-2 items-center justify-center">
           <TextInputComponent
             text={newTag}
+            customStyle="border-2 border-kuvitus-primary-blue"
             onSave={handleNewTagSave}
             onChange={handleNewTagName}
           />
 
           <FontAwesomeIcon
-            icon={isHovered ? faCircleXmark : faXmark}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
+            icon={faXmark}
             onClick={(e: any) => handleTagDeletion(e)}
-            className="cursor-pointer hover:text-red-400"
+            className="cursor-pointer text-white font-semibold text-xl hover:text-kuvitus-primary-blue"
           />
         </div>
       )}
