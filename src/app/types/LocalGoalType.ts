@@ -7,4 +7,5 @@ export interface LocalGoalType {
     velocity: { vx: number, vy: number, vt: number, vb: number },
     isFocused: boolean,
     isDragged: boolean,
+    titleChange: boolean,
 };

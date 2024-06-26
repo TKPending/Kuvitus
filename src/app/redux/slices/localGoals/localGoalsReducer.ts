@@ -14,6 +14,7 @@ export const addLocalGoalReducer = (
     velocity: AP.velocity,
     isFocused: AP.isFocused,
     isDragged: AP.isDragged,
+    titleChange: AP.titleChange,
   });
 };
 
@@ -40,7 +41,7 @@ export const localGoalFocusedReducer = (
   state.goals = state.goals.map((goal) => {
     if (goal.goal.uID === action.payload) {
       state.blockedProximity = goal.position;
-      return { ...goal, isFocused: true };
+      return { ...goal, isFocused: true, titleChange: true };
     }
     return goal;
   });
@@ -53,7 +54,7 @@ export const localGoalUnfocusedReducer = (
   state.goals = state.goals.map((goal) => {
     if (goal.goal.uID === action.payload) {
       state.blockedProximity = { x: 0, y: 0, t: 0, b: 0 };
-      return { ...goal, isFocused: false };
+      return { ...goal, isFocused: false, titleChange: false };
     }
     return goal;
   });

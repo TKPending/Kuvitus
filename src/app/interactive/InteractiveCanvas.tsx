@@ -57,6 +57,7 @@ const InteractiveCanvas = () => {
       },
       isFocused: false,
       isDragged: false,
+      titleChange: false,
     };
 
     SessionService.addSessionGoal(localNewGoal);

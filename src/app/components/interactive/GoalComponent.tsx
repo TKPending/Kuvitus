@@ -10,6 +10,7 @@ import {
   setLocalGoalDrag,
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import TagsContainer from "@/app/containers/TagsContainer";
+import TextInputComponent from "@/app/components/TextInputComponent";
 
 type Props = {
   goalUID: string;
@@ -26,7 +27,9 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
   });
   const { tags, title, dueDate, subGoals, status } = goal;
   const subGoalsAmount: number = subGoals.length;
-  const completedSubGoals: number = subGoals.filter(subGoal => subGoal.subStatus === 1).length;
+  const completedSubGoals: number = subGoals.filter(
+    (subGoal) => subGoal.subStatus === 1
+  ).length;
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setStartPos({ x: e.clientX, y: e.clientY });
@@ -88,7 +91,9 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
       }`}
     >
       <div className="flex items-center justify-center gap-8">
-        <p className="font-semibold select-none min-w-[80px] max-w-[300px] text-base">{title}</p>
+        <p className="font-semibold select-none min-w-[80px] max-w-[300px] text-base">
+          {title}
+        </p>
 
         {dueDate || subGoalsAmount > 0 ? (
           <div className="flex flex-col items-center gap-2">
@@ -98,10 +103,16 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
                 <p className="text-xs">
                   Due Date: <span className="font-semibold">{dueDate}</span>
                 </p>
-                {subGoalsAmount > 0 && <p className="text-xs">{completedSubGoals} / {subGoalsAmount} Tasks Completed</p>}
+                {subGoalsAmount > 0 && (
+                  <p className="text-xs">
+                    {completedSubGoals} / {subGoalsAmount} Tasks Completed
+                  </p>
+                )}
               </div>
             )}
-            {status === 1 && <p className='text-kuvitus-completed'>Completed</p>}
+            {status === 1 && (
+              <p className="text-kuvitus-completed">Completed</p>
+            )}
           </div>
         ) : null}
       </div>

@@ -23,14 +23,7 @@ const GoalOptionsComponent = ({ goalUID, isFocused }: Props) => {
     router.push(`/goal/${goalUID}`);
   };
 
-  const handleTitleClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    console.log("Hello There");
-    // Handle title click if necessary
-    // Handle in backend
-  };
-
   const options = [
-    { title: "Title", handleChange: handleTitleClick },
     { title: "View", handleChange: handleEditGoal },
     { title: "Delete", handleChange: handleDeleteGoal },
   ];
