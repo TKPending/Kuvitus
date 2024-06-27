@@ -1,19 +1,29 @@
-const AboutUsContainer = () => {
-  const aboutOptions = [
-    { question: "What inspired Kuvitus?", answer: "" },
-    { question: "Technologies Involved?", answer: "" },
-    { question: "Contact Tony", answer: "" },
-  ];
+import { TextConstants } from "@/app/util/textConstants";
 
+const AboutUsContainer = () => {
   return (
     <div className="flex flex-col gap-4 px-4">
-      {aboutOptions.map((q, index) => (
+      {TextConstants.about.map((q, index) => (
         <div
           key={index}
           className="flex flex-col gap-2 w-full text-kuvitus-primary-blue"
         >
-          <p className="text-2xl">{q.question}</p>
-          <p className="">{q.answer}</p>
+          <p className="text-2xl underline">{q.question}</p>
+          <p className="px-2 text-xl">
+            {q.answer.includes("email:") ? (
+              <>
+                {q.answer.split("email:")[0]}
+                <a
+                  href={`mailto:${q.answer.split("email:")[1].trim()}`}
+                  className="underline cursor-pointer hover:text-black transition duration-400"
+                >
+                  {q.answer.split("email:")[1]}
+                </a>
+              </>
+            ) : (
+              q.answer
+            )}
+          </p>
         </div>
       ))}
     </div>

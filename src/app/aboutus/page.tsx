@@ -37,7 +37,7 @@ const AboutUs = () => {
           <FuturePlansContainer />
         )}
       </div>
-      <AboutNavigationComponent handlePageChange={handlePageChange} />
+      <AboutNavigationComponent page={page} handlePageChange={handlePageChange} />
     </div>
   );
 };
