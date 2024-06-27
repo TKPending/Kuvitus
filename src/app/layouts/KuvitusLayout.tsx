@@ -34,7 +34,7 @@ const KuvitusLayout = ({ home=true }: Props) => {
     <div
       className={`${
         !isVisible && "hidden"
-      } absolute z-20 bg-white top-0 left-0 h-screen w-screen flex flex-col items-center justify-center`}
+      } absolute z-50 bg-white top-0 left-0 h-screen w-screen flex flex-col items-center justify-center`}
     >
       <div className="flex items-center justify-center">
         <p className="text-7xl font-semibold text-blue-400">Kuvitus</p>

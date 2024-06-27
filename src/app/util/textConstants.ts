@@ -1,4 +1,5 @@
 export const TextConstants = {
+    version: "V 2.0",
     status: {
       pause: "On-Pause",
       working: "Working On",
@@ -58,5 +59,13 @@ export const TextConstants = {
         answer: "You can contact me through this email: tony-koke@outlook.com",
       },
     ],
+    nextFeatures: [
+        {status: "pending", task: "Improve Drawing Canvas features: Deleting specfic elements, Selection highlight"},
+        {status: "pending", task: "Allow users to change a goal title from the Floating Goals Page"},
+        {status: "pending", task: "Implement a backend. So users can sign up, sign in along with have their goals stored."},
+        {status: "pending", task: "Track all completed tasks in one section. Know what you've completed and when"},
+        // {status: "pending", task: ""},
+
+    ]
   };
   

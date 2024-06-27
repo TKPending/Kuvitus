@@ -89,8 +89,8 @@ const InteractiveCanvas = () => {
 
   return (
     <div className="relative h-screen max-h-screen w-screen max-w-screen overflow-hidden">
-      <NavigationBarComponent />
       <KuvitusLayout />
+      <NavigationBarComponent />
       {localGoals.length === 0 && (
         <div className='h-full w-full flex items-center justify-center'>
           <p className="text-3xl">Click on the add button to add a goal!</p>
