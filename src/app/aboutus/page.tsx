@@ -28,7 +28,7 @@ const AboutUs = () => {
         Kuvitus
       </h1>
 
-      <div className="w-3/4 h-3/5 flex">
+      <div className="w-3/4 h-3/5 flex overflow-y-scroll">
         {page === 0 ? (
           <FrequentlyAskedContainer />
         ) : page === 1 ? (
