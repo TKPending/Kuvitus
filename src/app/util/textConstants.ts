@@ -60,7 +60,7 @@ export const TextConstants = {
       },
     ],
     nextFeatures: [
-        {status: "pending", task: "Improve Drawing Canvas features: Deleting specfic elements, Selection highlight"},
+        {status: "pending", task: "Improve Drawing Canvas features: Deleting specfic elements, Selection highlight, Reszing elements"},
         {status: "pending", task: "Allow users to change a goal title from the Floating Goals Page"},
         {status: "pending", task: "Implement a backend. So users can sign up, sign in along with have their goals stored."},
         {status: "pending", task: "Track all completed tasks in one section. Know what you've completed and when"},
