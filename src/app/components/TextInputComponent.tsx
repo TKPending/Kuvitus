@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 type Props = {
   text: string;
@@ -7,6 +7,7 @@ type Props = {
   input?: boolean;
   placeholder?: string;
   isDisabled?: boolean;
+  subGoal?: boolean;
   onClick?: (
     e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => void;
@@ -22,12 +23,15 @@ const TextInputComponent = ({
   size,
   input = true,
   placeholder,
-  isDisabled=false,
+  isDisabled = false,
+  subGoal = false,
   onClick = (e: React.MouseEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     e.stopPropagation(),
   onSave,
   onChange,
 }: Props) => {
+  const [isFocused, setIsFocused] = useState(false);
+
   const textSize = () => {
     switch (size) {
       case "standard":
@@ -43,25 +47,37 @@ const TextInputComponent = ({
     }
   };
 
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => {
+    setIsFocused(false);
+    onSave();
+  };
+
   return input ? (
     <input
       value={text}
       onChange={onChange}
       onClick={onClick}
-      onBlur={onSave}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       placeholder={placeholder}
       disabled={isDisabled}
-      className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-kuvitus-primary-blue`}
+      className={`${textSize()} ${customStyle} ${
+        isFocused
+          ? `border-2 ${subGoal ? "border-white" : "border-kuvitus-primary-blue"}`
+          : `hover:border-2 ${subGoal ? "border-white p-2" : "border-kuvitus-primary-blue"}`
+      } px-2 rounded-lg bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 transition duration-400`}
     />
   ) : (
     <textarea
       value={text}
       onClick={onClick}
       onChange={onChange}
-      onBlur={onSave}
+      onFocus={handleFocus}
+      onBlur={handleBlur}
       placeholder={placeholder}
       disabled={isDisabled}
-      className={`${textSize()} ${customStyle} bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 focus:border-none`}
+      className={`${textSize()} ${customStyle} rounded-lg bg-transparent h-full w-full appearance-none focus:outline-none focus:ring-0 transition duration-400`}
     />
   );
 };

@@ -3,12 +3,12 @@ import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import ReturnHomeComponent from "@/app/components/ReturnHomeComponent";
 import TextInputComponent from "@/app/components/TextInputComponent";
-import { setCompleteDate, setGoalStatus, setGoalTitle, setGoalDueDate } from "@/app/redux/slices/goal/goalSlice";
+import { setCompleteDate, setGoalStatus, setGoalTitle } from "@/app/redux/slices/goal/goalSlice";
 import StatusComponent from "@/app/components/StatusComponent";
 import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
-import { getCurrentDate } from "../util/getCurrentDate";
+import { getCurrentDate } from "@/app/util/getCurrentDate"
 import SessionService from "@/services/sessionStorage/SessionService";
-import { GoalType } from "../types/GoalType";
+import { GoalType } from "@/app/types/GoalType";
 
 const GoalOverviewHeaderContainer = () => {
   const dispatch = useDispatch();

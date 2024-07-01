@@ -10,7 +10,9 @@ const ReturnHomeComponent = () => {
 
   const handleReturnHome = () => {
     sessionStorage.setItem("specificGoal", "");
-    router.push("/");
+    setTimeout(() => {
+      router.push("/");
+    }, 0);
   };
 
   return (
@@ -19,7 +21,7 @@ const ReturnHomeComponent = () => {
         icon={isHovered ? solidLeft : regularLeft}
         onMouseEnter={() => setIsHover(true)}
         onMouseLeave={() => setIsHover(false)}
-        className="text-6xl transition-all duration-400 cursor-pointer text-kuvitus-primary-blue"
+        className={`cursor-pointer text-6xl text-kuvitus-primary-blue`}
       />
     </div>
   );

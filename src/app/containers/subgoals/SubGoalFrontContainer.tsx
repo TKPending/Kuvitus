@@ -7,7 +7,6 @@ import {
 import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
-import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
 import TagsContainer from "@/app/containers/TagsContainer";
 import SessionService from "@/services/sessionStorage/SessionService";
 import StatusComponent from "@/app/components/StatusComponent";
@@ -32,7 +31,6 @@ const SubGoalFrontContainer = ({
   const dispatch = useDispatch();
   const goalUID: string = useSelector((state: RootState) => state.goal.uID);
   const remainingDays: number = daysUntilCompletion(dueDate);
-  const remainingDaysStyle: { text: string, style: string} = getDaysLeftStyle(remainingDays);
 
   const handleSubGoalFocus = () => {
     dispatch(setSubGoalFocus(UID));
@@ -59,10 +57,11 @@ const SubGoalFrontContainer = ({
     <div
       onClick={handleSubGoalFocus}
       className={`min-h-16 cursor-pointer bg-kuvitus-primary-blue border-white border-2 text-white flex items-center justify-around p-2 px-6 
-        ${isPressed ? "rounde-tr-xl rounded-tl-xl" : "rounded-xl"}`}
+        ${isPressed ? "rounded-tr-xl rounded-tl-xl" : "rounded-xl"}`}
     >
       <TextInputComponent
         text={title}
+        subGoal={true}
         customStyle="text-xl"
         onSave={handleTitleSave}
         onChange={handleTitleChange}

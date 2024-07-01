@@ -65,7 +65,7 @@ const SubGoalDropdownContainer = ({
       onClick={handleSubGoalFocus}
       className="flex cursor-pointer flex-col gap-2 bg-kuvitus-secondary-blue border-white border-2 text-black p-4"
     >
-      <div className="flex-col gap-4 flex">
+      <div className="flex-col gap-4 flex hover:border-2 hover:border-kuvitus-primary-blue transiton duration-400 p-1 rounded-lg">
         <p>Details</p>
 
         <TextInputComponent

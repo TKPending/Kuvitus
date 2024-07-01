@@ -21,7 +21,7 @@ const GoalDescriptionComponent = () => {
   };
 
   return (
-    <div className="h-full rounded-lg p-4">
+    <div className="h-full rounded-lg p-4 hover:border-2 hover:border-kuvitus-primary-blue rounded-lg transition duration-400">
       <p className="text-xl">Description:</p>
       <TextInputComponent
         text={description}
