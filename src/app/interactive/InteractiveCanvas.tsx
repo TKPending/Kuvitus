@@ -15,8 +15,8 @@ import {
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
-import NavigationBarComponent from "../components/interactive/NavigationBarComponent";
-import RemoveAllGoalsComponent from "../components/interactive/RemoveAllGoalsComponent";
+import NavigationBarComponent from "@/app/components/interactive/NavigationBarComponent";
+import RemoveAllGoalsComponent from "@/app/components/interactive/RemoveAllGoalsComponent";
 
 const InteractiveCanvas = () => {
   const dispatch = useDispatch();
@@ -107,7 +107,7 @@ const InteractiveCanvas = () => {
         <InteractiveGoalLayout key={index} goal={goal} />
       ))}
       <AddGoalButtonComponent onClick={handleAddGoal} />
-      <RemoveAllGoalsComponent />
+      {localGoals.length > 0 && <RemoveAllGoalsComponent />}
     </div>
   );
 };
