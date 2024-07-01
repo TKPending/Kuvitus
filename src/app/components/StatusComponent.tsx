@@ -30,7 +30,7 @@ const StatusComponent = ({ status, button=true, onSave, handleDispatch }: Props)
   return (
     <div className="relative">
       <p
-        className={`p-2 cursor-pointer rounded-lg text-white ${
+        className={`p-2 cursor-pointer rounded-lg text-white hover:bg-opacity-80 transition duration-400 ${
           status === 0
             ? "bg-kuvitus-uncomplete"
             : status === 1
