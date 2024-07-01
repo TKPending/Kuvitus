@@ -57,7 +57,7 @@ const DrawingCanvas = () => {
 
   useEffect(() => {
     if (goalUID) {
-      const storedElements = SessionService.fetchDrawingCanvas(goalUID);
+      const storedElements = SessionService.fetchExisitingGoalValue("drawingElements");
       if (storedElements) {
         setInitialElements(storedElements);
       }

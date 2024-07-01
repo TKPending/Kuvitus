@@ -20,12 +20,13 @@ class SessionService {
     const index: number = sessionGoals.findIndex(
       (goal: LocalGoalType) => goal.goal.uID === goalUID
     );
-    const goal: GoalType = sessionGoals[index].goal;
-
-    if (index === -1 || !goal) {
+    
+    if (index === -1) {
       return null;
     }
 
+    const goal: GoalType = sessionGoals[index].goal;
+    
     return {
       index,
       goal,
@@ -181,15 +182,18 @@ class SessionService {
     sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
   }
 
-  public fetchDrawingCanvas(goalUID: string) {
-    const specificGoal = this.fetchGoal(goalUID);
-    if (!specificGoal) return [];
-
-    return specificGoal.goal.drawingElements;
-  }
-
   public deleteAllGoals() {
     sessionStorage.setItem("goals", JSON.stringify([]));
+  }
+
+  public fetchExisitingGoalValue(selection: string) {
+    const fetchedResult = sessionStorage.getItem("specificGoal");
+    if (!fetchedResult) {
+      return null;
+    }
+    const parsedResult = JSON.parse(fetchedResult);
+
+    return parsedResult.goal[selection];
   }
 }
 
