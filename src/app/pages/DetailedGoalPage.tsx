@@ -9,7 +9,7 @@ import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
-import HelpButtonComponent from "../components/HelpButtonComponent";
+import HelpButtonComponent from "@/app/components/HelpButtonComponent";
 
 type Props = {
   goalUID: string;
