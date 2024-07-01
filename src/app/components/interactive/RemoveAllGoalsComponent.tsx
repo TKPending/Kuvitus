@@ -15,7 +15,7 @@ const RemoveAllGoalsComponent = () => {
     setTimeout(() => {
       dispatch(removeAllLocalGoals());
       SessionService.deleteAllGoals();
-    }, 1000);
+    }, 1100);
     handleDeleteDisplay();
   };
 
