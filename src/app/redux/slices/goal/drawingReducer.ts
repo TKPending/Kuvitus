@@ -38,3 +38,10 @@ export const deleteAllElementsReducer = (
 ) => {
   state.drawingCanvas.deleteAll = action.payload;
 };
+
+export const deleteSpecifcElementsReducer = (
+  state: GoalType,
+  action: PayloadAction<number | null>
+) => {
+  state.drawingCanvas.specificDelete = action.payload;
+};

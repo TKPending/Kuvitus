@@ -30,6 +30,7 @@ import {
   deleteOptionsReducer,
   deleteAllElementsReducer,
   updateDrawingToolReducer,
+  deleteSpecifcElementsReducer,
 } from "./drawingReducer";
 
 const UNCOMPLETE = 0;
@@ -54,6 +55,7 @@ const initialState: GoalType = {
     errorMessage: "",
     displayDeleteOption: false,
     deleteAll: false,
+    specificDelete: null,
   },
 };
 
@@ -88,6 +90,7 @@ const goalSlice = createSlice({
     setCanvasErrorMessage: canvasErrorMessageReducer,
     setDeleteOptionVisible: deleteOptionsReducer,
     deleteAllElements: deleteAllElementsReducer,
+    specificDelete: deleteSpecifcElementsReducer,
   },
 });
 
@@ -119,6 +122,7 @@ export const {
   setCanvasErrorMessage,
   setDeleteOptionVisible,
   deleteAllElements,
+  specificDelete,
 } = goalSlice.actions;
 
 export default goalSlice.reducer;

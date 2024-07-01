@@ -2,13 +2,14 @@ import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { ElementType } from "@/app/types/DrawingTypes";
-import { deleteAllElements } from "@/app/redux/slices/goal/goalSlice";
+import { deleteAllElements, specificDelete } from "@/app/redux/slices/goal/goalSlice";
 import SessionService from "@/services/sessionStorage/SessionService";
 
 export const useHistory = (initialState: ElementType[]) => {
   const dispatch = useDispatch();
   const goalUID: string = useSelector((state: RootState) => state.goal.uID);
   const deleteAll: boolean = useSelector((state: RootState) => state.goal.drawingCanvas.deleteAll);
+  const elementToDelete: number | null = useSelector((state: RootState) => state.goal.drawingCanvas.specificDelete);
   const [index, setIndex] = useState<number>(0);
   const [history, setHistory] = useState<ElementType[][]>([initialState]);
 
@@ -25,6 +26,22 @@ export const useHistory = (initialState: ElementType[]) => {
 
     deleteElements();
   }, [deleteAll]);
+
+  useEffect(() => {
+    const deleteSpecificElement = () => {
+      if (elementToDelete) {
+        const newHistory = history[index].filter((element: ElementType) => element.id !== elementToDelete);
+        setHistory(prevState => [...prevState, newHistory]);
+        setIndex(prevState => prevState + 1);
+
+        dispatch(specificDelete(null));
+        SessionService.updateValue(goalUID, "drawingElements", newHistory);
+      }
+    }
+
+    deleteSpecificElement();
+
+  }, [elementToDelete])
 
   useEffect(() => {
     setHistory([initialState]);

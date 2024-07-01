@@ -41,4 +41,5 @@ export interface DrawingCanvas {
   errorMessage: string;
   displayDeleteOption: boolean;
   deleteAll: boolean;
+  specificDelete: number | null;
 };

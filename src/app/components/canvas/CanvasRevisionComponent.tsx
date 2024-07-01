@@ -1,4 +1,4 @@
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -6,16 +6,20 @@ import {
   faRotateRight,
   faTrash,
 } from "@fortawesome/free-solid-svg-icons";
-import { setDeleteOptionVisible } from "@/app/redux/slices/goal/goalSlice";
+import { setDeleteOptionVisible, specificDelete } from "@/app/redux/slices/goal/goalSlice";
+import { ElementType } from "@/app/types/DrawingTypes";
+import { RootState } from "@/app/redux/store";
 
 type Props = {
   displayTrashCan: boolean;
+  selectedElement: ElementType | null;
   onUndo: () => void;
   onRedo: () => void;
 };
 
-const CanvasRevisionComponent = ({ displayTrashCan, onUndo, onRedo }: Props) => {
+const CanvasRevisionComponent = ({ displayTrashCan, selectedElement, onUndo, onRedo }: Props) => {
   const dispatch = useDispatch();
+  const elementToDelete: number | null = useSelector((state: RootState) => state.goal.drawingCanvas.specificDelete);
   const [isOptionHovered, setIsOptionHovered] = useState<string | null>(null);
   
   const handleOptionHover = (option: string) => {
@@ -23,12 +27,17 @@ const CanvasRevisionComponent = ({ displayTrashCan, onUndo, onRedo }: Props) => 
   };
 
   const handleDisplayDelete = () => {
-    dispatch(setDeleteOptionVisible(true));
+    if (selectedElement) {
+      console.log(selectedElement)
+      dispatch(specificDelete(selectedElement.id));
+    } else {
+      dispatch(setDeleteOptionVisible(true));
+    }
   }
   const revisionOptions = [
     { type: "undo", icon: faRotateLeft, action: onUndo },
     { type: "redo", icon: faRotateRight, action: onRedo },
-    { type: "delete-all", icon: faTrash, action: handleDisplayDelete },
+    { type: `${elementToDelete ? "delete" : "delete-all"}`, icon: faTrash, action: handleDisplayDelete },
   ];
 
   return (
@@ -36,7 +45,7 @@ const CanvasRevisionComponent = ({ displayTrashCan, onUndo, onRedo }: Props) => 
       {revisionOptions.map((option, index) => (
         <div
           key={index}
-          className={`${option.type === "delete-all" && !displayTrashCan && "hidden"} flex flex-col items-center justify-center gap-2`}
+          className={`${option.type === "delete-all" || option.type === "delete" && !displayTrashCan && "hidden"} flex flex-col items-center justify-center gap-2`}
         >
           <p
             className={`${

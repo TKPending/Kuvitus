@@ -26,6 +26,7 @@ import CanvasSureDeleteComponent from "@/app/components/canvas/CanvasSureDeleteC
 import CanvasErrorComponent from "@/app/components/canvas/CanvasErrorComponent";
 import CanvasControllerContainer from "@/app/containers/CanvasControllerContainer";
 import SessionService from "@/services/sessionStorage/SessionService";
+import { highlightSelectedElement } from "./actions/drawSelectedElement";
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();
@@ -46,7 +47,7 @@ const DrawingCanvas = () => {
     null
   );
   const [panOffset, setPanOffset] = useState({ x: 0, y: 0 });
-  const [startMouesPanPosition, setStartMousePanPosition] = useState({
+  const [startMousePanPosition, setStartMousePanPosition] = useState({
     x: 0,
     y: 0,
   });
@@ -66,34 +67,41 @@ const DrawingCanvas = () => {
 
   useLayoutEffect(() => {
     const canvas = document.getElementById("canvas") as HTMLCanvasElement;
-    // Keeps drawing relative to parent div
     canvas.width = canvas.parentElement?.clientWidth || 0;
     canvas.height = canvas.parentElement?.clientHeight || 0;
     const canvasContext = canvas.getContext("2d") as CanvasRenderingContext2D;
-
+  
     canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-
+  
     const scaledWidth = canvas.width * scale;
     const scaledHeight = canvas.height * scale;
     const scaleOffsetX = (scaledWidth - canvas.width) / 2;
     const scaleOffsetY = (scaledHeight - canvas.height) / 2;
     setScaleOffset({ x: scaleOffsetX, y: scaleOffsetY });
-
+  
     canvasContext.save();
     canvasContext.translate(
       panOffset.x * scale - scaleOffsetX,
       panOffset.y * scale - scaleOffsetY
     );
     canvasContext.scale(scale, scale);
-
+  
     const roughCanvas = rough.canvas(canvas);
     elements.forEach((element: ElementType) => {
-      if (userAction === "writing" && selectedElement!.id === element.id)
-        return;
+      if (userAction === "writing" && selectedElement!.id === element.id) return;
+  
+      if (selectedElement && selectedElement.id === element.id) {
+        canvasContext.strokeStyle = "red";
+      } else {
+        canvasContext.strokeStyle = "black";
+      }
+  
       drawElement(roughCanvas, canvasContext, element, dispatch);
+      highlightSelectedElement(canvasContext, selectedElement, element);
     });
     canvasContext.restore();
   }, [elements, userAction, selectedElement, panOffset, scale]);
+  
 
   useEffect(() => {
     const undoRedoFunction = (event: KeyboardEvent) => {
@@ -123,7 +131,7 @@ const DrawingCanvas = () => {
   useEffect(() => {
     const panOrZoomFunction = (event: WheelEvent) => {
       if ((pressedKeys.has("Meta") || pressedKeys.has("Control")) && event.target === canvas) {
-        event.stopPropagation(); // Stop event propagation
+        event.stopPropagation();
         handleOnZoom(event.deltaY * -0.01);
       } else {
         setPanOffset((prevState) => ({
@@ -152,7 +160,7 @@ const DrawingCanvas = () => {
 
   const handleMouseDown = (event: React.MouseEvent) => {
     if (userAction === "writing") return;
-
+  
     const { clientX, clientY } = getRelativeCoordinates(
       event,
       {
@@ -162,15 +170,15 @@ const DrawingCanvas = () => {
       scaleOffset,
       scale
     );
-
+  
     if (event.button === 1 || pressedKeys.has(" ")) {
       setUserAction("panning");
       setStartMousePanPosition({ x: clientX, y: clientY });
     }
-
+  
     if (currentTool.type === "selection") {
       const clickedElement = getElementAtPosition(clientX, clientY, elements);
-
+  
       if (clickedElement) {
         if (clickedElement.type === "pencil" && clickedElement.points) {
           const xOffsets = clickedElement.points.map(
@@ -183,17 +191,19 @@ const DrawingCanvas = () => {
         } else {
           const offsetX = clientX - clickedElement.x1;
           const offsetY = clientY - clickedElement.y1;
-
+  
           setSelectedElement({ ...clickedElement, offsetX, offsetY });
         }
-
+  
         setElements((prevState) => prevState);
-
+  
         if (clickedElement.position === "inside") {
           setUserAction("moving");
         } else {
           setUserAction("resizing");
         }
+      } else {
+        setSelectedElement(null); // Clear selection if no element is clicked
       }
     } else {
       const id = elements.length;
@@ -205,10 +215,11 @@ const DrawingCanvas = () => {
       );
       setSelectedElement(element);
       setElements((prevState) => [...prevState, element]);
-
+  
       setUserAction(currentTool.type === "text" ? "writing" : "drawing");
     }
   };
+  
 
   const handleMouseMove = (event: React.MouseEvent) => {
     const { clientX, clientY } = getRelativeCoordinates(
@@ -222,8 +233,8 @@ const DrawingCanvas = () => {
     );
 
     if (userAction === "panning") {
-      const deltaX = clientX - startMouesPanPosition.x;
-      const deltaY = clientX - startMouesPanPosition.y;
+      const deltaX = clientX - startMousePanPosition.x;
+      const deltaY = clientX - startMousePanPosition.y;
       setPanOffset((prevState) => ({
         x: panOffset.x + deltaX,
         y: panOffset.y + deltaY,
@@ -351,7 +362,6 @@ const DrawingCanvas = () => {
     if (userAction === "writing") return;
 
     setUserAction("none");
-    setSelectedElement(null);
   };
 
   const handleOnBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
@@ -408,6 +418,7 @@ const DrawingCanvas = () => {
         <CanvasControllerContainer
           scale={scale}
           displayTrashCan={elements.length > 0}
+          selectedElement={selectedElement}
           onUndo={undo}
           onRedo={redo}
           handleZoom={handleOnZoom}
