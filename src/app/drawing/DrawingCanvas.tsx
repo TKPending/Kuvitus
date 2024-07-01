@@ -7,6 +7,7 @@ import { usePressedKeys } from "@/app/hooks/usePressedKeys";
 import { createElement } from "./actions/createElement";
 import { updateElement } from "./actions/updateElement";
 import { drawElement } from "./actions/drawElement";
+import { highlightSelectedElement } from "./actions/highlightSelectedElement";
 import { adjustElementCoordinates } from "./actions/adjustElementCoordinates";
 import { getRelativeCoordinates } from "./retrieval/getRelativeCoordinates";
 import { getElementAtPosition } from "./retrieval/getElementAtPosition";
@@ -26,7 +27,6 @@ import CanvasSureDeleteComponent from "@/app/components/canvas/CanvasSureDeleteC
 import CanvasErrorComponent from "@/app/components/canvas/CanvasErrorComponent";
 import CanvasControllerContainer from "@/app/containers/CanvasControllerContainer";
 import SessionService from "@/services/sessionStorage/SessionService";
-import { highlightSelectedElement } from "./actions/drawSelectedElement";
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();
