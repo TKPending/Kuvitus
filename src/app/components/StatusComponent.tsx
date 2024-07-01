@@ -3,11 +3,10 @@ import React, { useState, useRef, useEffect } from "react";
 type Props = {
   status: number;
   button?: boolean;
-  onSave?: () => void;
   handleDispatch?: (option: number) => void;
 };
 
-const StatusComponent = ({ status, button = true, onSave, handleDispatch }: Props) => {
+const StatusComponent = ({ status, button = true, handleDispatch }: Props) => {
   const [progressClicked, setProgressClicked] = useState<boolean>(false);
   const options: string[] = ["Uncomplete", "Completed", "Pending"];
   const dropdownRef = useRef<HTMLDivElement>(null);
