@@ -9,6 +9,7 @@ import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
+import HelpButtonComponent from "../components/HelpButtonComponent";
 
 type Props = {
   goalUID: string;
@@ -26,7 +27,7 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
   }, []);
 
   return (
-    <div className="min-h-screen w-screen max-w-screen flex flex lg:flex-row flex-col overscroll-y-none">
+    <div className="relative min-h-screen w-screen max-w-screen flex flex lg:flex-row flex-col overscroll-y-none">
       <KuvitusLayout home={false} />
       <div className="flex flex-col gap-4 h-screen w-full p-4">
         <GoalOverviewLayout />
@@ -34,6 +35,7 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
       </div>
 
       <SubGoalOverviewLayout />
+      <HelpButtonComponent />
     </div>
   );
 };
