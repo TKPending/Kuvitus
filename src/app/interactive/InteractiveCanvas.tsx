@@ -16,6 +16,7 @@ import {
 import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
 import NavigationBarComponent from "../components/interactive/NavigationBarComponent";
+import RemoveAllGoalsComponent from "../components/interactive/RemoveAllGoalsComponent";
 
 const InteractiveCanvas = () => {
   const dispatch = useDispatch();
@@ -87,6 +88,12 @@ const InteractiveCanvas = () => {
     fetchGoals();
   }, []);
 
+  useEffect(() => {
+    if (sessionStorage.getItem("specificGoal")) {
+      sessionStorage.removeItem("specificGoal");
+    }
+  }, []);
+
   return (
     <div className="relative h-screen max-h-screen w-screen max-w-screen overflow-hidden">
       <KuvitusLayout />
@@ -100,6 +107,7 @@ const InteractiveCanvas = () => {
         <InteractiveGoalLayout key={index} goal={goal} />
       ))}
       <AddGoalButtonComponent onClick={handleAddGoal} />
+      <RemoveAllGoalsComponent />
     </div>
   );
 };

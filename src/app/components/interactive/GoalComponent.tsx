@@ -91,7 +91,7 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
       }`}
     >
       <div className="flex items-center justify-center gap-8">
-        <p className="font-semibold select-none min-w-[80px] max-w-[300px] text-base">
+        <p className="font-semibold select-none min-w-[80px] max-w-[400px] text-base">
           {title}
         </p>
 

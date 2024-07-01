@@ -6,6 +6,7 @@ import {
   goalDraggedReducer,
   localGoalFocusedReducer,
   localGoalUnfocusedReducer,
+  removeAllLocalGoalsReducer,
   removeLocalGoalReducer,
   updateLocalGoalsPositionReducer,
 } from "./localGoalsReducer";
@@ -23,6 +24,7 @@ const localGoalSlice = createSlice({
     addLocalGoal: addLocalGoalReducer,
     addSessionGoals: addSessionGoalsReducer,
     removeLocalGoal: removeLocalGoalReducer,
+    removeAllLocalGoals: removeAllLocalGoalsReducer,
     setLocalGoalFocused: localGoalFocusedReducer,
     setLocalGoalUnfocused: localGoalUnfocusedReducer,
     updateLocalPositions: updateLocalGoalsPositionReducer,
@@ -35,6 +37,7 @@ export const {
   addLocalGoal,
   addSessionGoals,
   removeLocalGoal,
+  removeAllLocalGoals,
   setLocalGoalFocused,
   setLocalGoalUnfocused,
   updateLocalPositions,

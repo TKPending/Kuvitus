@@ -187,6 +187,10 @@ class SessionService {
 
     return specificGoal.goal.drawingElements;
   }
+
+  public deleteAllGoals() {
+    sessionStorage.setItem("goals", JSON.stringify([]));
+  }
 }
 
 export default new SessionService();

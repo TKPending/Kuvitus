@@ -34,6 +34,12 @@ export const removeLocalGoalReducer = (
   );
 };
 
+export const removeAllLocalGoalsReducer = (
+  state: LocalGoalStateType
+) => {
+  state.goals = [];
+};
+
 export const localGoalFocusedReducer = (
   state: LocalGoalStateType,
   action: PayloadAction<string>
