@@ -22,6 +22,7 @@ import {
   updateSubGoalStatusReducer,
   updateSubGoalDueDateReducer,
   updateSubGoalCompleteDateReducer,
+  removeAllSubGoalsReducer,
 } from "./subGoalReducer";
 import {
   canvasErrorMessageReducer,
@@ -72,6 +73,7 @@ const goalSlice = createSlice({
 
     setSubGoalFocus: subGoalFocusedReducer,
     removeSubGoal: removeSubGoalReducer,
+    removeAllSubGoals: removeAllSubGoalsReducer,
     addSubGoal: addSubGoalReducer,
     setSubGoalTitle: updateSubGoalTitleReducer,
     setSubGoalDetails: updateSubGoalDescriptionReducer,
@@ -102,6 +104,7 @@ export const {
 
   setSubGoalFocus,
   removeSubGoal,
+  removeAllSubGoals,
   addSubGoal,
   setSubGoalTitle,
   setSubGoalDetails,

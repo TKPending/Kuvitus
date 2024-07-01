@@ -4,6 +4,7 @@ import SubGoalHeaderComponent from "@/app/components/subgoals/SubGoalHeaderCompo
 import { SubType } from "@/app/types/SubType";
 import SubGoalLayout from "./SubGoalLayout";
 import AddSubGoalButtonComponent from "@/app/components/subgoals/AddSubGoalButtonComponent";
+import UpdateSubGoalOptionsComponent from "@/app/components/subgoals/UpdateSubGoalOptionsComponent";
 
 const SubGoalOverviewLayout = () => {
   const dispatch = useDispatch();
@@ -14,12 +15,14 @@ const SubGoalOverviewLayout = () => {
   return (
     <div className="h-screen w-full p-8 flex flex-col">
       <SubGoalHeaderComponent />
-
-      <div className="flex-1 p-2 px-6 overflow-y-auto bg-kuvitus-sub-background rounded-br-xl rounded-bl-xl">
+      <div className="flex-1 px-6 overflow-y-auto bg-kuvitus-sub-background rounded-br-xl rounded-bl-xl">
         {subGoals.length > 0 ? (
-          subGoals.map((goal: SubType, index: number) => (
-            <SubGoalLayout key={index} subGoal={goal} />
-          ))
+          <div>
+            <UpdateSubGoalOptionsComponent />
+            {subGoals.map((goal: SubType, index: number) => (
+              <SubGoalLayout key={index} subGoal={goal} />
+            ))}
+          </div>
         ) : (
           <div className="w-full h-1/2 flex flex-col gap-6 items-center justify-center text-center font-semibold">
             <p>There are currently no subgoals.</p>
@@ -31,7 +34,7 @@ const SubGoalOverviewLayout = () => {
           </div>
         )}
 
-        <AddSubGoalButtonComponent />
+        {subGoals.length <= 0 && <AddSubGoalButtonComponent />}
       </div>
     </div>
   );

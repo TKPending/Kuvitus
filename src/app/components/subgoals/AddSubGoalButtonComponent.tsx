@@ -24,7 +24,7 @@ const AddSubGoalButtonComponent = () => {
       isPressed: false,
       
     }
-    SessionService.addSubGoal(uID, subGoalData)
+    SessionService.addSubGoal(uID, subGoalData);
   };
 
   return (

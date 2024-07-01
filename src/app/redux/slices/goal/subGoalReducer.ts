@@ -22,6 +22,12 @@ export const removeSubGoalReducer = (
   );
 };
 
+export const removeAllSubGoalsReducer = (
+  state: GoalType,
+) => {
+  state.subGoals = [];
+};
+
 export const addSubGoalReducer = (
   state: GoalType,
   action: PayloadAction<string>
