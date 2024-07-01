@@ -60,7 +60,7 @@ const AddTagsComponent = ({ subUID }: Props) => {
         <FontAwesomeIcon
           icon={faPlus}
           onClick={handleTagActive}
-          className="cursor-pointer text-white hover:text-kuvitus-primary-blue font-semibold text-xl transition-duration-200"
+          className="cursor-pointer text-white hover:text-kuvitus-primary-blue font-semibold text-xl transition duration-400 hover:shadow-xl"
         />
       ) : (
         <div className="flex gap-2 items-center justify-center">
