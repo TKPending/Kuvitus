@@ -27,7 +27,7 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
   }, []);
 
   return (
-    <div className="relative min-h-screen w-screen max-w-screen flex flex lg:flex-row flex-col overscroll-y-none">
+    <div className="relative w-screen min-h-screen flex lg:flex-row flex-col overscroll-none">
       <KuvitusLayout home={false} />
       <div className="flex flex-col gap-4 h-screen w-full p-4">
         <GoalOverviewLayout />

@@ -122,7 +122,8 @@ const DrawingCanvas = () => {
 
   useEffect(() => {
     const panOrZoomFunction = (event: WheelEvent) => {
-      if (pressedKeys.has("Meta") || pressedKeys.has("Control")) {
+      if ((pressedKeys.has("Meta") || pressedKeys.has("Control")) && event.target === canvas) {
+        event.stopPropagation(); // Stop event propagation
         handleOnZoom(event.deltaY * -0.01);
       } else {
         setPanOffset((prevState) => ({
@@ -131,10 +132,11 @@ const DrawingCanvas = () => {
         }));
       }
     };
-
-    document.addEventListener("wheel", panOrZoomFunction);
+  
+    const canvas = document.getElementById("canvas") as HTMLCanvasElement;
+    canvas.addEventListener("wheel", panOrZoomFunction);
     return () => {
-      document.removeEventListener("wheel", panOrZoomFunction);
+      canvas.removeEventListener("wheel", panOrZoomFunction);
     };
   }, [pressedKeys]);
 
