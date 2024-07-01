@@ -8,8 +8,8 @@ const VersionTrackerComponent = () => {
       </p>
 
       {TextConstants.nextFeatures.map((feature, index) => (
-        <div key={index} className="w-full flex h-12 ">
-          <div className="h-6 w-10 flex items-center justify-center">
+        <div key={index} className="w-full flex h-12 items-center">
+          <div className="h-6 flex items-center">
             <div
               className={`rounded-full h-6 w-6 ${
                 feature.status === "complete"
