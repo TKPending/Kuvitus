@@ -28,12 +28,12 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
     (subGoal) => subGoal.subStatus === 1
   ).length;
 
-  const handleMouseDown = (e: MouseEventHandler<HTMLDivElement>) => {
-    startPos.current = { x: e.clientX, y: e.clientY, };
+  const handleMouseDown = (e: any) => {
+    startPos.current = { x: e.clientX, y: e.clientY };
     dispatch(setLocalGoalDrag(goalUID)); // Start dragging
   };
 
-  const handleMouseMove = (e: MouseEventHandler<HTMLDivElement>) => {
+  const handleMouseMove = (e: any) => {
     if (e.buttons === 1) {
       const dx = Math.abs(e.clientX - startPos.current.x);
       const dy = Math.abs(e.clientY - startPos.current.y);
@@ -98,13 +98,15 @@ const GoalComponent = ({ goalUID, isFocused, goal }: Props) => {
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      className={`relative w-300px flex flex-col overflow-auto gap-2 bg-kuvitus-secondary-blue hover:bg-kuvitus-primary-blue transition duration-400 rounded-lg bg-opacity-40 py-2 px-4 shadow-lg ${
+      className={`relative w-300px flex flex-col overflow-auto gap-2 hover:bg-kuvitus-primary-blue ${
+        isFocused ? "bg-kuvitus-primary-blue" : "bg-kuvitus-secondary-blue"
+      }  transition duration-400 rounded-lg bg-opacity-40 py-2 px-4 shadow-lg ${
         isDragging ? "cursor-move" : "cursor-pointer"
       }`}
     >
       <div className="flex items-center justify-center gap-8">
         <p className="font-semibold select-none min-w-[80px] max-w-[400px] text-base">
-          {title}
+          {title === "Enter your goal" ? isFocused ? "Click on View" : "Click on ME" : title}
         </p>
 
         {dueDate || subGoalsAmount > 0 ? (

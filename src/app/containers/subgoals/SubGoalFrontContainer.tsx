@@ -68,7 +68,7 @@ const SubGoalFrontContainer = ({
       />
 
       {!isPressed && (
-        <div className="flex flex-col items-center justify-center gap-4 w-full p-2">
+        <div className="flex flex-col items-center justify-center gap-4 p-2">
           {!isMobile && <TagsContainer tags={tags} subUID={UID} button={false} />}
 
           <div className="w-full gap-4 flex items-center justify-end px-4 text-base">

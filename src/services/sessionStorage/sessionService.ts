@@ -9,7 +9,6 @@ class SessionService {
     const jsonGoal: LocalGoalType[] = JSON.parse(
       sessionGoals!
     ) as LocalGoalType[];
-    // Handle Error
     
     return jsonGoal;
   }

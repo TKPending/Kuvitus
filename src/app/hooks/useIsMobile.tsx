@@ -10,10 +10,10 @@ export const useIsMobile = () => {
   };
 
   useEffect(() => {
-    checkIfMobile(); // Initial check on mount
-    window.addEventListener('resize', checkIfMobile); // Update on resize
+    checkIfMobile(); 
+    window.addEventListener('resize', checkIfMobile);
 
-    return () => window.removeEventListener('resize', checkIfMobile); // Cleanup on unmount
+    return () => window.removeEventListener('resize', checkIfMobile);
   }, []);
 
   return isMobile;

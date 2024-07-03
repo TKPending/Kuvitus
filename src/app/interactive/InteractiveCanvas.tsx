@@ -4,10 +4,10 @@ import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect, useRef } from "react";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
+import {v4 as uuid} from 'uuid';
 import AddGoalButtonComponent from "@/app/components/interactive/AddGoalButtonComponent";
 import InteractiveGoalLayout from "@/app/layouts/InteractiveGoalLayout";
 import { getRandomPosition } from "@/app/util/getRandomPosition";
-import {v4 as uuid} from 'uuid';
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import {
   addLocalGoal,
@@ -33,7 +33,7 @@ const InteractiveCanvas = () => {
     const localNewGoal = {
       goal: {
         uID: UID,
-        title: "Enter Goal",
+        title: "Enter your goal",
         description: "",
         status: 0,
         depth: "basic",
@@ -82,7 +82,6 @@ const InteractiveCanvas = () => {
 
   useEffect(() => {
     const fetchGoals = () => {
-        // Handle if null is returned
       const goals = SessionService.kuvitusSessionCheck(localGoals);
       if (goals && goals.length > 0) {
         goals.map((goal) => {
