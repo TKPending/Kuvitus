@@ -1,15 +1,15 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import lottie from "lottie-web";
 import animationData from "../../../public/TodoLoadingLottie.json"; 
 
 type Props = {
     home?: boolean;
+    isLoading: boolean;
 };
 
-const KuvitusLayout = ({ home=true }: Props) => {
-  const [isVisible, setIsVisible] = useState<boolean>(true);
+const KuvitusLayout = ({ home=true, isLoading }: Props) => {
   const animationContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -21,10 +21,6 @@ const KuvitusLayout = ({ home=true }: Props) => {
       animationData: animationData,
     });
 
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 3000);
-
     return () => {
       animation.destroy(); // Clean up the animation when the component is unmounted
     };
@@ -33,7 +29,7 @@ const KuvitusLayout = ({ home=true }: Props) => {
   return (
     <div
       className={`${
-        !isVisible && "hidden"
+        !isLoading && "hidden"
       } absolute z-50 bg-white top-0 left-0 h-screen w-screen flex flex-col items-center justify-center`}
     >
       <div className="flex items-center justify-center">

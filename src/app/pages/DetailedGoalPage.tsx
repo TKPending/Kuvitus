@@ -1,7 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
+import { useIsMobile } from "@/app/hooks/useIsMobile";
 import GoalOverviewLayout from "@/app/layouts/GoalOveriewLayout";
 import SubGoalOverviewLayout from "@/app/layouts/SubGoalOverviewLayout";
 import DrawingCanvas from "@/app/drawing/DrawingCanvas";
@@ -10,6 +11,7 @@ import SessionService from "@/services/sessionStorage/SessionService";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
 import HelpButtonComponent from "@/app/components/HelpButtonComponent";
+import CanvasUnavailableComponent from "@/app/components/canvas/CanvasUnavailableComponent";
 
 type Props = {
   goalUID: string;
@@ -17,6 +19,8 @@ type Props = {
 
 const DetailedGoalPage = ({ goalUID }: Props) => {
   const dispatch = useDispatch();
+  const isMobile: boolean = useIsMobile();
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const goal: ActiveGoalType | null =
@@ -24,18 +28,31 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
     if (goal) {
       dispatch(setGoal(goal.goal));
     }
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
   }, []);
 
   return (
     <div className="relative w-screen min-h-screen flex lg:flex-row flex-col overscroll-none">
-      <KuvitusLayout home={false} />
-      <div className="flex flex-col gap-4 h-screen w-full p-4">
-        <GoalOverviewLayout />
-        <DrawingCanvas />
-      </div>
+      {isLoading ? (
+        <KuvitusLayout home={false} isLoading={isLoading} />
+      ) : (
+        <>
+          <div
+            className={`flex flex-col gap-4 ${
+              isMobile ? "h-auto" : "h-screen"
+            } w-full p-4`}
+          >
+            <GoalOverviewLayout />
+            {isMobile ? <CanvasUnavailableComponent /> : <DrawingCanvas />}
+          </div>
 
-      <SubGoalOverviewLayout />
-      <HelpButtonComponent />
+          <SubGoalOverviewLayout />
+          <HelpButtonComponent />
+        </>
+      )}
     </div>
   );
 };

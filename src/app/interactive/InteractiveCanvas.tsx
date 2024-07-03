@@ -48,6 +48,7 @@ const InteractiveCanvas = () => {
           errorMessage: "",
           displayDeleteOption: false,
           deleteAll: false,
+          specificDelete: null,
         },
       },
       position: getRandomPosition(),
