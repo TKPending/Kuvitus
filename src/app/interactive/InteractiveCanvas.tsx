@@ -2,7 +2,8 @@
 
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useIsMobile } from "@/app/hooks/useIsMobile";
 import AddGoalButtonComponent from "@/app/components/interactive/AddGoalButtonComponent";
 import InteractiveGoalLayout from "@/app/layouts/InteractiveGoalLayout";
 import { getRandomPosition } from "@/app/util/getRandomPosition";
@@ -20,9 +21,11 @@ import RemoveAllGoalsComponent from "@/app/components/interactive/RemoveAllGoals
 
 const InteractiveCanvas = () => {
   const dispatch = useDispatch();
+  const isMobile: boolean = useIsMobile();
   const localGoals: LocalGoalType[] = useSelector(
     (state: RootState) => state.localGoals.goals
   );
+  const [isLoading, setIsLoading] = useState(true);
   const requestRef = useRef<number>();
 
   const handleAddGoal = () => {
@@ -91,21 +94,25 @@ const InteractiveCanvas = () => {
     };
 
     fetchGoals();
-  }, []);
+  }, [isMobile]);
 
   useEffect(() => {
     if (sessionStorage.getItem("specificGoal")) {
       sessionStorage.removeItem("specificGoal");
     }
+
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
   }, []);
 
   return (
     <div className="relative h-screen max-h-screen w-screen max-w-screen overflow-hidden">
-      <KuvitusLayout />
+      <KuvitusLayout isLoading={isLoading} />
       <NavigationBarComponent />
       {localGoals.length === 0 && (
         <div className='h-full w-full flex items-center justify-center'>
-          <p className="text-3xl">Click on the add button to add a goal!</p>
+          <p className="text-3xl text-center">Click on the add button to add a goal!</p>
         </div>
       )}
       {localGoals.map((goal: LocalGoalType, index: number) => (
