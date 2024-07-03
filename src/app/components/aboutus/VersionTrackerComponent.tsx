@@ -2,13 +2,13 @@ import { TextConstants } from "@/app/util/textConstants";
 
 const VersionTrackerComponent = () => {
   return (
-    <div className="bg-kuvitus-sub-background flex flex-col gap-4 w-full p-4">
+    <div className="bg-kuvitus-sub-background flex flex-col gap-4 h-full w-full p-4">
       <p className="text-2xl text-kuvitus-primary-blue">
         Kuvitus {TextConstants.version}
       </p>
 
       {TextConstants.nextFeatures.map((feature, index) => (
-        <div key={index} className="w-full flex h-12 items-center">
+        <div key={index} className="w-full flex h-12 items-center my-6">
           <div className="h-6 flex items-center">
             <div
               className={`rounded-full h-6 w-6 ${

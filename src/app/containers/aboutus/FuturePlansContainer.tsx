@@ -7,10 +7,10 @@ const FuturePlansContainer = () => {
   return (
     <div className="flex flex-col h-full w-full px-4 gap-6">
       <div className="w-full flex items-center">
-        <p className="text-kuvitus-primary-blue text-2xl">Status: {status}</p>
+        <p className="text-kuvitus-primary-blue text-base md:text-2xl">Status: {status}</p>
       </div>
 
-      <div className="flex w-full h-full gap-8">
+      <div className="flex flex-col md:flex-row w-full h-full gap-8">
         <VersionTrackerComponent />
         <SuggestionComponent />
       </div>

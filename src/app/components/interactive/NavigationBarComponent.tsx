@@ -6,7 +6,7 @@ const NavigationBarComponent = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleRedirection = () => {
-    router.push("aboutus");
+    router.push("/aboutus");
   };
 
   useEffect(() => {

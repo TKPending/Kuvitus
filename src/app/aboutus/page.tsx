@@ -20,7 +20,7 @@ const AboutUs = () => {
   };
 
   return (
-    <div className="relative h-screen w-screen flex items-center justify-center px-12">
+    <div className="relative h-screen w-screen flex items-center justify-center p-2 md:px-12">
       <h1
         onClick={handleRedirection}
         className="absolute top-10 left-20 text-kuvitus-primary-blue text-5xl cursor-pointer"
@@ -28,7 +28,7 @@ const AboutUs = () => {
         Kuvitus
       </h1>
 
-      <div className="w-3/4 h-3/5 flex overflow-y-scroll">
+      <div className="w-3/4 h-4/5 md:h-3/5 flex overflow-y-scroll">
         {page === 0 ? (
           <FrequentlyAskedContainer />
         ) : page === 1 ? (

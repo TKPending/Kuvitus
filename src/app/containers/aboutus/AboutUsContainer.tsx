@@ -8,8 +8,8 @@ const AboutUsContainer = () => {
           key={index}
           className="flex flex-col gap-2 w-full text-kuvitus-primary-blue"
         >
-          <p className="text-2xl underline">{q.question}</p>
-          <p className="px-2 text-xl">
+          <p className="text-xl lg:text-2xl text-center md:text-left underline">{q.question}</p>
+          <p className="px-2 text-center md:text-left text-base md:text-xl">
             {q.answer.includes("email:") ? (
               <>
                 {q.answer.split("email:")[0]}
