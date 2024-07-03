@@ -81,6 +81,10 @@ const InteractiveCanvas = () => {
         // Handle if null is returned
       const goals = SessionService.kuvitusSessionCheck(localGoals);
       if (goals && goals.length > 0) {
+        goals.map((goal) => {
+          const newRenderPosition = getRandomPosition();
+          goal.position = newRenderPosition;
+        })
         dispatch(addSessionGoals(goals));
       }
     };
