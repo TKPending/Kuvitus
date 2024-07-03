@@ -1,6 +1,6 @@
 import CanvasRevisionComponent from "@/app/components/canvas/CanvasRevisionComponent";
 import CanvasZoomComponent from "@/app/components/canvas/CanvasZoomComponent";
-import { ElementType } from "../types/DrawingTypes";
+import { ElementType } from "@/app/types/DrawingTypes";
 
 type Props = {
   scale: number;

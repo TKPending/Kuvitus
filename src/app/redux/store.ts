@@ -6,7 +6,7 @@ import {
 } from "@reduxjs/toolkit";
 
 import { GoalType } from "@/app/types/GoalType";
-import { LocalGoalStateType } from "../types/LocalGoalStateType";
+import { LocalGoalStateType } from "@/app/types/LocalGoalStateType";
 import localGoalsReducer from "./slices/localGoals/localGoalsSlice";
 import goalReducer from "./slices/goal/goalSlice";
 

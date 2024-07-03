@@ -13,11 +13,11 @@ import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
 import { getCurrentDate } from "@/app/util/getCurrentDate";
 import SessionService from "@/services/sessionStorage/SessionService";
 import { GoalType } from "@/app/types/GoalType";
-import { useIsMobile } from "../hooks/useIsMobile";
+import { useIsMobile } from "@/app/hooks/useIsMobile";
 
 const GoalOverviewHeaderContainer = () => {
   const dispatch = useDispatch();
-  const isMobile = useIsMobile();
+  const isMobile: boolean = useIsMobile();
   const { title, status, uID }: GoalType = useSelector(
     (state: RootState) => state.goal
   );

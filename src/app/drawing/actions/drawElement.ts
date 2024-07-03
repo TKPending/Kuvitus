@@ -1,7 +1,7 @@
 import { RoughCanvas } from "roughjs/bin/canvas";
 import { ElementType } from "@/app/types/DrawingTypes";
 import getStroke from "perfect-freehand";
-import { getSvgPathFromStroke } from "../retrieval/getSvgPathFromStroke";
+import { getSvgPathFromStroke } from "@/app/drawing/retrieval/getSvgPathFromStroke";
 import { setCanvasErrorMessage } from "@/app/redux/slices/goal/goalSlice";
 import { Dispatch, UnknownAction } from "@reduxjs/toolkit";
 

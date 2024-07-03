@@ -1,5 +1,5 @@
 import { ElementType } from "@/app/types/DrawingTypes";
-import { positionWithinElement } from "../util/positionWithinElement";
+import { positionWithinElement } from "@/app/drawing/util/positionWithinElement";
 
 export const getElementAtPosition = (
   x: number,

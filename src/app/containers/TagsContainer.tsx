@@ -1,4 +1,4 @@
-import TagsComponent from "../components/TagsComponent";
+import TagsComponent from "@/app/components/TagsComponent";
 
 type Props = {
   tags: string[];

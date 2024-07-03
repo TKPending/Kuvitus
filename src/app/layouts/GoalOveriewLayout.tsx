@@ -1,11 +1,11 @@
-import { useIsMobile } from "../hooks/useIsMobile";
+import { RootState } from "@/app/redux/store"
+import { useSelector } from "react-redux";
+import { useIsMobile } from "@/app/hooks/useIsMobile";
 import GoalOverviewHeaderContainer from "@/app/containers/GoalOverviewHeaderContainer";
 import GoalDescriptionComponent from "@/app/components/goalOverview/GoalDescriptionComponent";
-import { useSelector } from "react-redux";
-import { RootState } from "../redux/store";
-import { daysUntilCompletion } from "../util/daysUntilCompletion";
-import { getDaysLeftStyle } from "../util/getDaysLeftStyle";
-import { GoalType } from "../types/GoalType";
+import { daysUntilCompletion } from "@/app/util/daysUntilCompletion"
+import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
+import { GoalType } from "@/app/types/GoalType";
 
 const GoalOverviewLayout = () => {
   const isMobile: boolean = useIsMobile();
