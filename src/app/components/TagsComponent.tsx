@@ -20,7 +20,7 @@ const TagsComponent = ({
       className={`h-6 w-auto px-2 bg-white rounded-lg flex items-center justify-center gap-2`}
     >
       <p
-        className={`text-black w-auto text-base`}
+        className={`text-black w-auto text-[12px] lg:text-base`}
       >
         {title}
       </p>
