@@ -1,5 +1,6 @@
 import { RootState } from "@/app/redux/store";
 import { useSelector, useDispatch } from "react-redux";
+import { useIsMobile } from "@/app/hooks/useIsMobile";
 import CalendarComponent from "@/app/components/custom/calendar/CalendarComponent";
 import { setGoalDueDate } from "@/app/redux/slices/goal/goalSlice";
 import { GoalType } from "@/app/types/GoalType";
@@ -9,6 +10,7 @@ import SessionService from "@/services/sessionStorage/SessionService";
 
 const GoalDateComponent = () => {
   const dispatch = useDispatch();
+  const isMobile: boolean = useIsMobile();
   const darkMode: boolean = true;
   const { uID, dueDate, status, completeDate }: GoalType = useSelector((state: RootState) => state.goal);
   const remainingDays: number = daysUntilCompletion(dueDate);
@@ -35,8 +37,8 @@ const GoalDateComponent = () => {
             </p>
           )}
         </div>
-      ) : (
-        <div className="flex flex-col items-center w-32">
+      ) : !isMobile && (
+        <div className="flex flex-col items-center">
           {dueDate && <p className="text-base font-semibold">Due: {dueDate}</p>}
           <p className={`font-semibold text-xs ${remainingDaysSyle.style}`}>
             {dueDate && remainingDaysSyle.text}

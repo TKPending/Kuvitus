@@ -10,7 +10,7 @@ const HelpButtonComponent = () => {
   };
 
   return (
-    <div className="z-50 absolute bottom-5 right-5 flex items-center justify-center">
+    <div className="z-50 flex items-center justify-center">
       <FontAwesomeIcon
         icon={faQuestion}
         onClick={handleRouting}
