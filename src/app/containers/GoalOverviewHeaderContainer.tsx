@@ -65,7 +65,7 @@ const GoalOverviewHeaderContainer = () => {
         <TextInputComponent
           text={title}
           size="text-xl"
-          customStyle="font-semibold flex-wrap"
+          customStyle="font-semibold flex-wrap py-2"
           onSave={handleOnSave}
           onChange={handleOnChange}
         />

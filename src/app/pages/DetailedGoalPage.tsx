@@ -10,8 +10,8 @@ import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
-import HelpButtonComponent from "@/app/components/HelpButtonComponent";
 import CanvasUnavailableComponent from "@/app/components/canvas/CanvasUnavailableComponent";
+import NavigationBarComponent from "../components/interactive/NavigationBarComponent";
 
 type Props = {
   goalUID: string;
@@ -43,14 +43,16 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
           <div
             className={`flex flex-col gap-4 ${
               isMobile ? "h-auto" : "h-screen"
-            } w-full p-4`}
+            } w-full pt-4`}
           >
             <GoalOverviewLayout />
             {isMobile ? <CanvasUnavailableComponent /> : <DrawingCanvas />}
           </div>
 
+          <div className="flex flex-col w-full gap-8 py-8">
+            {!isMobile && <NavigationBarComponent />}
           <SubGoalOverviewLayout />
-          <HelpButtonComponent />
+          </div>
         </>
       )}
     </div>

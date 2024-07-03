@@ -25,7 +25,7 @@ const ConfirmDeletionComponent = ({ subGoalUID, onClickState }: Props) => {
 
   return (
     <div className="h-12 w-full flex items-center justify-end gap-4">
-      <p>Are you sure you want to delete this sub goal?</p>
+      <p className="text-center">Are you sure you want to delete this sub goal?</p>
 
       <div className="flex gap-2 transition duration-200 font-semibold">
         <p

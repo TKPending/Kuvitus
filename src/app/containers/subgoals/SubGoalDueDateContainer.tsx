@@ -64,7 +64,7 @@ const SubGoalDueDateContainer = ({ subUID, dueDate, status }: Props) => {
   };
 
   return (
-    <div className="flex items-center justify-end px-8 w-full">
+    <div className="flex items-center justify-end px-8 w-full ">
       <div className="flex flex-col gap-2 justify-center items-center">
         <div className="flex gap-4">
           {status !== 1 && (

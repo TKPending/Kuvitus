@@ -12,7 +12,7 @@ const SubGoalOverviewLayout = () => {
   );
 
   return (
-    <div className="sticky top-5 h-screen w-full p-8 flex flex-col">
+    <div className="sticky top-5 h-screen lg:h-full w-full p-8 flex flex-col">
       <SubGoalHeaderComponent />
       <div className="flex-1 px-6 overflow-y-auto bg-kuvitus-sub-background rounded-br-xl rounded-bl-xl">
         {subGoals.length > 5 && <UpdateSubGoalOptionsComponent />}
