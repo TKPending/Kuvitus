@@ -49,8 +49,8 @@ const DetailedGoalPage = ({ goalUID }: Props) => {
             {isMobile ? <CanvasUnavailableComponent /> : <DrawingCanvas />}
           </div>
 
-          <div className="flex flex-col w-full gap-8 py-8">
-            {!isMobile && <NavigationBarComponent />}
+          <div className="flex flex-col w-full gap-8 py-8 max-h-screen">
+            {/* {!isMobile && <NavigationBarComponent />} */}
           <SubGoalOverviewLayout />
           </div>
         </>

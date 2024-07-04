@@ -4,7 +4,9 @@ import ProgressionComponent from "@/app/components/custom/progression/Progressio
 import { SubType } from "@/app/types/SubType";
 
 const SubGoalHeaderComponent = () => {
-  const subGoals: SubType[] = useSelector((state: RootState) => state.goal.subGoals);
+  const subGoals: SubType[] = useSelector(
+    (state: RootState) => state.goal.subGoals
+  );
 
   return (
     <div className="p-8 bg-kuvitus-primary-blue text-white flex items-center justify-between rounded-tr-xl rounded-tl-xl">

@@ -57,7 +57,7 @@ const GoalOverviewHeaderContainer = () => {
     >
       {!isMobile && <ReturnHomeComponent />}
 
-      <div className="flex w-full items-center justify-evenly">
+      <div className="flex gap-1 w-full items-center justify-evenly">
         <StatusComponent
           status={status}
           handleDispatch={(option) => handleStatusChange(option)}
@@ -65,7 +65,7 @@ const GoalOverviewHeaderContainer = () => {
         <TextInputComponent
           text={title}
           size="text-xl"
-          customStyle="font-semibold flex-wrap py-2"
+          customStyle="font-semibold flex-wrap py-2 transition duration-500"
           onSave={handleOnSave}
           onChange={handleOnChange}
         />

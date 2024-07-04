@@ -1,6 +1,7 @@
 import React from "react";
 import { RootState } from "@/app/redux/store";
 import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 import {
   setSubGoalDetails,
   setSubGoalFocus,
@@ -29,6 +30,7 @@ const SubGoalDropdownContainer = ({
 }: Props) => {
   const dispatch = useDispatch();
   const goalUID: string = useSelector((state: RootState) => state.goal.uID);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleSubGoalFocus = () => {
     dispatch(setSubGoalFocus(UID));
@@ -60,12 +62,17 @@ const SubGoalDropdownContainer = ({
     SessionService.removeSubGoalTag(goalUID, UID, tag);
   };
 
+  const handleIsFocused = () => setIsFocused(!isFocused);
+
   return (
     <div
       onClick={handleSubGoalFocus}
-      className="flex cursor-pointer flex-col gap-2 bg-kuvitus-secondary-blue border-white border-2 text-black p-4"
+      className="flex cursor-pointer flex-col gap-2 bg-kuvitus-secondary-blue border-white border-2 border-t-0 text-black p-4 rounded-bl-lg rounded-br-lg"
     >
-      <div className="flex-col gap-4 flex hover:border-2 hover:border-kuvitus-primary-blue transiton duration-400 p-1 rounded-lg">
+      <div 
+        onFocus={handleIsFocused}
+        onBlur={handleIsFocused}
+        className={`flex-col gap-2 flex border-2 ${isFocused ? "border-opacity-100" : "border-opacity-20"} hover:border-opacity-100 border-kuvitus-primary-blue p-2 rounded-lg transition duration-500`}>
         <p>Details</p>
 
         <TextInputComponent

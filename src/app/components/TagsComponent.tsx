@@ -15,19 +15,24 @@ const TagsComponent = ({
   handleDeletion,
 }: Props) => {
 
+  const handleDeleteTag = (e: React.MouseEvent<SVGSVGElement, MouseEvent>, title: string) => {
+    e.stopPropagation();
+    handleDeletion(title)
+  }
+
   return (
     <div
       className={`h-6 w-auto px-2 bg-white rounded-lg flex items-center justify-center gap-2`}
     >
       <p
-        className={`text-black w-auto text-[12px] lg:text-base`}
+        className={`text-black w-auto text-[12px] md:text-[14px]`}
       >
         {title}
       </p>
       {button && (
         <FontAwesomeIcon
           icon={faXmark}
-          onClick={() => handleDeletion(title)}
+          onClick={(e) => handleDeleteTag(e, title)}
           className="cursor-pointer hover:text-kuvitus-uncomplete"
         />
       )}

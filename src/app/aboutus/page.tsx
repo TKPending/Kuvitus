@@ -34,7 +34,8 @@ const AboutUs = () => {
         ) : page === 1 ? (
           <AboutUsContainer />
         ) : (
-          <FuturePlansContainer />
+          <></>
+          // <FuturePlansContainer />
         )}
       </div>
       <AboutNavigationComponent page={page} handlePageChange={handlePageChange} />

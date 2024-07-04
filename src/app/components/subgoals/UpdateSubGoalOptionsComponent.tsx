@@ -11,7 +11,7 @@ import SessionService from "@/services/sessionStorage/SessionService";
 
 const UpdateSubGoalOptionsComponent = () => {
   const dispatch = useDispatch();
-  const { uID } = useSelector((state: RootState) => state.goal);
+  const { subGoals, uID } = useSelector((state: RootState) => state.goal);
   const [deleteClicked, setDeleteClicked] = useState<boolean>(false);
 
   const handleClicked = () => {
@@ -53,12 +53,12 @@ const UpdateSubGoalOptionsComponent = () => {
           </div>
         )}
         <div className="flex gap-2">
-          <div
+          {subGoals.length > 5 && <div
             onClick={handleAddSubGoal}
             className="cursor-pointer bg-kuvitus-completed  p-2 rounded-xl"
           >
             Add Goal
-          </div>
+          </div>}
           <div
             onClick={handleClicked}
             className="cursor-pointer bg-kuvitus-uncomplete p-2 rounded-xl"

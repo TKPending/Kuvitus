@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-/* Custom CSS for the underline animation */
+/* Underline animation */
 .underline-animation {
     position: relative;
     display: inline-block;
@@ -25,4 +25,55 @@
     visibility: visible;
     width: 100%;
   }
+
+  /* SubGoalLayout.css */
+
+.dropdown-enter {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition: max-height 300ms ease-out, opacity 300ms ease-out;
+}
+
+.dropdown-enter-active {
+  max-height: 500px; 
+  opacity: 1;
+}
+
+.dropdown-exit {
+  max-height: 500px; 
+  opacity: 1;
+  overflow: hidden;
+}
+
+.dropdown-exit-active {
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 300ms ease-in, opacity 300ms ease-in;
+}
+
+/* SubGoalOverviewLayout.css */
+
+.goal-enter {
+  opacity: 0;
+  transform: translateY(-10%);
+}
+
+.goal-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms, transform 300ms;
+}
+
+.goal-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.goal-exit-active {
+  opacity: 0;
+  transform: translateY(-10%);
+  transition: opacity 300ms, transform 300ms;
+}
+
   

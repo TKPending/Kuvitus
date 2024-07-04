@@ -28,7 +28,7 @@ const GoalDateComponent = () => {
   };
 
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="flex items-center justify-center gap-2">
       {status === 1 ? (
         <div className="flex flex-col flex-wrap items-center justify-center">
           {completeDate && (
@@ -38,8 +38,8 @@ const GoalDateComponent = () => {
           )}
         </div>
       ) : !isMobile && (
-        <div className="flex flex-col items-center">
-          {dueDate && <p className="text-base font-semibold">Due: {dueDate}</p>}
+        <div className="flex flex-col items-center w-24">
+          {dueDate && <p className="text-xs font-semibold">Due: {dueDate}</p>}
           <p className={`font-semibold text-xs ${remainingDaysSyle.style}`}>
             {dueDate && remainingDaysSyle.text}
           </p>

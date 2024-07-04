@@ -43,7 +43,9 @@ const AddTagsComponent = ({ subUID }: Props) => {
   };
 
   const handleNewTagSave = async () => {
-    // Handle in backend
+    if (newTag === "") {
+      return;
+    }
     dispatch(addSubGoalTag({
         subUID: subUID,
         tagToAdd: newTag,
@@ -66,7 +68,7 @@ const AddTagsComponent = ({ subUID }: Props) => {
         <div className="flex gap-2 items-center justify-center">
           <TextInputComponent
             text={newTag}
-            customStyle="border-2 border-kuvitus-primary-blue"
+            customStyle="border-2 border-kuvitus-primary-blue bg-neutral-200"
             onSave={handleNewTagSave}
             onChange={handleNewTagName}
           />

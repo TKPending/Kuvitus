@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import { useTransition, animated } from "@react-spring/web";
 
 type Props = {
   status: number;
@@ -44,30 +45,38 @@ const StatusComponent = ({ status, button = true, handleDispatch }: Props) => {
     };
   }, [progressClicked]);
 
+  const transitions = useTransition(progressClicked, {
+    from: { opacity: 0, transform: "translateY(-10px)" },
+    enter: { opacity: 1, transform: "translateY(0)" },
+    leave: { opacity: 0, transform: "translateY(-10px)" },
+  });
+
   return (
     <div className="relative" ref={dropdownRef}>
       <p
-        className={`p-2 cursor-pointer rounded-lg text-white hover:bg-opacity-80 transition duration-400 ${
+        className={`p-2 ${button ? "cursor-pointer hover:bg-opacity-80" : ""} rounded-lg text-white transition duration-400 ${
           status === 0 ? "bg-kuvitus-uncomplete" : status === 1 ? "bg-kuvitus-completed" : "bg-kuvitus-pending"
         }`}
-        onClick={handleInitialClick} // Toggle dropdown visibility
-        tabIndex={0} // Make focusable
+        onClick={handleInitialClick} 
+        tabIndex={0}
       >
         {status === 0 ? "Uncomplete" : status === 1 ? "Completed" : "Pending"}
       </p>
-      {progressClicked && (
-        <div className="absolute z-50 top-full left-0 mt-1 bg-white shadow-md rounded-md">
-          {options.map((option: string, index: number) => (
-            <p
-              key={index}
-              className="p-2 text-black cursor-pointer hover:bg-gray-200"
-              onClick={(e: React.MouseEvent<HTMLParagraphElement>) => handleOptionClick(e, index)}
-              tabIndex={0} // Make focusable
-            >
-              {option}
-            </p>
-          ))}
-        </div>
+      {transitions((style, item) =>
+        item ? (
+          <animated.div style={style} className="absolute z-50 top-full left-0 mt-1 bg-white shadow-md rounded-md">
+            {options.map((option: string, index: number) => (
+              <p
+                key={index}
+                className="p-2 text-black cursor-pointer hover:bg-gray-200"
+                onClick={(e: React.MouseEvent<HTMLParagraphElement>) => handleOptionClick(e, index)}
+                tabIndex={0} 
+              >
+                {option}
+              </p>
+            ))}
+          </animated.div>
+        ) : null
       )}
     </div>
   );

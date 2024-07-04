@@ -2,6 +2,7 @@ import { SubType } from "@/app/types/SubType";
 import SubGoalFrontContainer from "@/app/containers/subgoals/SubGoalFrontContainer";
 import SubGoalDropdownContainer from "@/app/containers/subgoals/SubGoalDropdownContainer";
 import DeleteSubGoalContainer from "@/app/containers/subgoals/DeleteSubGoalContainer";
+import { CSSTransition } from 'react-transition-group';
 
 type Props = {
   subGoal: SubType;
@@ -23,7 +24,12 @@ const SubGoalLayout = ({ subGoal }: Props) => {
         isPressed={subGoal.isPressed}
       />
 
-      {subGoal.isPressed && (
+      <CSSTransition
+        in={subGoal.isPressed}
+        timeout={300}
+        classNames="dropdown"
+        unmountOnExit
+      >
         <SubGoalDropdownContainer
           UID={subGoalUID}
           details={subGoal.subDetails}
@@ -31,7 +37,7 @@ const SubGoalLayout = ({ subGoal }: Props) => {
           status={subGoal.subStatus}
           tags={subGoal.subTags}
         />
-      )}
+      </CSSTransition>
     </div>
   );
 };

@@ -392,7 +392,8 @@ const DrawingCanvas = () => {
 
   return (
     <div className="h-3/4 p-4 flex items-center justify-center">
-      <div className="relative flex items-center justify-center h-full w-full overflow-hidden">
+      <div 
+        className={`relative flex items-center justify-center h-full w-full overflow-hidden`}>
         <CanvasToolBarComponent />
         {isError && <CanvasErrorComponent />}
         {displayDeleteOptions && <CanvasSureDeleteComponent />}

@@ -56,27 +56,33 @@ const SubGoalFrontContainer = ({
   return (
     <div
       onClick={handleSubGoalFocus}
-      className={`relative min-h-16 cursor-pointer bg-kuvitus-primary-blue border-white border-2 text-white flex items-center justify-around p-2 px-6 
+      className={`relative min-h-16 cursor-pointer bg-kuvitus-primary-blue border-white border-2 text-white px-4 flex flex-col justify-center
         ${isPressed ? "rounded-tr-xl rounded-tl-xl" : "rounded-xl pt-2"}`}
     >
-      <TextInputComponent
-        text={title}
-        subGoal={true}
-        customStyle="lg:text-xl"
-        onSave={handleTitleSave}
-        onChange={handleTitleChange}
-      />
+      <div className="absolute right-14 top-2 flex items-center justify-end h-6">
+        {!isPressed && !isMobile && (
+          <TagsContainer tags={tags} subUID={UID} button={false} />
+        )}
+      </div>
 
-      {!isPressed && (
-        <div className="flex flex-col items-center justify-center gap-4 p-2">
-          {!isMobile && <TagsContainer tags={tags} subUID={UID} button={false} />}
+      <div className={`flex items-center ${tags.length > 0 && "mt-4"} py-4`}>
+        <TextInputComponent
+          text={title}
+          subGoal={true}
+          customStyle={`lg:text-xl ${tags.length > 0 && "mb-4"}`}
+          onSave={handleTitleSave}
+          onChange={handleTitleChange}
+        />
 
-          <div className="w-full gap-4 flex items-center justify-end px-4 text-base">
-            {dueDate && status !== 1 && <p>{dueDate}</p>}
-            <StatusComponent status={status} button={false} />
+        {!isPressed && (
+          <div className="flex flex-col items-center justify-center gap-4 p-2">
+            <div className="w-full gap-4 flex items-center justify-end px-4 text-base">
+              {dueDate && status !== 1 && <p>{dueDate}</p>}
+              <StatusComponent status={status} button={false} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

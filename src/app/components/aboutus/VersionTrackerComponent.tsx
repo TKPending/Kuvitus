@@ -2,14 +2,14 @@ import { TextConstants } from "@/app/util/textConstants";
 
 const VersionTrackerComponent = () => {
   return (
-    <div className="bg-kuvitus-sub-background flex flex-col gap-4 h-full w-full p-4">
+    <div className="bg-kuvitus-sub-background flex flex-col gap-4 h-full w-full p-4 overflow-y-auto">
       <p className="text-2xl text-kuvitus-primary-blue">
         Kuvitus {TextConstants.version}
       </p>
 
+      <div className="flex flex-col gap-4 h-full">
       {TextConstants.nextFeatures.map((feature, index) => (
-        <div key={index} className="w-full flex h-12 items-center my-6">
-          <div className="h-6 flex items-center">
+        <div key={index} className="w-full flex h-12 items-center flex-wrap">
             <div
               className={`rounded-full h-6 w-6 ${
                 feature.status === "complete"
@@ -19,12 +19,14 @@ const VersionTrackerComponent = () => {
                   : "bg-kuvitus-pending"
               }`}
             ></div>
-          </div>
           <p className="text-base text-kuvitus-primary-blue px-2">
             {feature.task}
           </p>
         </div>
       ))}
+
+      </div>
+
     </div>
   );
 };
