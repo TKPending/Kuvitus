@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🧠 Kuvitus
 
-## Getting Started
+A To-Do site with a twist, designed to be both methodical and creative. Users can set goals and sub-goals, and mind map their thoughts using a Drawing Canvas similar to Excalidraw.
 
-First, run the development server:
+## Technologies Used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Next.js
+- React.js
+- TypeScript
+- Rough.js
+- CSS
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+With Kuvitus, you can:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **Create Goals**: Click on the big plus sign to create new goals.
+- **View Goals**: Dive into details by viewing your goals.
+- **Drawing Canvas**: A canvas for brainstorming and mind mapping, similar to Excalidraw, featuring:
+    - **ToolBar**: Choose from pencils, rectangles, lines, and text.
+    - **Undo and Redo**: Easily correct mistakes or revert changes.
+    - **Panning and Zooming**: Navigate and resize the canvas effortlessly.
+- **Create Sub-Goals**: Add sub-goals to track steps towards completing your main goals, with flexible descriptions.
 
-## Learn More
+## Why Kuvitus?
 
-To learn more about Next.js, take a look at the following resources:
+Kuvitus was inspired by my use of Excalidraw. While brainstorming ideas, I realised the value of integrating such a tool into a To-Do list, combining the freedom of mind mapping with organised task management. This project also provided an opportunity to deepen my experience with interactive web development, helping users seamlessly translate their thoughts into actionable steps.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Future Development
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Kuvitus is a work in progress, with many exciting features planned, including:
 
-## Deploy on Vercel
+- Smoother transitions with animations
+- Expanded toolbar with more tool options
+- Enhanced drawing canvas for a more pleasant experience
+- Keyboard shortcuts to improve efficiency
+- Backend implementation for data storage
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*Continued development will be based upon, free time and reception to the initial idea*
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Video Tutorial
