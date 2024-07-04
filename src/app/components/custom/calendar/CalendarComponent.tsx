@@ -43,7 +43,7 @@ const CalendarComponent = ({ dueDate, handleDispatch }: Props) => {
         customInput={
           <FontAwesomeIcon
             icon={faCalendarDays}
-            className="cursor-pointer hover:scale-110 transition duration-200 text-kuvitus-primary-blue"
+            className="cursor-pointer z-50 hover:scale-110 transition duration-200 text-kuvitus-primary-blue"
           />
         }
         onChange={handleDateChanged}

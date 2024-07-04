@@ -4,11 +4,10 @@ import { useTransition, animated } from "@react-spring/web";
 type Props = {
   status: number;
   button?: boolean;
-  dropdown?: boolean; // TODO: Fix the Z-Index Rendering
   handleDispatch?: (option: number) => void;
 };
 
-const StatusComponent = ({ status, button = true, dropdown=true, handleDispatch }: Props) => {
+const StatusComponent = ({ status, button = true, handleDispatch }: Props) => {
   const [progressClicked, setProgressClicked] = useState<boolean>(false);
   const options: string[] = ["Uncomplete", "Completed", "Pending"];
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -64,7 +63,7 @@ const StatusComponent = ({ status, button = true, dropdown=true, handleDispatch 
       </p>
       {transitions((style, item) =>
         item ? (
-          <animated.div style={style} className={`absolute z-50 ${dropdown ? "top-full" : "bottom-full"} left-0 mt-1 bg-white shadow-md rounded-md`}>
+          <animated.div style={style} className={`absolute z-50 top-full left-0 mt-1 bg-white shadow-md rounded-md`}>
             {options.map((option: string, index: number) => (
               <p
                 key={index}
