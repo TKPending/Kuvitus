@@ -35,7 +35,3 @@ Kuvitus is a work in progress, with many exciting features planned, including:
 - Enhanced drawing canvas for a more pleasant experience
 - Keyboard shortcuts to improve efficiency
 - Backend implementation for data storage
-
-*Continued development will be based upon, free time and reception to the initial idea*
-
-## Video Tutorial
