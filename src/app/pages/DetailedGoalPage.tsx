@@ -11,7 +11,7 @@ import SessionService from "@/services/sessionStorage/SessionService";
 import { setGoal } from "@/app/redux/slices/goal/goalSlice";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
 import CanvasUnavailableComponent from "@/app/components/canvas/CanvasUnavailableComponent";
-import NavigationBarComponent from "@/app/components/NavigationBarComponent";
+// import NavigationBarComponent from "@/app/components/NavigationBarComponent";
 
 type Props = {
   goalUID: string;

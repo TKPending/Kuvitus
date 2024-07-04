@@ -26,7 +26,7 @@ const SubGoalOverviewLayout = () => {
         {subGoals.length > 1 && <UpdateSubGoalOptionsComponent />}
 
         {transitions((style, goal) => (
-          <animated.div style={style} className="relative z-10">
+          <animated.div style={style} className="relative">
             <SubGoalLayout key={goal.subUID} subGoal={goal} />
           </animated.div>
         ))}

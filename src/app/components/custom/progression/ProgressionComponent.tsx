@@ -1,12 +1,13 @@
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { SubType } from "@/app/types/SubType";
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/redux/store';
 
-type Props = {
-  subGoals: SubType[];
-};
 
-const ProgressionComponent = ({ subGoals }: Props) => {
+const ProgressionComponent = () => {
+  const subGoals: SubType[] = useSelector((state: RootState) => state.goal.subGoals);
+
   const completeState = {
     textColor: "#fff",
     trailColor: "#fff",
