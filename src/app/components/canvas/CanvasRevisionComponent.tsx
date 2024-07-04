@@ -36,7 +36,7 @@ const CanvasRevisionComponent = ({ displayTrashCan, selectedElement, onUndo, onR
   const revisionOptions = [
     { type: "undo", icon: faRotateLeft, action: onUndo },
     { type: "redo", icon: faRotateRight, action: onRedo },
-    { type: `${elementToDelete ? "delete" : "delete-all"}`, icon: faTrash, action: handleDisplayDelete },
+    { type: "delete", icon: faTrash, action: handleDisplayDelete },
   ];
 
   return (
@@ -44,14 +44,14 @@ const CanvasRevisionComponent = ({ displayTrashCan, selectedElement, onUndo, onR
       {revisionOptions.map((option, index) => (
         <div
           key={index}
-          className={`${option.type === "delete-all" || option.type === "delete" && !displayTrashCan && "hidden"} flex flex-col items-center justify-center gap-2`}
+          className={`${option.type === "delete" && !displayTrashCan && "hidden"} select-none flex flex-col items-center justify-center gap-2`}
         >
           <p
             className={`${
               isOptionHovered === option.type
                 ? "text-kuvitus-secondary-blue scale-110"
                 : "text-white"
-            } transition duration-500 text-xs`}
+            } ${option.type === "delete" && "text-red-400"} transition duration-500 text-xs`}
           >
             {option.type}
           </p>
@@ -61,7 +61,7 @@ const CanvasRevisionComponent = ({ displayTrashCan, selectedElement, onUndo, onR
             onMouseOver={() => handleOptionHover(option.type)}
             onMouseLeave={() => setIsOptionHovered(null)}
             className={`hover:cursor-pointer hover:scale-105 rounded-full p-2 
-              ${option.type === "delete-all" ? "bg-kuvitus-uncomplete bg-opacity-40 hover:bg-opacity-80 transition duration-400" : "bg-kuvitus-secondary-blue"}
+              ${option.type === "delete" ? "bg-kuvitus-uncomplete bg-opacity-40 hover:bg-opacity-80 transition duration-400" : "bg-kuvitus-secondary-blue"}
               
             `}
           />

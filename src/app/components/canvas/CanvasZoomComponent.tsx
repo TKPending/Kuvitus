@@ -12,7 +12,7 @@ const CanvasZoomComponent = ({ scale, onZoomIn, onZoomOut }: Props) => {
     "flex items-center justify-center cursor-pointer hover:scale-105 hover:bg-kuvitus-primary-blue transition duration-200 h-8 w-8 rounded-lg bg-kuvitus-secondary-blue";
 
   return (
-    <div className="flex items justify-center gap-2">
+    <div className="flex items justify-center gap-2 select-none">
       <div className={`${style}`} onClick={onZoomOut}>
         <FontAwesomeIcon icon={faMinus} />
       </div>

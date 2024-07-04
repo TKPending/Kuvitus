@@ -39,9 +39,9 @@ const CanvasSureDeleteComponent = () => {
   return (
     <div
       ref={containerRef}
-      className="absolute z-10 flex flex-col gap-8 border-2 border-black p-4 rounded-lg shadow-lg"
+      className="absolute z-10 flex flex-col gap-8 border-2 border-white p-4 rounded-lg shadow-xl bg-kuvitus-primary-blue"
     >
-      <p className="text-2xl">Are you sure you want to delete all elements?</p>
+      <p className="text-2xl text-white" >Are you sure you want to delete all elements?</p>
 
       <div className="flex items-center justify-center gap-6">
         {options.map((decision: string, index: number) => (
@@ -54,7 +54,7 @@ const CanvasSureDeleteComponent = () => {
               decision === "Delete" ? deleteStyle : resumeStyle
             } transition duration-200`}
           >
-            <p className="font-semibold">{decision}</p>
+            <p className="font-semibold text-white">{decision}</p>
           </div>
         ))}
       </div>

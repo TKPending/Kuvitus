@@ -29,7 +29,8 @@ export const useHistory = (initialState: ElementType[]) => {
 
   useEffect(() => {
     const deleteSpecificElement = () => {
-      if (elementToDelete) {
+      // @ts-ignore
+      if (elementToDelete !== null && elementToDelete !== undefined) {
         const newHistory = history[index].filter((element: ElementType) => element.id !== elementToDelete);
         setHistory(prevState => [...prevState, newHistory]);
         setIndex(prevState => prevState + 1);
