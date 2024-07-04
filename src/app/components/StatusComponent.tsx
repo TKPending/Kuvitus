@@ -57,7 +57,7 @@ const StatusComponent = ({ status, button = true, handleDispatch }: Props) => {
         className={`p-2 ${button ? "cursor-pointer hover:bg-opacity-80" : ""} rounded-lg text-white transition duration-400 ${
           status === 0 ? "bg-kuvitus-uncomplete" : status === 1 ? "bg-kuvitus-completed" : "bg-kuvitus-pending"
         }`}
-        onClick={handleInitialClick} 
+        onClick={handleInitialClick}
         tabIndex={0}
       >
         {status === 0 ? "Uncomplete" : status === 1 ? "Completed" : "Pending"}
@@ -70,7 +70,7 @@ const StatusComponent = ({ status, button = true, handleDispatch }: Props) => {
                 key={index}
                 className="p-2 text-black cursor-pointer hover:bg-gray-200"
                 onClick={(e: React.MouseEvent<HTMLParagraphElement>) => handleOptionClick(e, index)}
-                tabIndex={0} 
+                tabIndex={0}
               >
                 {option}
               </p>

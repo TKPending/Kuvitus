@@ -22,11 +22,11 @@ const SubGoalOverviewLayout = () => {
   return (
     <div className="sticky top-5 h-screen lg:h-full w-full p-8 flex flex-col">
       <SubGoalHeaderComponent />
-      <div className="flex-col px-6 overflow-y-auto bg-kuvitus-sub-background rounded-br-xl rounded-bl-xl h-full hover:shadow-lg"> 
+      <div className="flex-col px-6 overflow-y-auto bg-kuvitus-sub-background rounded-br-xl rounded-bl-xl h-full hover:shadow-lg relative"> 
         {subGoals.length > 1 && <UpdateSubGoalOptionsComponent />}
 
         {transitions((style, goal) => (
-          <animated.div style={style}>
+          <animated.div style={style} className="relative z-10">
             <SubGoalLayout key={goal.subUID} subGoal={goal} />
           </animated.div>
         ))}

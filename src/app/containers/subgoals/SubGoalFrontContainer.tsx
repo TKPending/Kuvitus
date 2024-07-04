@@ -57,7 +57,7 @@ const SubGoalFrontContainer = ({
     <div
       onClick={handleSubGoalFocus}
       className={`relative min-h-16 cursor-pointer bg-kuvitus-primary-blue border-white border-2 text-white px-4 flex flex-col justify-center
-        ${isPressed ? "rounded-tr-xl rounded-tl-xl" : "rounded-xl pt-2"}`}
+        ${isPressed ? "rounded-tr-xl rounded-tl-xl" : "rounded-xl pt-2"} z-10`}
     >
       <div className="absolute right-14 top-2 flex items-center justify-end h-6">
         {!isPressed && !isMobile && (

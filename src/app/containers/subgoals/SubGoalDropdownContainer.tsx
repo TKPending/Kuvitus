@@ -67,7 +67,7 @@ const SubGoalDropdownContainer = ({
   return (
     <div
       onClick={handleSubGoalFocus}
-      className="flex cursor-pointer flex-col gap-2 bg-kuvitus-secondary-blue border-white border-2 border-t-0 text-black p-4 rounded-bl-lg rounded-br-lg"
+      className="flex overflow-visible cursor-pointer flex-col gap-2 bg-kuvitus-secondary-blue border-white border-2 border-t-0 text-black p-4 rounded-bl-lg rounded-br-lg"
     >
       <div 
         onFocus={handleIsFocused}
