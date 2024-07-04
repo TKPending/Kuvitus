@@ -28,7 +28,6 @@ const CanvasRevisionComponent = ({ displayTrashCan, selectedElement, onUndo, onR
 
   const handleDisplayDelete = () => {
     if (selectedElement) {
-      console.log(selectedElement)
       dispatch(specificDelete(selectedElement.id));
     } else {
       dispatch(setDeleteOptionVisible(true));

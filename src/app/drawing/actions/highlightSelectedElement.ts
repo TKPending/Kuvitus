@@ -9,7 +9,6 @@ export const highlightSelectedElement = (
     const { x1, y1, x2, y2 } = element;
     canvasContext.fillStyle = "red";
     canvasContext.strokeStyle= "#fff";
-    console.log(canvasContext)
     const radius = 4;
     [x1, y1, x2, y2].forEach((corner, i) => {
       const x = i % 2 === 0 ? corner : x2;
