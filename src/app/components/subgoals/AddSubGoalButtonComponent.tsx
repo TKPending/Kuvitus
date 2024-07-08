@@ -10,7 +10,7 @@ const AddSubGoalButtonComponent = () => {
   const dispatch = useDispatch();
   const { uID }: GoalType = useSelector((state: RootState) => state.goal);
 
-  const handleAddSubGoal = async () => {
+  const handleAddSubGoal = () => {
     const subUID = uuid();
     dispatch(addSubGoal(subUID));
     const subGoalData: SubType = {

@@ -42,7 +42,7 @@ const AddTagsComponent = ({ subUID }: Props) => {
     setIsTagActive(false);
   };
 
-  const handleNewTagSave = async () => {
+  const handleNewTagSave = () => {
     if (newTag === "") {
       return;
     }

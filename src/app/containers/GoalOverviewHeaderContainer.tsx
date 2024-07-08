@@ -30,7 +30,7 @@ const GoalOverviewHeaderContainer = () => {
     dispatch(setGoalTitle(newValue));
   };
 
-  const handleOnSave = async () => {
+  const handleOnSave = () => {
     // Error handling
     SessionService.updateValue(uID, "title", title);
   };

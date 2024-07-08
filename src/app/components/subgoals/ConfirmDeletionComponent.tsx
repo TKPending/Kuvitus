@@ -13,7 +13,7 @@ const ConfirmDeletionComponent = ({ subGoalUID, onClickState }: Props) => {
   const dispatch = useDispatch();
   const { uID }: GoalType = useSelector((state: RootState) => state.goal);
 
-  const handleGoalDeletion = async () => {
+  const handleGoalDeletion = () => {
     // Remove from Redux
     dispatch(removeSubGoal(subGoalUID));
 

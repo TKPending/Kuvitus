@@ -21,7 +21,7 @@ const GoalDescriptionComponent = () => {
     dispatch(setGoalDescription(newValue));
   };
 
-  const handleOnSave = async () => {
+  const handleOnSave = () => {
     SessionService.updateValue(uID, "description", description);
   };
 
