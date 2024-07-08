@@ -52,7 +52,7 @@ const StatusComponent = ({ status, button = true, handleDispatch }: Props) => {
   });
 
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative " ref={dropdownRef}>
       <p
         className={`p-2 ${button ? "cursor-pointer hover:bg-opacity-80" : ""} rounded-lg text-white transition duration-400 ${
           status === 0 ? "bg-kuvitus-uncomplete" : status === 1 ? "bg-kuvitus-completed" : "bg-kuvitus-pending"

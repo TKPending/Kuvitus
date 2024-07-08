@@ -38,7 +38,7 @@ const GoalOptionsComponent = ({ goalUID, isFocused }: Props) => {
               option.title === "Delete"
                 ? "bg-red-400 hover:bg-kuvitus-uncomplete"
                 : "bg-kuvitus-pending hover:bg-kuvitus-secondary-blue"
-            } flex items-center justify-center transition duration-200 cursor-pointer rounded shadow-lg h-6 w-12 z-50`}
+            } flex items-center justify-center transition duration-200 cursor-pointer rounded shadow-lg h-6 w-12 z-40`}
           >
             <p className="text-xs font-semibold">{option.title}</p>
           </div>

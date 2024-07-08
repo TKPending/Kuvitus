@@ -24,10 +24,17 @@ type Props = {
 const SubGoalDueDateContainer = ({ subUID, dueDate, status }: Props) => {
   const dispatch = useDispatch();
   const goalUID: string = useSelector((state: RootState) => state.goal.uID);
-  const remainingDays: number = daysUntilCompletion(dueDate);
-  const remainingDaysStyle: { text: string; style: string } = getDaysLeftStyle(remainingDays);
 
-  const handleStatusChange = (option: number) => {
+  const handleDueDateComplete = () => {
+    const currentDate: string = getCurrentDate();
+    dispatch(setSubGoalCompleteDate({
+      subUID,
+      completeDate: currentDate,
+    }));
+    SessionService.updateSubGoalValue(goalUID, subUID, "subCompleteDate", currentDate);
+  };
+
+  const handleStatusDispatch = (option: number) => {
     dispatch(setSubGoalStatus({
         subUID,
         newStatus: option,
@@ -35,12 +42,7 @@ const SubGoalDueDateContainer = ({ subUID, dueDate, status }: Props) => {
     );
 
     if (option === COMPLETED) {
-      const completeDate: string = getCurrentDate();
-      dispatch(setSubGoalCompleteDate({
-        subUID,
-        completeDate,
-      }));
-      SessionService.updateSubGoalValue(goalUID, subUID, "subCompleteDate", completeDate);
+      handleDueDateComplete();
     } else {
       dispatch(setSubGoalCompleteDate({
         subUID,  
@@ -51,7 +53,7 @@ const SubGoalDueDateContainer = ({ subUID, dueDate, status }: Props) => {
     SessionService.updateSubGoalValue(goalUID, subUID, "subStatus", option);
   };
 
-  const handleDateChange = (newDate: string) => {
+  const handleDueDateDispatch = (newDate: string) => {
     dispatch(
       setSubGoalDueDate({
         subUID,
@@ -63,20 +65,22 @@ const SubGoalDueDateContainer = ({ subUID, dueDate, status }: Props) => {
     };
   };
 
+  const remainingDays: number = daysUntilCompletion(dueDate);
+  const remainingDaysStyle: { text: string; style: string } = getDaysLeftStyle(remainingDays);
+
   return (
-    <div className=" flex items-center justify-end px-8 w-full ">
-      <div className="flex flex-col gap-2 justify-center items-center">
+    <div className=" flex items-center justify-end px-8 w-full z-50">
+      <div className="flex flex-col gap-2 justify-center items-center z-50">
         <div className="flex gap-4">
           {status !== 1 && (
             <CalendarComponent
               dueDate={dueDate}
-              handleDispatch={handleDateChange}
+              handleDispatch={handleDueDateDispatch}
             />
           )}
           <StatusComponent
             status={status}
-            dropdown={false}
-            handleDispatch={handleStatusChange}
+            handleDispatch={handleStatusDispatch}
           />
         </div>
 

@@ -35,7 +35,7 @@ const GoalOverviewHeaderContainer = () => {
     SessionService.updateValue(uID, "title", title);
   };
 
-  const handleStatusChange = (option: number) => {
+  const handleStatusDispatch = (option: number) => {
     if (option === COMPLETED) {
       const completedDate: string = getCurrentDate();
       SessionService.updateValue(uID, "completeDate", completedDate);
@@ -60,7 +60,7 @@ const GoalOverviewHeaderContainer = () => {
       <div className="flex gap-1 w-full items-center justify-evenly">
         <StatusComponent
           status={status}
-          handleDispatch={(option) => handleStatusChange(option)}
+          handleDispatch={(option) => handleStatusDispatch(option)}
         />
         <TextInputComponent
           text={title}

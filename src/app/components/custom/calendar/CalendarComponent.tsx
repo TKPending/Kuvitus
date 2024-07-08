@@ -36,7 +36,7 @@ const CalendarComponent = ({ dueDate, handleDispatch }: Props) => {
   return (
     <div
       onClick={handleDateClicked}
-      className="flex items-center justify-center relative"
+      className="flex items-center justify-center relative z-50"
     >
       <DatePicker
         selected={selectedDate}

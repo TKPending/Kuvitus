@@ -2,12 +2,13 @@ import React from "react";
 import { RootState } from "@/app/redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react";
+import { CSSTransition } from "react-transition-group";
 import {
   setSubGoalDetails,
   setSubGoalFocus,
   removeSubGoalTag,
 } from "@/app/redux/slices/goal/goalSlice";
-import TextInputComponent from "@/app/components/TextInputComponent"
+import TextInputComponent from "@/app/components/TextInputComponent";
 import AddTagsComponent from "@/app/components/subgoals/AddTagsComponent";
 import SubGoalDueDateContainer from "@/app/containers/subgoals/SubGoalDueDateContainer";
 import TagsContainer from "@/app/containers/TagsContainer";
@@ -16,6 +17,7 @@ import SessionService from "@/services/sessionStorage/SessionService";
 type Props = {
   UID: string;
   details: string;
+  isPressed: boolean;
   dueDate: string;
   status: number;
   tags: string[];
@@ -24,6 +26,7 @@ type Props = {
 const SubGoalDropdownContainer = ({
   UID,
   details,
+  isPressed,
   dueDate,
   status,
   tags,
@@ -48,13 +51,14 @@ const SubGoalDropdownContainer = ({
       })
     );
   };
-  
+
   const handleOnSave = () => {
     SessionService.updateSubGoalValue(goalUID, UID, "subDetails", details);
   };
-  
+
   const handleTagDeletion = (tag: string) => {
-    dispatch(removeSubGoalTag({
+    dispatch(
+      removeSubGoalTag({
         subUID: UID,
         tagToRemove: tag,
       })
@@ -65,31 +69,50 @@ const SubGoalDropdownContainer = ({
   const handleIsFocused = () => setIsFocused(!isFocused);
 
   return (
-    <div
-      onClick={handleSubGoalFocus}
-      className="flex overflow-visible cursor-pointer flex-col gap-2 bg-kuvitus-secondary-blue border-white border-2 border-t-0 text-black p-4 rounded-bl-lg rounded-br-lg"
+    <CSSTransition
+      in={isPressed}
+      timeout={300}
+      classNames="dropdown"
+      unmountOnExit
     >
-      <div 
-        onFocus={handleIsFocused}
-        onBlur={handleIsFocused}
-        className={`flex-col gap-2 flex border-2 ${isFocused ? "border-opacity-100" : "border-opacity-20"} hover:border-opacity-100 border-kuvitus-primary-blue p-2 rounded-lg transition duration-500`}>
-        <p>Details</p>
+      <div
+        onClick={handleSubGoalFocus}
+        className="flex overflow-visible cursor-pointer flex-col gap-2 bg-kuvitus-secondary-blue border-white border-2 border-t-0 text-black p-4 rounded-bl-lg rounded-br-lg"
+      >
+        <div
+          onFocus={handleIsFocused}
+          onBlur={handleIsFocused}
+          className={`flex-col gap-2 flex border-2 ${
+            isFocused ? "border-opacity-100" : "border-opacity-20"
+          } hover:border-opacity-100 border-kuvitus-primary-blue p-2 rounded-lg transition duration-500`}
+        >
+          <p>Details</p>
 
-        <TextInputComponent
-          text={details}
-          input={false}
-          onSave={handleOnSave}
-          onChange={handleOnChange}
+          <TextInputComponent
+            text={details}
+            input={false}
+            onSave={handleOnSave}
+            onChange={handleOnChange}
+          />
+        </div>
+
+        <div className="flex gap-4 w-full p-2 items-center justify-end">
+          <TagsContainer
+            tags={tags}
+            subUID={UID}
+            onRemoval={handleTagDeletion}
+          />
+          <AddTagsComponent subUID={UID} />
+        </div>
+
+        <SubGoalDueDateContainer
+          subUID={UID}
+          dueDate={dueDate}
+          status={status}
         />
+        {/* <div className="absolute top-full left-0 h-72 w-72 bg-black"> Hello</div> */}
       </div>
-
-      <div className="flex gap-4 w-full p-2 items-center justify-end">
-        <TagsContainer tags={tags} subUID={UID} onRemoval={handleTagDeletion} />
-        <AddTagsComponent subUID={UID} />
-      </div>
-
-      <SubGoalDueDateContainer subUID={UID} dueDate={dueDate} status={status} />
-    </div>
+    </CSSTransition>
   );
 };
 
