@@ -56,7 +56,7 @@ export const TextConstants = {
       },
       {
         question: "Contact Tony",
-        answer: "You can contact me through this email: tony-koke@outlook.com",
+        answer: "You can contact me through this email: ",
       },
     ],
     nextFeatures: [
