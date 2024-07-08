@@ -55,13 +55,13 @@ const UpdateSubGoalOptionsComponent = () => {
         <div className="flex gap-2">
           {subGoals.length > 5 && <div
             onClick={handleAddSubGoal}
-            className="text-white cursor-pointer bg-kuvitus-completed p-1 rounded-xl"
+            className="text-white cursor-pointer bg-kuvitus-completed p-2 rounded-xl"
           >
             Add Goal
           </div>}
           <div
             onClick={handleClicked}
-            className="text-white cursor-pointer bg-kuvitus-uncomplete p-1 rounded-xl"
+            className="text-white cursor-pointer bg-kuvitus-uncomplete p-2 rounded-xl"
           >
             Delete All
           </div>

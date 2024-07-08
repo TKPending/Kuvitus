@@ -37,13 +37,13 @@ const CalendarComponent = ({ dueDate, handleDispatch }: Props) => {
     <div
       onClick={handleDateClicked}
       className="flex items-center justify-center relative z-50"
-    >
+      >
       <DatePicker
         selected={selectedDate}
         customInput={
           <FontAwesomeIcon
-            icon={faCalendarDays}
-            className="cursor-pointer z-50 hover:scale-110 transition duration-200 text-kuvitus-primary-blue"
+          icon={faCalendarDays}
+          className="cursor-pointer z-50 hover:scale-110 transition duration-200 text-kuvitus-primary-blue"
           />
         }
         onChange={handleDateChanged}
