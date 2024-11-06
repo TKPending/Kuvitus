@@ -18,6 +18,7 @@ import KuvitusLayout from "@/app/layouts/KuvitusLayout";
 import SessionService from "@/services/sessionStorage/SessionService";
 import NavigationBarComponent from "@/app/components/NavigationBarComponent";
 import RemoveAllGoalsComponent from "@/app/components/interactive/RemoveAllGoalsComponent";
+import { getSessionStorage, removeSessionStorage } from "@/services/sessionStorage/SessionHelper";
 
 const InteractiveCanvas = () => {
   const dispatch = useDispatch();
@@ -96,8 +97,8 @@ const InteractiveCanvas = () => {
   }, [isMobile]);
 
   useEffect(() => {
-    if (sessionStorage.getItem("specificGoal")) {
-      sessionStorage.removeItem("specificGoal");
+    if (getSessionStorage("specificGoal")) {
+      removeSessionStorage("specificGoal");
     }
 
     setTimeout(() => {

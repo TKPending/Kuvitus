@@ -2,10 +2,11 @@ import { GoalType } from "@/app/types/GoalType";
 import { LocalGoalType } from "@/app/types/LocalGoalType";
 import { ActiveGoalType } from "@/app/types/ActiveGoalType";
 import { SubType } from "@/app/types/SubType";
+import { getSessionStorage, setSessionStorage } from "./SessionHelper";
 
 class SessionService {
   private fetchSessionGoals() {
-    const sessionGoals: string | null = sessionStorage.getItem("goals");
+    const sessionGoals: string | null = getSessionStorage("goals");
     const jsonGoal: LocalGoalType[] = JSON.parse(
       sessionGoals!
     ) as LocalGoalType[];
@@ -33,16 +34,16 @@ class SessionService {
   }
 
   public kuvitusSessionCheck(localGoals: LocalGoalType[]) {
-    const kuvitus = sessionStorage.getItem("application");
-    const goals = sessionStorage.getItem("goals");
+    const kuvitus = getSessionStorage("application");
+    const goals = getSessionStorage("goals");
 
     if (kuvitus === "kuvitus" && goals) {
       const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
 
       return sessionGoals;
     }
-    sessionStorage.setItem("application", "kuvitus");
-    sessionStorage.setItem("goals", JSON.stringify(localGoals));
+    setSessionStorage("application", "kuvitus");
+    setSessionStorage("goals", JSON.stringify(localGoals));
 
     return null;
   }
@@ -51,7 +52,7 @@ class SessionService {
     const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
 
     const updatedGoals: LocalGoalType[] = [...sessionGoals, goal];
-    sessionStorage.setItem("goals", JSON.stringify(updatedGoals));
+    setSessionStorage("goals", JSON.stringify(updatedGoals));
   }
 
   public deleteSessionGoal(goalUID: string) {
@@ -60,7 +61,7 @@ class SessionService {
       (goal) => goal.goal.uID !== goalUID
     );
 
-    sessionStorage.setItem("goals", JSON.stringify(filteredGoals));
+    setSessionStorage("goals", JSON.stringify(filteredGoals));
   }
 
   public fetchSpecificGoal(goalUID: string) {
@@ -69,7 +70,7 @@ class SessionService {
       return null;
     }
 
-    sessionStorage.setItem(
+    setSessionStorage(
       "specificGoal",
       JSON.stringify({
         index: specificGoal.index,
@@ -93,7 +94,7 @@ class SessionService {
     const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
     sessionGoals[specificGoal.index].goal[key] = value;
 
-    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+    setSessionStorage("goals", JSON.stringify(sessionGoals));
   }
 
   public updateSubGoalValue<K extends keyof SubType>(
@@ -115,7 +116,7 @@ class SessionService {
 
     subGoals[index][key] = value;
 
-    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+    setSessionStorage("goals", JSON.stringify(sessionGoals));
   }
 
   public addSubGoal(goalUID: string, subGoal: SubType) {
@@ -127,7 +128,7 @@ class SessionService {
     const sessionGoals: LocalGoalType[] = this.fetchSessionGoals();
     sessionGoals[specificGoal.index].goal.subGoals.push(subGoal);
 
-    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+    setSessionStorage("goals", JSON.stringify(sessionGoals));
   }
 
   public removeSubGoal(goalUID: string, subGoalUID: string) {
@@ -142,7 +143,7 @@ class SessionService {
       (sg: SubType) => sg.subUID !== subGoalUID
     );
 
-    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+    setSessionStorage("goals", JSON.stringify(sessionGoals));
   }
 
   public addSubGoalTag(goalUID: string, subUID: string, value: string) {
@@ -159,7 +160,7 @@ class SessionService {
 
     subGoals[index].subTags.push(value);
 
-    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+    setSessionStorage("goals", JSON.stringify(sessionGoals));
   }
 
   public removeSubGoalTag(goalUID: string, subUID: string, value: string) {
@@ -178,15 +179,15 @@ class SessionService {
       (tag: string) => tag !== value
     );
 
-    sessionStorage.setItem("goals", JSON.stringify(sessionGoals));
+    setSessionStorage("goals", JSON.stringify(sessionGoals));
   }
 
   public deleteAllGoals() {
-    sessionStorage.setItem("goals", JSON.stringify([]));
+    setSessionStorage("goals", JSON.stringify([]));
   }
 
   public fetchExisitingGoalValue(selection: string) {
-    const fetchedResult = sessionStorage.getItem("specificGoal");
+    const fetchedResult = getSessionStorage("specificGoal");
     if (!fetchedResult) {
       return null;
     }

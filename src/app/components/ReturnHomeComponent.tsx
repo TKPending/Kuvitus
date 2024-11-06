@@ -3,13 +3,14 @@ import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleLeft as solidLeft } from "@fortawesome/free-solid-svg-icons";
 import { faCircleLeft as regularLeft } from "@fortawesome/free-regular-svg-icons";
+import { setSessionStorage } from "@/services/sessionStorage/SessionHelper";
 
 const ReturnHomeComponent = () => {
   const router = useRouter();
   const [isHovered, setIsHover] = useState<boolean>(false);
 
   const handleReturnHome = () => {
-    sessionStorage.setItem("specificGoal", "");
+    setSessionStorage("specificGoal", "");
     setTimeout(() => {
       router.push("/");
     }, 0);
