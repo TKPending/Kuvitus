@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { removeAllLocalGoals } from "@/app/redux/slices/localGoals/localGoalsSlice";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 const RemoveAllGoalsComponent = () => {
   const dispatch = useDispatch();

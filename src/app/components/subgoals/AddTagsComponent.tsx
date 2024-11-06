@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import { addSubGoalTag, removeSubGoalTag } from "@/app/redux/slices/goal/goalSlice";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 type Props = {
     subUID: string;

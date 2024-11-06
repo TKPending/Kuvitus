@@ -10,7 +10,7 @@ import {
   setSubGoalStatus,
 } from "@/app/redux/slices/goal/goalSlice";
 import { getCurrentDate } from "@/app/util/getCurrentDate";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 const COMPLETED: number = 1;
 const PENDING: number = 2;

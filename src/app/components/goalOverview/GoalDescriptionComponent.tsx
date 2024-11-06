@@ -5,7 +5,7 @@ import { useState } from "react";
 import TextInputComponent from "@/app/components/TextInputComponent";
 import { setGoalDescription } from "@/app/redux/slices/goal/goalSlice";
 import { GoalType } from "@/app/types/GoalType";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 const GoalDescriptionComponent = () => {
   const dispatch = useDispatch();

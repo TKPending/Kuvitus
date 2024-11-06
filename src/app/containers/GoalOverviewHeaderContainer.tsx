@@ -11,7 +11,7 @@ import {
 import StatusComponent from "@/app/components/StatusComponent";
 import GoalDateComponent from "@/app/components/goalOverview/GoalDateComponent";
 import { getCurrentDate } from "@/app/util/getCurrentDate";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 import { GoalType } from "@/app/types/GoalType";
 import { useIsMobile } from "@/app/hooks/useIsMobile";
 

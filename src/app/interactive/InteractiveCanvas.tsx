@@ -15,10 +15,10 @@ import {
   updateLocalPositions,
 } from "@/app/redux/slices/localGoals/localGoalsSlice";
 import KuvitusLayout from "@/app/layouts/KuvitusLayout";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 import NavigationBarComponent from "@/app/components/NavigationBarComponent";
 import RemoveAllGoalsComponent from "@/app/components/interactive/RemoveAllGoalsComponent";
-import { getSessionStorage, removeSessionStorage } from "@/services/sessionStorage/SessionHelper";
+import { getSessionStorage, removeSessionStorage } from "@/app/services/sessionStorage/SessionHelper";
 
 const InteractiveCanvas = () => {
   const dispatch = useDispatch();

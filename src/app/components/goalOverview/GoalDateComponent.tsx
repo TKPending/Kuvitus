@@ -6,7 +6,7 @@ import { setGoalDueDate } from "@/app/redux/slices/goal/goalSlice";
 import { GoalType } from "@/app/types/GoalType";
 import { daysUntilCompletion } from "@/app/util/daysUntilCompletion";
 import { getDaysLeftStyle } from "@/app/util/getDaysLeftStyle";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 const GoalDateComponent = () => {
   const dispatch = useDispatch();

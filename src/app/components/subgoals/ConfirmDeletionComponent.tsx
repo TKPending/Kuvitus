@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { removeSubGoal } from "@/app/redux/slices/goal/goalSlice";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 import { GoalType } from "@/app/types/GoalType";
 import { RootState } from "@/app/redux/store";
 

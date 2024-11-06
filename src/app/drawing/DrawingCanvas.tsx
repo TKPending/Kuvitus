@@ -26,7 +26,7 @@ import { faArrowPointer } from "@fortawesome/free-solid-svg-icons";
 import CanvasSureDeleteComponent from "@/app/components/canvas/CanvasSureDeleteComponent";
 import CanvasErrorComponent from "@/app/components/canvas/CanvasErrorComponent";
 import CanvasControllerContainer from "@/app/containers/CanvasControllerContainer";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 const DrawingCanvas = () => {
   const dispatch = useDispatch();

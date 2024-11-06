@@ -12,7 +12,7 @@ import TextInputComponent from "@/app/components/TextInputComponent";
 import AddTagsComponent from "@/app/components/subgoals/AddTagsComponent";
 import SubGoalDueDateContainer from "@/app/containers/subgoals/SubGoalDueDateContainer";
 import TagsContainer from "@/app/containers/TagsContainer";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 type Props = {
   UID: string;

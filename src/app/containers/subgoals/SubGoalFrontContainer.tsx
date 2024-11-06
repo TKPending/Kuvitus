@@ -8,7 +8,7 @@ import {
 import TextInputComponent from "@/app/components/TextInputComponent";
 import React from "react";
 import TagsContainer from "@/app/containers/TagsContainer";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 import StatusComponent from "@/app/components/StatusComponent";
 
 type Props = {

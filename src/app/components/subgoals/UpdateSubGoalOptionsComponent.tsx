@@ -7,7 +7,7 @@ import {
   removeAllSubGoals,
 } from "@/app/redux/slices/goal/goalSlice";
 import { SubType } from "@/app/types/SubType";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 const UpdateSubGoalOptionsComponent = () => {
   const dispatch = useDispatch();

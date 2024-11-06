@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { ElementType } from "@/app/types/DrawingTypes";
 import { deleteAllElements, specificDelete } from "@/app/redux/slices/goal/goalSlice";
-import SessionService from "@/services/sessionStorage/SessionService";
+import SessionService from "@/app/services/sessionStorage/SessionService";
 
 export const useHistory = (initialState: ElementType[]) => {
   const dispatch = useDispatch();

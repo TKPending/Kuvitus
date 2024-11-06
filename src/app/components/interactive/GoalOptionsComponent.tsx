@@ -1,8 +1,8 @@
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { removeLocalGoal } from "@/app/redux/slices/localGoals/localGoalsSlice";
-import SessionService from "@/services/sessionStorage/SessionService";
-import { removeSessionStorage } from "@/services/sessionStorage/SessionHelper";
+import SessionService from "@/app/services/sessionStorage/SessionService";
+import { removeSessionStorage } from "@/app/services/sessionStorage/SessionHelper";
 
 type Props = {
   goalUID: string;
